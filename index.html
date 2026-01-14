@@ -6,7 +6,7 @@
     <title>Boda de Denilson & Belen</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fuentes Elegantes (Incluyendo Pinyon Script del ejemplo) -->
+    <!-- Fuentes Elegantes -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
     <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,6 +16,8 @@
             --bg-color: #FAF9F5;
             --primary: #B0714E;   /* Terracota */
             --secondary: #5E604B; /* Oliva */
+            --secondary-dark: #4a4c3b; /* Oliva Oscuro para sombras */
+            --secondary-light: #6d6f58; /* Oliva Claro para luces */
             --accent: #D7B391;    /* Beige Dorado */
             --highlight: #FFE8CF; /* Crema suave */
             --text-dark: #3D3D3D;
@@ -28,38 +30,134 @@
             overflow: hidden; /* Bloqueado inicio */
         }
 
-        /* Tipografías Específicas */
+        /* Tipografías */
         .font-title { font-family: 'Cinzel', serif; letter-spacing: 2px; }
         .font-script { font-family: 'Pinyon Script', cursive; }
 
-        /* --- PORTADA / SOBRE --- */
+        /* --- PORTADA / SOBRE INTERACTIVO --- */
         #cover {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--secondary);
+            inset: 0;
             z-index: 9999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: transform 1.5s cubic-bezier(0.86, 0, 0.07, 1);
-            background-image: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent; /* El fondo lo dan los flaps */
+            pointer-events: auto;
         }
-        #cover.open { transform: translateY(-100%); }
 
-        .wax-seal-btn {
-            width: 110px; height: 110px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        /* Capas del sobre (Flaps) */
+        .flap {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 1.2s cubic-bezier(0.6, 0.05, 0.2, 1), opacity 1s ease 0.5s;
+            will-change: transform;
+        }
+
+        /* Izquierda */
+        .flap.left {
+            background-color: var(--secondary-dark);
+            clip-path: polygon(0 0, 50% 50%, 0 100%);
+            z-index: 10;
+        }
+        
+        /* Derecha */
+        .flap.right {
+            background-color: var(--secondary-dark);
+            clip-path: polygon(100% 0, 50% 50%, 100% 100%);
+            z-index: 10;
+        }
+
+        /* Abajo (Fondo del bolsillo) */
+        .flap.bottom {
+            background-color: var(--secondary);
+            clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+            z-index: 11;
+        }
+
+        /* Arriba (Solapa que cierra) */
+        .flap.top {
+            background-color: var(--secondary-light);
+            clip-path: polygon(0 0, 50% 50%, 100% 0);
+            z-index: 12;
+            transform-origin: top;
+        }
+
+        /* --- SELLO DE CERA (CORAZÓN CSS) --- */
+        .seal-container {
+            position: absolute;
+            z-index: 20;
             cursor: pointer;
-            border: 4px double var(--accent);
-            transition: all 0.4s ease;
+            transition: transform 0.3s ease, opacity 0.5s ease;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+        }
+        
+        .heart-seal {
+            background-color: var(--primary);
+            width: 80px;
+            height: 80px;
             position: relative;
+            transform: rotate(-45deg);
+            animation: pulse-seal 2s infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .wax-seal-btn::after {
-            content: ''; position: absolute; inset: 5px;
-            border: 1px dashed rgba(255,255,255,0.5); border-radius: 50%;
+
+        .heart-seal::before,
+        .heart-seal::after {
+            content: "";
+            background-color: var(--primary);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            position: absolute;
         }
-        .wax-seal-btn:hover { transform: scale(1.1); background: #a06341; }
+
+        .heart-seal::before { top: -40px; left: 0; }
+        .heart-seal::after { left: 40px; top: 0; }
+
+        /* Texto dentro del sello */
+        .seal-text {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            z-index: 25;
+            color: var(--highlight);
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        @keyframes pulse-seal {
+            0% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.05); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+
+        .seal-container:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- ESTADOS DE ANIMACIÓN AL ABRIR --- */
+        #cover.open .seal-container {
+            transform: scale(1.5);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #cover.open .flap.top { transform: translateY(-100%); }
+        #cover.open .flap.bottom { transform: translateY(100%); }
+        #cover.open .flap.left { transform: translateX(-100%); }
+        #cover.open .flap.right { transform: translateX(100%); }
+
+        #cover.hidden-layer {
+            display: none;
+        }
 
         /* --- HERO SPLIT (Foto + Nombres) --- */
         .hero-section {
@@ -90,7 +188,6 @@
         .hero-img {
             width: 100%; height: 100%;
             object-fit: cover;
-            /* Curva elegante en esquina inferior en móvil, o lateral en desktop */
             border-bottom-left-radius: 100px; 
         }
         @media (min-width: 1024px) { 
@@ -247,18 +344,18 @@
 </head>
 <body>
 
-    <!-- PORTADA / SOBRE -->
+    <!-- PORTADA / SOBRE INTERACTIVO -->
     <div id="cover">
-        <div class="text-[#FAF9F5] text-center px-4">
-            <div class="font-title text-sm tracking-[0.4em] mb-8 opacity-80 uppercase">Invitación de Boda</div>
-            <h1 class="font-script text-7xl md:text-8xl mb-8">D & B</h1>
-            
-            <div class="wax-seal-btn mx-auto group" onclick="openInvitation()">
-                <div class="flex flex-col items-center">
-                    <i class="fas fa-envelope-open text-2xl text-[#FFE8CF]"></i>
-                    <span class="text-[10px] mt-1 text-[#FFE8CF] tracking-widest uppercase">Abrir</span>
-                </div>
-            </div>
+        <!-- Flaps del sobre -->
+        <div class="flap left"></div>
+        <div class="flap right"></div>
+        <div class="flap bottom"></div>
+        <div class="flap top"></div>
+
+        <!-- Sello de Lacre (Botón de Apertura) -->
+        <div class="seal-container" onclick="openInvitation()">
+            <div class="heart-seal"></div>
+            <div class="seal-text">ABRIR</div>
         </div>
     </div>
 
@@ -304,13 +401,13 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8">
                     <div>
                         <h3 class="font-title text-[var(--primary)] text-lg mb-4 border-b border-[var(--accent)] pb-2 inline-block">Padres de la Novia</h3>
-                        <p class="font-light text-lg">Nombre del Padre</p>
-                        <p class="font-light text-lg">Nombre de la Madre</p>
+                        <p class="font-light text-lg">Adhemar Velez Gutierrez</p>
+                        <p class="font-light text-lg">Maritza Cortez Salvatierra</p>
                     </div>
                     <div>
                         <h3 class="font-title text-[var(--primary)] text-lg mb-4 border-b border-[var(--accent)] pb-2 inline-block">Padres del Novio</h3>
-                        <p class="font-light text-lg">Nombre del Padre</p>
-                        <p class="font-light text-lg">Nombre de la Madre</p>
+                        <p class="font-light text-lg">Widen Joaquin Razuk Cuellar</p>
+                        <p class="font-light text-lg">Liliana Rivero Stover</p>
                     </div>
                 </div>
 
@@ -478,15 +575,25 @@
     </div>
 
     <script>
-        // --- LOGICA DE APERTURA ---
+        // --- LOGICA DE APERTURA DEL SOBRE ---
         function openInvitation() {
-            document.getElementById('cover').classList.add('open');
+            const cover = document.getElementById('cover');
+            
+            // 1. Activar animación CSS (desplazamiento de flaps)
+            cover.classList.add('open');
+            
+            // 2. Permitir scroll en el body
             document.body.style.overflow = 'auto'; 
             
-            // Iniciar observador de scroll para animaciones
+            // 3. Iniciar observador de scroll para el contenido
             initObserver();
             
-            // Música (opcional delay)
+            // 4. Ocultar el sobre del DOM después de la animación para que no estorbe clicks
+            setTimeout(() => {
+                cover.classList.add('hidden-layer');
+            }, 1500); // 1.5 segundos espera a que termine la transición CSS
+
+            // 5. Música (opcional delay)
             setTimeout(() => {
                 if(!musicPlaying) toggleMusic();
             }, 800);
