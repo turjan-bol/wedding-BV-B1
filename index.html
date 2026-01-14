@@ -1,161 +1,215 @@
 <!DOCTYPE html>
 <html lang="es" prefix="og: https://ogp.me/ns#">
 <head>
-<meta charset="UTF-8">
-<style>
-#wpadminbar #wp-admin-bar-wccp_free_top_button .ab-icon:before {
-    content: "\f160";
-    color: #02CA02;
-    top: 3px;
-}
-#wpadminbar #wp-admin-bar-wccp_free_top_button .ab-icon {
-    transform: rotate(45deg);
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Nuestra Boda Denilson y Belen - Invitali</title>
+    
+    <!-- Metadatos de Redes Sociales segun fuentes [2, 3, 16] -->
+    <meta property="og:title" content="Nuestra Boda Denilson y Belen - Invitali" />
+    <meta property="og:description" content="Sé parte de nuestra historia" />
+    <meta property="og:image" content="https://invitali.com/wp-content/uploads/2025/09/WPP-BIANCA-Y-WIDEN.webp" />
 
-<!-- Optimización para motores de búsqueda de Rank Math -->
-<title>Nuestra Boda Denilson y Belén - Invitali</title>
+    <style type="text/css">
+        /* Ajuste de Paleta Global segun instrucciones y fuentes [4, 5, 15] */
+        :root {
+            --ast-global-color-0: #5E604B; /* Verde Oliva (Títulos/Botones) */
+            --ast-global-color-1: #B0714E; /* Terracota (Acentos/Hover) */
+            --ast-global-color-2: #D7B391; /* Arena (Bordes/Textos secundarios) */
+            --ast-global-color-3: #FFE8CF; /* Crema Melocotón (Fondos de sección) */
+            --ast-global-color-4: #FAF9F5; /* Blanco Hueso (Sustituye al blanco puro) */
+            --ast-global-color-5: #FAF9F5; /* Fondo Principal */
+            --ast-border-color: #D7B391;
+        }
 
-<!-- Aquí actualicé los nombres en el título -->
+        body {
+            background-color: var(--ast-global-color-5) !important;
+            color: var(--ast-global-color-0);
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+        }
 
-<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
+        h1, h2, h3, .elementor-heading-title {
+            font-family: 'Playfair Display', serif !important;
+            color: var(--ast-global-color-0) !important;
+        }
 
-<style type="text/css">
-@font-face {
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-stretch: normal;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/opensans/v44/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVc.ttf) format('truetype');
-}
-@font-face {
-    font-family: 'Playfair Display';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDXbtY.ttf) format('truetype');
-}
-@font-face {
-    font-family: 'Playfair Display';
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKeiunDXbtY.ttf) format('truetype');
-}
-</style>
+        .elementor-button {
+            background-color: var(--ast-global-color-0) !important;
+            color: var(--ast-global-color-4) !important;
+            border-radius: 15px !important;
+            padding: 15px 30px;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
 
-<!-- Resto del código CSS... -->
+        .elementor-button:hover {
+            background-color: var(--ast-global-color-1) !important;
+        }
 
-<!-- Aquí aplicaré los cambios de colores en las variables CSS -->
-:root {
-    --ast-global-color-0: #5E604B;
-    --ast-global-color-1: #B0714E;
-    --ast-global-color-2: #D7B391;
-    --ast-global-color-3: #FFE8CF;
-    --ast-global-color-4: #FAF9F5;
-    --ast-global-color-5: #FAF9F5;
-    --ast-global-color-6: rgba(94, 96, 75, 0.79);
-    --ast-global-color-7: #2f2f2f;
-    --ast-global-color-8: rgba(94, 96, 75, 0.62);
-}
+        /* Sección de apertura (Sobre interactivo) [17, 18] */
+        #contenedor-a-ocultar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 9999;
+            background-color: var(--ast-global-color-4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 2s ease-out;
+        }
 
-/* También actualizaré las variables de Elementor */
-.elementor-kit-1316 {
-    --e-global-color-9ed2449: #5E604B;
-    --e-global-color-410f5e9: #B0714E;
-    --e-global-color-32e2378: #D7B391;
-    --e-global-color-ef8f825: #FFE8CF;
-    --e-global-color-3b6f460: #FAF9F5;
-}
+        #contenedor-izquierda, #contenedor-derecha {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            background-color: var(--ast-global-color-4);
+            transition: transform 2s ease-out;
+        }
 
-<!-- Resto del código... -->
+        #contenedor-izquierda { left: 0; border-right: 1px solid var(--ast-global-color-2); }
+        #contenedor-derecha { right: 0; }
 
-<body class="wp-singular page-template page-template-elementor_canvas page page-id-54464 wp-custom-logo wp-theme-astra unselectable eio-default ehf-template-astra ehf-stylesheet-astra ast-desktop ast-page-builder-template ast-no-sidebar astra-4.8.7 ast-single-post ast-mobile-inherit-site-logo ast-replace-site-logo-transparent ast-inherit-site-logo-transparent ast-hfb-header elementor-default elementor-template-canvas elementor-kit-1316 elementor-page elementor-page-54464">
+        .sello-invitacion {
+            position: relative;
+            z-index: 10000;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
 
-<!-- En el cuerpo del HTML, cambiaré los textos -->
+<body class="page-template-elementor_canvas">
 
-<div class="elementor-element elementor-element-3cb37e6 elementor-widget elementor-widget-heading">
-    <div class="elementor-widget-container">
-        <h2 class="elementor-heading-title elementor-size-default">DB</h2> <!-- Cambié de WB a DB -->
+    <!-- Pantalla de Inicio / Sobre [17-27] -->
+    <div id="contenedor-a-ocultar">
+        <div id="contenedor-izquierda"></div>
+        <div id="contenedor-derecha"></div>
+        <div class="sello-invitacion" id="boton-ocultar">
+            <h2 style="font-family: 'Cormorant Infant'; margin-bottom: 20px;">Ver invitación</h2>
+            <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="100">
+        </div>
     </div>
-</div>
 
-<div class="elementor-element elementor-element-42a7d4a elementor-widget elementor-widget-text-editor">
-    <div class="elementor-widget-container">
-        <p style="text-align: center;">· 01 . 03 . 26 ·</p> <!-- Cambié la fecha -->
-    </div>
-</div>
+    <!-- Contenido Principal [7-14, 28-105] -->
+    <div class="elementor-content" style="padding-top: 50px;">
+        
+        <!-- Iniciales y Fecha Superior [12, 28] -->
+        <div style="text-align: center; margin-bottom: 50px;">
+            <h2 style="font-size: 57px; letter-spacing: 5px;">DB</h2>
+            <p style="letter-spacing: 3px; color: var(--ast-global-color-1);"> · 01 . 03 . 26 ·</p>
+        </div>
 
-<!-- Más abajo en el código -->
+        <!-- Mensaje Bíblico [34] -->
+        <div style="text-align: center; padding: 20px;">
+            <p>Dios nos unió con propósito y caminaremos juntos por la eternidad...<br>1 Corintios 13:4-7</p>
+            <p>Tenemos el honor de invitarte a nuestra boda</p>
+            <h1 style="font-family: 'edwardian script itc' !important; font-size: 90px; margin: 20px 0;">Denilson &amp; Belen</h1>
+        </div>
 
-<div class="elementor-element elementor-element-8fc7e7f elementor-widget elementor-widget-text-editor">
-    <div class="elementor-widget-container">
-        <p style="text-align: center;">Dios nos unió con propósito y caminaremos juntos por la eternidad… <br>1 Corintios 13:4-7</p>
-    </div>
-</div>
+        <!-- Contador Regresivo [14, 52] -->
+        <div style="text-align: center; margin: 40px 0; border-top: 1px solid var(--ast-global-color-2); border-bottom: 1px solid var(--ast-global-color-2); padding: 20px 0;">
+            <h2 style="font-size: 16px; letter-spacing: 2px;">DOMINGO 01 DE MARZO DE 2026</h2>
+            <p style="font-family: 'Pinyon Script'; font-size: 25px;">Faltan</p>
+            <div id="countdown" style="display: flex; justify-content: center; gap: 20px; font-size: 25px; font-weight: 100;">
+                <!-- El script actualizará estos valores -->
+                <div><span id="days">00</span><br><small style="font-size: 12px;">Días</small></div>
+                <div><span id="hours">00</span><br><small style="font-size: 12px;">Hrs</small></div>
+                <div><span id="mins">00</span><br><small style="font-size: 12px;">Mins</small></div>
+            </div>
+            <!-- Botón Agenda [53] -->
+            <a class="elementor-button" style="margin-top: 20px;" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Boda%20Denilson%20y%20Belen&dates=20260301T170000/20260302T030000" target="_blank">Agendar evento</a>
+        </div>
 
-<div class="elementor-element elementor-element-b0c8098 elementor-widget elementor-widget-text-editor">
-    <div class="elementor-widget-container">
-        <p style="text-align: center;">Tenemos el honor</p>
-        <p style="text-align: center;">de invitarte a nuestra boda</p>
-    </div>
-</div>
+        <!-- Ubicaciones [54-59] -->
+        <div style="background-color: var(--ast-global-color-3); padding: 50px 20px; text-align: center;">
+            <h2 style="font-size: 25px;">La Ceremonia Religiosa</h2>
+            <p>Parroquia Sagrado Corazón de María</p>
+            <a href="https://maps.app.goo.gl/T3fudGSYGLtvW6UU8" class="elementor-button" target="_blank">Ver Ubicación</a>
+            
+            <h2 style="font-size: 25px; margin-top: 40px;">Recepción Social</h2>
+            <p>Urubó Village</p>
+            <a href="https://maps.app.goo.gl/YShyavKYVtmYMeFY9" class="elementor-button" target="_blank">Ver Ubicación</a>
+        </div>
 
-<div class="elementor-element elementor-element-9b2776e elementor-widget elementor-widget-heading">
-    <div class="elementor-widget-container">
-        <h2 class="elementor-heading-title elementor-size-default">Denilson<br>&amp; Belén</h2> <!-- Cambié los nombres -->
-    </div>
-</div>
-
-<!-- Más abajo, cambiando la fecha completa -->
-
-<div class="elementor-element elementor-element-8e4f7d1 elementor-widget elementor-widget-heading">
-    <div class="elementor-widget-container">
-        <h2 class="elementor-heading-title elementor-size-default">marzo</h2> <!-- Cambié de octubre a marzo -->
-    </div>
-</div>
-
-<div class="elementor-element elementor-element-da69c6d elementor-widget elementor-widget-heading">
-    <div class="elementor-widget-container">
-        <h2 class="elementor-heading-title elementor-size-default">2026</h2> <!-- Año actualizado -->
-    </div>
-</div>
-
-<!-- Cambiando el día específico -->
-
-<div class="elementor-element elementor-element-55bade3 elementor-widget elementor-widget-heading">
-    <div class="elementor-widget-container">
-        <h2 class="elementor-heading-title elementor-size-default">01</h2> <!-- Cambié de 25 a 01 -->
-    </div>
-</div>
-
-<!-- En la sección del countdown, actualizar la fecha -->
-
-<div class="elementor-element elementor-element-eebd8bc elementor-widget elementor-widget-eael-countdown">
-    <div class="elementor-widget-container">
-        <div class="eael-countdown-wrapper" data-countdown-id="eebd8bc" data-expire-type="none" data-countdown-type="due_date">
-            <div class="eael-countdown-container eael-countdown-label-block eael-countdown-label-block-mobile">
-                <ul id="eael-countdown-eebd8bc" class="eael-countdown-items" data-date="Mar 01 2026 17:00:00 -4"> <!-- Fecha actualizada -->
-                    <!-- Resto del countdown... -->
-                </ul>
+        <!-- Itinerario Completo [7, 63-78] -->
+        <div style="padding: 50px 20px; text-align: center;">
+            <h2 style="font-size: 25px; margin-bottom: 30px;">Itinerario</h2>
+            <div style="max-width: 400px; margin: 0 auto; text-align: left; border-left: 2px solid var(--ast-global-color-2); padding-left: 20px;">
+                <p><strong>04:40 pm</strong> - Ceremonia Religiosa</p>
+                <p><strong>06:30 pm</strong> - Recepción Social</p>
+                <p><strong>07:30 pm</strong> - Brindis y Vals</p>
+                <p><strong>08:30 pm</strong> - Cena</p>
+                <p><strong>09:15 pm</strong> - Fiesta</p>
+                <p><strong>12:15 am</strong> - Bouquet</p>
+                <p><strong>02:00 am</strong> - Finalización</p>
             </div>
         </div>
-    </div>
-</div>
 
-<!-- Más abajo, cambiando referencias a los nombres -->
+        <!-- Código de Vestimenta [8, 82-84] -->
+        <div style="background-color: var(--ast-global-color-3); padding: 50px 20px; text-align: center;">
+            <h2>Código de Vestimenta</h2>
+            <p><strong>Formal de Gala</strong></p>
+            <p style="font-size: 14px;">Dejar el color blanco reservado para la novia.<br>Mujeres utilizar zapatos cómodos por el jardín.</p>
+        </div>
 
-<div class="elementor-element elementor-element-f2186c2 elementor-widget elementor-widget-text-editor">
-    <div class="elementor-widget-container">
-        <div id="comp-luetk4fh3" class="HcOXKn c9GqVL QxJLC3 comp-luetk4fh3 wixui-rich-text" data-testid="richTextElement">
-            <p class="p1" style="text-align: center;">Denilson y Belén</p> <!-- Nombres actualizados -->
+        <!-- Sugerencia de Regalo [9, 85-87] -->
+        <div style="padding: 50px 20px; text-align: center;">
+            <h2>Sugerencia de Regalo</h2>
+            <p>Su presencia y sus buenos deseos son un regalo invaluable. Si consideran realizar un presente:</p>
+            <img src="https://invitali.com/wp-content/uploads/2025/08/Novios-multicenter-2.webp" style="max-width: 80%; filter: hue-rotate(65deg);">
+            <br>
+            <a href="#" class="elementor-button" style="margin-top: 20px;">Contactar</a>
+        </div>
+
+        <!-- Confirmación de Asistencia [11, 101, 102] -->
+        <div style="padding: 50px 20px; text-align: center; border: 1px solid var(--ast-global-color-2); margin: 20px; border-radius: 20px;">
+            <p>Con todo nuestro amor</p>
+            <h2 style="font-size: 40px; font-family: 'Pinyon Script' !important;">Denilson y Belen</h2>
+            <p>Nos encantaría contar con su presencia.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe6dpLuSAemZhzpeWaUieDL10WeAKPclLup79jFxyQernJIrw/viewform" class="elementor-button">Confirmar Asistencia</a>
+        </div>
+
+        <!-- Logo Final [104] -->
+        <div style="text-align: center; padding: 40px; background-color: #141414;">
+            <img src="https://invitali.com/wp-content/uploads/2025/05/Recurso-19logo-invitali-contraforma-dorado-300x103.png" width="150">
         </div>
     </div>
-</div>
 
-<!-- Resto del código... -->
+    <!-- Scripts de Interacción [23-27, 106] -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var botonOcultar = document.getElementById('boton-ocultar');
+            var contenedor = document.getElementById('contenedor-a-ocultar');
+            var contenedorIzquierda = document.getElementById('contenedor-izquierda');
+            var contenedorDerecha = document.getElementById('contenedor-derecha');
+            var audio = new Audio('https://invitali.com/wp-content/uploads/2025/09/KARAOKE-POR-TODA-LA-VIDA-FONSECA.mp3');
+            audio.loop = true;
 
+            botonOcultar.addEventListener('click', function() {
+                contenedorIzquierda.style.transform = 'translateX(-100%)';
+                contenedorDerecha.style.transform = 'translateX(100%)';
+                contenedor.style.opacity = '0';
+                audio.play();
+                setTimeout(function() {
+                    contenedor.style.display = 'none';
+                }, 2000);
+            });
+
+            // Lógica del Contador [14]
+            const fechaBoda = new Date("March 01, 2026 17:00:00").getTime();
+            setInterval(function() {
+                const ahora = new Date().getTime();
+                const diff = fechaBoda - ahora;
+                document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
