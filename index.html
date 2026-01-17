@@ -174,8 +174,12 @@
         </div>
         
         <div class="sello-container">
-            <a id="boton-ocultar" href="#cabecera" class="cursor-pointer block sello-pulse flex flex-col items-center">
-                <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="130" alt="Abrir" class="drop-shadow-xl">
+            <!-- Se quitó la clase 'sello-pulse' del enlace 'a' para que no afecte al texto -->
+            <a id="boton-ocultar" href="#cabecera" class="cursor-pointer flex flex-col items-center group">
+                <!-- Se añadió un div contenedor con 'sello-pulse' y 'rounded-full' solo para la imagen -->
+                <div class="sello-pulse rounded-full">
+                    <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="130" alt="Abrir" class="drop-shadow-xl">
+                </div>
                 <span class="mt-4 font-serif italic text-gray-500 text-sm tracking-wider">Abrir invitación</span>
             </a>
         </div>
