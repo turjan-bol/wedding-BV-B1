@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,11 +27,16 @@
                         sand: '#D7B391',
                         peach: '#FFE8CF',
                         cream: '#FAF9F5',
+                        paper: '#FDFBF7', // Nuevo color para el papel
+                        graydetail: '#A0A09C',
                     },
                     fontFamily: {
                         script: ['"Great Vibes"', 'cursive'],
                         serif: ['"Cormorant Garamond"', 'serif'],
                         sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'paper-texture': "url('data:image/svg+xml,%3Csvg width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 100 100\\' xmlns=\\'http://www.w3.org/2000/svg\\' %3E%3Cfilter id=\\'noise\\'%3E%3CfeTurbulence type=\\'fractalNoise\\' baseFrequency=\\'0.8\\' numOctaves=\\'3\\' stitchTiles=\\'stitch\\'/%3E%3C/filter%3E%3Crect width=\\'100%25\\' height=\\'100%25\\' filter=\\'url(%23noise)\\' opacity=\\'0.08\\'/%3E%3C/svg%3E')",
                     }
                 }
             }
@@ -44,7 +49,7 @@
             overflow-x: hidden;
         }
 
-        /* --- Estilos de la Animación de Entrada (Tu Código Adaptado) --- */
+        /* --- Estilos de la Animación de Entrada --- */
         #contenedor-a-ocultar {
             width: 100%;
             height: 100vh;
@@ -58,7 +63,12 @@
             align-items: center;
         }
 
-        /* Mitades del sobre con los colores de la paleta */
+        /* Textura de papel para el sobre */
+        .paper-bg {
+            background-color: #FDFBF7;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+        }
+
         #contenedor-izquierda, #contenedor-derecha {
             position: absolute;
             top: 0;
@@ -66,25 +76,37 @@
             height: 100%;
             transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1);
             background-size: cover;
-            background-position: center;
+            /* Sombra suave interna para dar volumen al papel */
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.03); 
         }
 
         #contenedor-izquierda {
             left: 0;
-            background-color: #5E604B; /* Olive Base */
-            border-right: 1px solid #D7B391;
-            /* Reemplazo de textura pixelada por degradado elegante de alta calidad */
-            background: linear-gradient(135deg, #6b6d56 0%, #5E604B 100%);
-            box-shadow: inset -10px 0 20px rgba(0,0,0,0.1);
+            border-right: 1px solid #e5e5e5;
+            z-index: 2;
         }
 
         #contenedor-derecha {
             right: 0;
-            background-color: #5E604B; /* Olive Base */
-            border-left: 1px solid #D7B391;
-             /* Reemplazo de textura pixelada por degradado elegante de alta calidad */
-             background: linear-gradient(225deg, #6b6d56 0%, #5E604B 100%);
-             box-shadow: inset 10px 0 20px rgba(0,0,0,0.1);
+            border-left: 1px solid #e5e5e5;
+            z-index: 1;
+        }
+
+        /* Pseudo-elementos para simular el pliegue curvo del sobre */
+        #contenedor-izquierda::after {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 120%;
+            background: inherit;
+            border-radius: 50%;
+            z-index: 3;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.05);
+            /* Ocultamos este borde extra para que no se vea feo al abrir, 
+               pero da el efecto curvo cerrado */
         }
 
         /* El sello central */
@@ -99,260 +121,299 @@
         }
 
         @keyframes pulse-animation {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(215, 179, 145, 0.7); border-radius: 50%; }
-            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(215, 179, 145, 0); border-radius: 50%; }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(215, 179, 145, 0); border-radius: 50%; }
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(176, 113, 78, 0.3); border-radius: 50%; }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(176, 113, 78, 0); border-radius: 50%; }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(176, 113, 78, 0); border-radius: 50%; }
         }
 
-        /* Clases de animación */
         .move-left { transform: translateX(-100%); }
         .move-right { transform: translateX(100%); }
         .fade-out { opacity: 0; pointer-events: none; transition: opacity 1.5s ease-out; }
         .hide-sello { opacity: 0; pointer-events: none; }
 
-        /* --- Estilos Generales de la Invitación --- */
+        /* --- Estilos Generales --- */
         .fade-in-section {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, visibility;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
         .fade-in-section.is-visible {
             opacity: 1;
             transform: none;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+        /* Clase para imágenes con forma de arco */
+        .arch-image {
+            border-radius: 200px 200px 20px 20px;
+        }
+
+        /* Separador de ondas */
+        .wave-separator {
+            width: 100%;
+            height: 60px;
+            background-size: cover;
+            background-repeat: no-repeat;
         }
     </style>
 </head>
 <body class="text-olive antialiased selection:bg-terracotta selection:text-white">
 
-    <!-- PANTALLA DE APERTURA (SOBRE) -->
+    <!-- PANTALLA DE APERTURA (SOBRE PAPEL) -->
     <div id="contenedor-a-ocultar">
-        <div id="contenedor-izquierda" class="flex items-center justify-end pr-4">
-            <p class="text-cream font-script text-4xl opacity-50 rotate-90 hidden md:block">D & B</p>
+        <div id="contenedor-izquierda" class="paper-bg flex items-center justify-end pr-8">
+            <!-- Detalle decorativo en gris sutil -->
+            <div class="absolute bottom-10 left-10 opacity-20">
+                <i class="fa-solid fa-leaf text-6xl text-graydetail rotate-45"></i>
+            </div>
         </div>
-        <div id="contenedor-derecha"></div>
+        <div id="contenedor-derecha" class="paper-bg">
+            <!-- Detalle decorativo en gris sutil -->
+            <div class="absolute top-10 right-10 opacity-20">
+                <i class="fa-solid fa-leaf text-6xl text-graydetail -rotate-12"></i>
+            </div>
+        </div>
         
         <div class="sello-container">
-            <a id="boton-ocultar" href="#cabecera" class="cursor-pointer block sello-pulse">
-                <!-- Sello de cera proporcionado -->
-                <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="120" alt="Abrir invitación">
-                <p class="text-white text-center font-sans text-xs mt-2 tracking-widest uppercase">Abrir invitación</p>
+            <a id="boton-ocultar" href="#cabecera" class="cursor-pointer block sello-pulse flex flex-col items-center">
+                <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="130" alt="Abrir" class="drop-shadow-xl">
+                <span class="mt-4 font-serif italic text-gray-500 text-sm tracking-wider">Abrir invitación</span>
             </a>
         </div>
     </div>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="max-w-3xl mx-auto bg-cream shadow-2xl min-h-screen relative pb-12 overflow-hidden">
+    <main class="max-w-3xl mx-auto bg-paper-texture bg-cream shadow-2xl min-h-screen relative pb-12 overflow-hidden">
         
-        <!-- Elementos decorativos fondo -->
-        <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-5">
-            <div class="absolute -top-20 -left-20 w-96 h-96 bg-olive rounded-full blur-3xl"></div>
-            <div class="absolute top-1/2 -right-20 w-80 h-80 bg-terracotta rounded-full blur-3xl"></div>
+        <!-- Elementos fluidos de fondo (Blobs) -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-10 overflow-hidden">
+            <div class="absolute -top-[10%] -left-[10%] w-[500px] h-[500px] bg-olive rounded-full blur-[80px]"></div>
+            <div class="absolute top-[30%] -right-[20%] w-[600px] h-[600px] bg-sand rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-[10%] left-[10%] w-[400px] h-[400px] bg-terracotta rounded-full blur-[90px]"></div>
         </div>
 
-        <!-- 1. Header & Foto Principal -->
-        <header id="cabecera" class="relative pt-12 px-6 text-center fade-in-section">
-            <p class="text-terracotta font-sans tracking-[0.3em] uppercase text-sm mb-4">Nuestra Boda</p>
-            <h1 class="font-script text-6xl md:text-8xl text-olive mb-2">Denilson & Belen</h1>
+        <!-- 1. Header & Foto Principal (Arco) -->
+        <header id="cabecera" class="relative pt-16 px-6 text-center fade-in-section z-10">
+            <p class="text-terracotta font-sans tracking-[0.3em] uppercase text-xs md:text-sm mb-4">Nuestra Boda</p>
+            <h1 class="font-script text-7xl md:text-9xl text-olive mb-4 drop-shadow-sm">Denilson & Belen</h1>
             
-            <p class="font-serif text-xl md:text-2xl text-olive my-6 max-w-2xl mx-auto">
-                Tenemos el inmenso placer de invitarte a celebrar el inicio de nuestra vida juntos
+            <p class="font-serif text-xl md:text-2xl text-graydetail my-6 max-w-xl mx-auto italic leading-relaxed">
+                "Tenemos el inmenso placer de invitarte a celebrar el inicio de nuestra vida juntos"
             </p>
             
-            <div class="my-8 relative">
-                <div class="w-full h-96 md:h-[500px] overflow-hidden rounded-t-[150px] border-4 border-double border-sand">
-                    <!-- Foto de Novios Placeholder -->
+            <div class="my-10 relative flex justify-center">
+                <!-- Marco fluido/Arco -->
+                <div class="w-full max-w-md h-[500px] overflow-hidden arch-image border-4 border-white shadow-xl relative z-10">
                     <img src="https://images.unsplash.com/photo-1583939003579-73013917a611?q=80&w=2070&auto=format&fit=crop" 
                          alt="Denilson y Belen" class="w-full h-full object-cover">
                 </div>
+                <!-- Elemento decorativo detrás -->
+                <div class="absolute top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-md h-[500px] arch-image border border-sand/50 -z-10 rotate-2"></div>
             </div>
 
-            <p class="font-serif text-2xl italic text-terracotta mb-2">01 de Marzo de 2026</p>
+            <div class="inline-block border-y border-olive/20 py-4 px-12 mb-8">
+                <p class="font-serif text-3xl text-olive">01 • 03 • 2026</p>
+            </div>
             
-            <div class="py-8 px-4 max-w-lg mx-auto">
-                <p class="font-serif text-lg md:text-xl text-olive/80 leading-relaxed">
+            <div class="py-6 px-4 max-w-lg mx-auto">
+                <p class="font-serif text-lg text-gray-600 leading-relaxed italic">
                     "Por esa razón, el hombre dejará a su padre y a su madre, se unirá a su esposa y ellos serán una sola carne."
                 </p>
-                <p class="font-sans text-xs font-bold mt-2 text-terracotta tracking-widest">— GÉNESIS 2:24</p>
+                <p class="font-sans text-[10px] font-bold mt-3 text-terracotta tracking-widest uppercase">— Génesis 2:24</p>
             </div>
         </header>
 
-        <!-- 2. Countdown -->
+        <!-- Onda Separadora -->
+        <div class="w-full overflow-hidden leading-[0] text-sand opacity-30 my-4">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-[50px]">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
+            </svg>
+        </div>
+
+        <!-- 2. Countdown Circular -->
         <section class="py-8 text-center px-4 fade-in-section">
-            <h3 class="font-sans text-sm tracking-widest text-olive mb-6 uppercase">Sólo falta</h3>
-            <div id="countdown" class="flex justify-center gap-4 md:gap-8 font-serif text-terracotta">
+            <h3 class="font-sans text-xs tracking-[0.2em] text-graydetail mb-8 uppercase">Cuenta Regresiva</h3>
+            <div id="countdown" class="flex flex-wrap justify-center gap-6 md:gap-10 font-serif text-olive">
                 <!-- Se llena con JS -->
             </div>
         </section>
 
-        <!-- 3. Eventos (Ceremonia y Recepción) -->
-        <section class="py-12 px-6 fade-in-section">
-            <div class="glass-card rounded-xl p-8 shadow-sm border-t-4 border-olive">
-                <h2 class="font-script text-5xl text-center text-olive mb-8">Nuestra Boda</h2>
-                
-                <div class="grid md:grid-cols-2 gap-8 text-center relative">
-                    <!-- Línea divisora vertical para desktop -->
-                    <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-sand/50 transform -translate-x-1/2"></div>
+        <!-- 3. Eventos (Diseño Limpio y Fluido) -->
+        <section class="py-16 px-6 fade-in-section relative">
+            <div class="bg-white/70 backdrop-blur-sm rounded-[40px] p-10 shadow-lg border border-white/50 relative overflow-hidden">
+                <!-- Decoración esquina -->
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-peach/30 rounded-full blur-xl"></div>
 
+                <h2 class="font-script text-5xl text-center text-olive mb-12">Celebración</h2>
+                
+                <div class="flex flex-col md:flex-row gap-12 justify-center items-center relative z-10">
+                    
                     <!-- Ceremonia -->
-                    <div class="space-y-4">
-                        <i class="fa-solid fa-church text-4xl text-terracotta"></i>
-                        <h3 class="font-serif text-2xl font-bold text-olive">Ceremonia Religiosa</h3>
-                        <p class="font-sans text-sm text-gray-600">Horario</p>
-                        <p class="font-serif text-3xl text-olive">16:30 hrs</p>
+                    <div class="text-center group">
+                        <div class="w-20 h-20 mx-auto bg-olive/10 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110 duration-500">
+                            <i class="fa-solid fa-church text-2xl text-olive"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-olive">Ceremonia</h3>
+                        <p class="font-sans text-sm text-gray-500 mt-1">16:30 hrs</p>
                     </div>
 
+                    <div class="h-px w-24 bg-sand md:w-px md:h-24"></div>
+
                     <!-- Recepción -->
-                    <div class="space-y-4">
-                        <i class="fa-solid fa-champagne-glasses text-4xl text-terracotta"></i>
-                        <h3 class="font-serif text-2xl font-bold text-olive">Recepción Social</h3>
-                        <p class="font-sans text-sm text-gray-600">Horario</p>
-                        <p class="font-serif text-3xl text-olive">18:00 hrs</p>
+                    <div class="text-center group">
+                        <div class="w-20 h-20 mx-auto bg-terracotta/10 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110 duration-500">
+                            <i class="fa-solid fa-champagne-glasses text-2xl text-terracotta"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-olive">Recepción</h3>
+                        <p class="font-sans text-sm text-gray-500 mt-1">18:00 hrs</p>
                     </div>
                 </div>
 
-                <div class="mt-8 text-center pt-8 border-t border-dashed border-sand">
-                    <p class="font-serif text-lg text-olive mb-4">Ubicación para ambos eventos</p>
+                <div class="mt-12 text-center">
                     <a href="https://www.google.com/maps/place/18°10'30.9%22S+63°52'31.0%22W/@-18.175868,-63.8752845,271m/data=!3m1!1e3!4m4!3m3!8m2!3d-18.175259!4d-63.8752718?hl=es&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D" 
                        target="_blank"
-                       class="inline-block bg-terracotta text-cream px-8 py-3 rounded-full font-sans text-sm tracking-widest hover:bg-olive transition duration-300 shadow-lg">
-                        <i class="fa-solid fa-location-dot mr-2"></i> VER MAPA
+                       class="inline-block bg-olive text-cream px-10 py-4 rounded-full font-sans text-xs font-bold tracking-widest hover:bg-terracotta transition duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+                        VER UBICACIÓN
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- 4. Foto Hermosa Intermedia -->
-        <section class="fade-in-section">
-            <img src="https://images.unsplash.com/photo-1519225463359-2a682da67f1d?q=80&w=2070&auto=format&fit=crop" 
-                 alt="Amor eterno" class="w-full h-80 object-cover opacity-90">
+        <!-- 4. Foto Ovalada -->
+        <section class="fade-in-section px-8">
+            <div class="w-full h-80 rounded-[50%] overflow-hidden border-4 border-white/50 shadow-inner mx-auto max-w-2xl">
+                <img src="https://images.unsplash.com/photo-1519225463359-2a682da67f1d?q=80&w=2070&auto=format&fit=crop" 
+                     alt="Amor" class="w-full h-full object-cover hover:scale-105 transition duration-1000">
+            </div>
         </section>
 
-        <!-- 5. Itinerario -->
-        <section class="py-16 px-6 fade-in-section">
-            <h2 class="font-script text-5xl text-center text-olive mb-12">Itinerario</h2>
-            <div class="relative border-l-2 border-sand ml-6 md:ml-auto md:mr-auto md:w-1/2 space-y-10 pl-8">
-                
-                <div class="relative">
-                    <span class="absolute -left-[41px] top-1 bg-terracotta text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"><i class="fa-solid fa-check"></i></span>
-                    <h4 class="font-serif text-xl font-bold text-olive">Llegada de invitados</h4>
-                    <p class="font-sans text-sm text-gray-600">16:00 - 16:30 hrs</p>
+        <!-- 5. Itinerario (Timeline Curvo) -->
+        <section class="py-20 px-6 fade-in-section">
+            <h2 class="font-script text-5xl text-center text-olive mb-16">Nuestro Día</h2>
+            <div class="max-w-xl mx-auto space-y-12 relative">
+                <!-- Línea vertical discontinua -->
+                <div class="absolute left-[27px] top-4 bottom-4 w-px border-l-2 border-dashed border-sand/50"></div>
+
+                <div class="relative pl-16">
+                    <div class="absolute left-0 w-14 h-14 bg-white border border-sand rounded-full flex items-center justify-center z-10 shadow-sm">
+                        <i class="fa-solid fa-car text-olive text-sm"></i>
+                    </div>
+                    <h4 class="font-serif text-xl text-olive">Llegada</h4>
+                    <p class="font-sans text-xs text-terracotta font-bold tracking-wider mb-1">16:00 HRS</p>
                 </div>
                 
-                <div class="relative">
-                    <span class="absolute -left-[41px] top-1 bg-terracotta text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"><i class="fa-solid fa-ring"></i></span>
-                    <h4 class="font-serif text-xl font-bold text-olive">Ceremonia</h4>
-                    <p class="font-sans text-sm text-gray-600">16:30 - 17:30 hrs</p>
+                <div class="relative pl-16">
+                    <div class="absolute left-0 w-14 h-14 bg-olive text-white rounded-full flex items-center justify-center z-10 shadow-md">
+                        <i class="fa-solid fa-ring text-lg"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl font-bold text-olive">Sí, acepto</h4>
+                    <p class="font-sans text-xs text-terracotta font-bold tracking-wider mb-1">16:30 HRS</p>
+                    <p class="text-sm text-gray-500 italic">Ceremonia Religiosa</p>
                 </div>
 
-                <div class="relative">
-                    <span class="absolute -left-[41px] top-1 bg-terracotta text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"><i class="fa-solid fa-camera"></i></span>
-                    <h4 class="font-serif text-xl font-bold text-olive">Sesión de Fotos</h4>
-                    <p class="font-sans text-sm text-gray-600">17:30 - 18:00 hrs</p>
+                <div class="relative pl-16">
+                    <div class="absolute left-0 w-14 h-14 bg-white border border-sand rounded-full flex items-center justify-center z-10 shadow-sm">
+                        <i class="fa-solid fa-camera text-olive text-sm"></i>
+                    </div>
+                    <h4 class="font-serif text-xl text-olive">Fotos</h4>
+                    <p class="font-sans text-xs text-terracotta font-bold tracking-wider mb-1">17:30 HRS</p>
                 </div>
 
-                <div class="relative">
-                    <span class="absolute -left-[41px] top-1 bg-terracotta text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"><i class="fa-solid fa-utensils"></i></span>
-                    <h4 class="font-serif text-xl font-bold text-olive">Cena y Fiesta</h4>
-                    <p class="font-sans text-sm text-gray-600">18:00 en adelante</p>
+                <div class="relative pl-16">
+                    <div class="absolute left-0 w-14 h-14 bg-white border border-sand rounded-full flex items-center justify-center z-10 shadow-sm">
+                        <i class="fa-solid fa-music text-olive text-sm"></i>
+                    </div>
+                    <h4 class="font-serif text-xl text-olive">Fiesta</h4>
+                    <p class="font-sans text-xs text-terracotta font-bold tracking-wider mb-1">18:00 HRS</p>
                 </div>
             </div>
         </section>
 
-        <!-- 6. Detalles Importantes (Puntualidad, Adultos, Dress Code) -->
-        <section class="py-12 px-6 bg-olive/5 fade-in-section">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <!-- Puntualidad -->
-                <div class="p-4">
-                    <i class="fa-regular fa-clock text-3xl text-terracotta mb-3"></i>
-                    <h4 class="font-serif text-xl font-bold text-olive mb-2">Puntualidad</h4>
-                    <p class="font-sans text-sm text-gray-600">Agradecemos su presencia puntual para iniciar la ceremonia a tiempo.</p>
+        <!-- Onda Separadora Invertida -->
+        <div class="w-full overflow-hidden leading-[0] text-olive opacity-5">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-[60px] rotate-180">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
+            </svg>
+        </div>
+
+        <!-- 6. Detalles (Tarjetas Fluidas) -->
+        <section class="py-12 px-6 fade-in-section">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-[30px] shadow-sm text-center border border-gray-100 hover:shadow-md transition">
+                    <i class="fa-regular fa-clock text-2xl text-sand mb-4"></i>
+                    <h4 class="font-serif text-lg font-bold text-olive">Puntualidad</h4>
+                    <p class="font-sans text-xs text-gray-500 mt-2 leading-relaxed">Rogamos llegar 15 minutos antes.</p>
                 </div>
-                <!-- Dress Code -->
-                <div class="p-4">
-                    <i class="fa-solid fa-user-tie text-3xl text-terracotta mb-3"></i>
-                    <h4 class="font-serif text-xl font-bold text-olive mb-2">Código de Vestimenta</h4>
-                    <p class="font-serif text-lg font-bold uppercase tracking-widest text-olive">Formal</p>
-                    <p class="font-sans text-sm text-gray-600 mt-2">Ellas: Vestido Largo<br>Ellos: Traje y corbata</p>
+                <!-- Card 2 -->
+                <div class="bg-olive p-8 rounded-[30px] shadow-md text-center text-white transform md:-translate-y-4">
+                    <i class="fa-solid fa-user-tie text-2xl mb-4 text-sand"></i>
+                    <h4 class="font-serif text-lg font-bold">Dress Code</h4>
+                    <p class="font-sans text-xs font-bold tracking-widest mt-2 mb-1">FORMAL</p>
+                    <p class="font-serif text-sm opacity-80 italic">Elegancia rigurosa</p>
                 </div>
-                <!-- Adultos -->
-                <div class="p-4">
-                    <i class="fa-solid fa-martini-glass-citrus text-3xl text-terracotta mb-3"></i>
-                    <h4 class="font-serif text-xl font-bold text-olive mb-2">Solo Adultos</h4>
-                    <p class="font-sans text-sm text-gray-600">Amamos a sus pequeños, pero queremos que disfruten la noche con nosotros. Recepción sin niños.</p>
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-[30px] shadow-sm text-center border border-gray-100 hover:shadow-md transition">
+                    <i class="fa-solid fa-child-reaching text-2xl text-sand mb-4"></i>
+                    <h4 class="font-serif text-lg font-bold text-olive">Adultos</h4>
+                    <p class="font-sans text-xs text-gray-500 mt-2 leading-relaxed">Evento exclusivo para adultos.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 7. Foto Hermosa -->
-        <section class="py-8 fade-in-section">
-             <div class="mx-6 h-64 overflow-hidden rounded-xl">
-                 <img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=2574&auto=format&fit=crop" 
-                 alt="Detalles" class="w-full h-full object-cover">
-             </div>
+        <!-- 7. Galería Circular -->
+        <section class="py-16 px-4 fade-in-section">
+            <div class="grid grid-cols-2 gap-4 md:gap-6">
+                <img src="https://images.unsplash.com/photo-1532054992925-4c07a9c8491c?q=80&w=1000&auto=format&fit=crop" class="w-full h-48 md:h-72 object-cover rounded-tl-[80px] rounded-br-[80px] rounded-tr-[20px] rounded-bl-[20px] shadow-md hover:opacity-90 transition">
+                <img src="https://images.unsplash.com/photo-1588673755325-10ce690626a4?q=80&w=1000&auto=format&fit=crop" class="w-full h-48 md:h-72 object-cover rounded-tr-[80px] rounded-bl-[80px] rounded-tl-[20px] rounded-br-[20px] shadow-md hover:opacity-90 transition">
+                <img src="https://images.unsplash.com/photo-1595168866166-f40b08da22c0?q=80&w=1000&auto=format&fit=crop" class="w-full h-48 md:h-72 object-cover rounded-bl-[80px] rounded-tr-[80px] rounded-tl-[20px] rounded-br-[20px] shadow-md hover:opacity-90 transition">
+                <img src="https://images.unsplash.com/photo-1623862413727-2c1a1f599974?q=80&w=1000&auto=format&fit=crop" class="w-full h-48 md:h-72 object-cover rounded-br-[80px] rounded-tl-[80px] rounded-tr-[20px] rounded-bl-[20px] shadow-md hover:opacity-90 transition">
+            </div>
         </section>
 
-        <!-- 8. Regalos (QR) -->
+        <!-- 8. Regalos -->
         <section class="py-12 px-6 text-center fade-in-section">
-            <h2 class="font-script text-5xl text-olive mb-4">Regalos</h2>
-            <p class="font-serif text-lg text-gray-600 mb-8 max-w-md mx-auto">
-                Su presencia es nuestro mejor regalo. Si desean tener un detalle con nosotros, agradecemos su aporte en nuestra lluvia de sobres digital.
+            <h2 class="font-script text-4xl text-olive mb-4">Regalos</h2>
+            <p class="font-serif text-base text-gray-500 mb-8 max-w-sm mx-auto">
+                Su presencia es lo más importante. Si desean hacernos un presente, ponemos a disposición nuestra cuenta.
             </p>
             
-            <div class="bg-white p-6 inline-block rounded-xl shadow-lg border border-sand">
-                <!-- Placeholder de QR -->
+            <div class="bg-white p-4 inline-block rounded-2xl shadow-lg border border-gray-100 rotate-2 hover:rotate-0 transition duration-300">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=GraciasPorElRegaloDenilsonyBelen&color=5E604B" 
-                     alt="QR Pago" class="mx-auto mb-2 opacity-90">
-                <p class="font-sans text-xs text-olive font-bold tracking-widest mt-2">ESCANEAR PARA TRANSFERIR</p>
+                     alt="QR Pago" class="mx-auto rounded-lg">
             </div>
         </section>
 
-        <!-- 9. Galería -->
-        <section class="py-12 px-4 fade-in-section">
-            <div class="grid grid-cols-2 gap-2 md:gap-4">
-                <img src="https://images.unsplash.com/photo-1532054992925-4c07a9c8491c?q=80&w=1000&auto=format&fit=crop" class="w-full h-48 md:h-64 object-cover rounded-tl-2xl rounded-br-2xl border-2 border-cream shadow-md">
-                <img src="https://images.unsplash.com/photo-1588673755325-10ce690626a4?q=80&w=1000&auto=format&fit=crop" class="w-full h-48 md:h-64 object-cover rounded-tr-2xl rounded-bl-2xl border-2 border-cream shadow-md">
-                <img src="https://images.unsplash.com/photo-1595168866166-f40b08da22c0?q=80&w=1000&auto=format&fit=crop" class="w-full h-48 md:h-64 object-cover rounded-tr-2xl rounded-bl-2xl border-2 border-cream shadow-md">
-                <img src="https://images.unsplash.com/photo-1623862413727-2c1a1f599974?q=80&w=1000&auto=format&fit=crop" class="w-full h-48 md:h-64 object-cover rounded-tl-2xl rounded-br-2xl border-2 border-cream shadow-md">
-            </div>
-        </section>
+        <!-- 9. Footer & RSVP -->
+        <footer class="relative pt-20 pb-10 px-6 bg-olive text-cream mt-12 rounded-t-[50px] overflow-hidden fade-in-section">
+             <!-- Confirmación -->
+             <div class="relative z-10 text-center mb-16">
+                <h2 class="font-script text-5xl mb-6">Confirmación</h2>
+                <p class="font-sans text-sm opacity-80 mb-8 max-w-md mx-auto">
+                    Por favor confirma tu asistencia antes del 15 de Febrero.
+                </p>
+                <a href="https://wa.me/?text=Hola%20Denilson%20y%20Belen,%20¡con%20gusto%20asistiré%20a%20su%20boda!" 
+                    target="_blank"
+                    class="inline-block border border-cream/50 bg-cream/10 backdrop-blur-md text-white px-8 py-3 rounded-full font-sans text-xs font-bold hover:bg-white hover:text-olive transition">
+                     CONFIRMAR ASISTENCIA
+                 </a>
+             </div>
 
-        <!-- 10. Confirmación / RSVP -->
-        <section class="py-16 px-6 bg-peach/20 text-center fade-in-section">
-            <h2 class="font-script text-5xl text-olive mb-6">Confirmación</h2>
-            <p class="font-serif text-xl text-olive mb-8 max-w-md mx-auto">
-                Para nosotros es muy importante contar con tu presencia. Por favor confirma tu asistencia antes del 15 de Febrero.
-            </p>
-            
-            <a href="https://wa.me/?text=Hola%20Denilson%20y%20Belen,%20¡con%20gusto%20asistiré%20a%20su%20boda!" 
-               target="_blank"
-               class="inline-flex items-center bg-[#25D366] text-white px-8 py-4 rounded-full font-sans font-bold shadow-lg hover:bg-[#128C7E] transition transform hover:scale-105">
-                <i class="fa-brands fa-whatsapp text-2xl mr-2"></i> CONFIRMAR EN WHATSAPP
-            </a>
-        </section>
-
-        <!-- 11. Foto Final y Footer -->
-        <footer class="relative h-[400px] fade-in-section">
-             <img src="https://images.unsplash.com/photo-1606103920295-9a091573f160?q=80&w=2070&auto=format&fit=crop" 
-                  class="w-full h-full object-cover grayscale opacity-60">
+             <!-- Créditos -->
+             <div class="relative z-10 text-center border-t border-white/10 pt-8">
+                 <h2 class="font-script text-3xl opacity-90">Denilson & Belen</h2>
+                 <p class="font-sans text-[10px] mt-2 opacity-50 tracking-[0.3em]">MARZO 2026</p>
+             </div>
              
-             <div class="absolute inset-0 flex flex-col items-center justify-center bg-olive/30 text-white">
-                <h2 class="font-script text-6xl mb-2">Gracias</h2>
-                <p class="font-serif text-xl tracking-widest uppercase">Por acompañarnos</p>
-                <p class="font-sans text-xs mt-8 opacity-80">Denilson & Belen • 2026</p>
+             <!-- Imagen Fondo Footer -->
+             <div class="absolute inset-0 opacity-10 mix-blend-overlay">
+                 <img src="https://images.unsplash.com/photo-1606103920295-9a091573f160?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover">
              </div>
         </footer>
 
     </main>
 
     <script>
-        // --- 1. Lógica del "Sobre" (Tu código adaptado) ---
+        // --- 1. Lógica del "Sobre" ---
         var audio; 
         
         document.addEventListener('DOMContentLoaded', function() {
@@ -365,38 +426,22 @@
             audio = new Audio('https://invitali.com/wp-content/uploads/2025/09/KARAOKE-POR-TODA-LA-VIDA-FONSECA.mp3');
             audio.loop = true; 
         
-            function activarPantallaCompleta() {
-                var elemento = document.documentElement;
-                if (elemento.requestFullscreen) { elemento.requestFullscreen().catch(err => console.log(err)); } 
-                else if (elemento.mozRequestFullScreen) { elemento.mozRequestFullScreen(); } 
-                else if (elemento.webkitRequestFullscreen) { elemento.webkitRequestFullscreen(); } 
-                else if (elemento.msRequestFullscreen) { elemento.msRequestFullscreen(); }
-            }
-        
             botonOcultar.addEventListener('click', function(e) {
                 e.preventDefault(); 
         
-                // Ocultar sello
                 selloContainer.classList.add('hide-sello');
-
-                // Abrir puertas
                 contenedorIzquierda.classList.add('move-left');
                 contenedorDerecha.classList.add('move-right');
-        
-                // Desvanecer contenedor global
                 contenedor.classList.add('fade-out');
         
-                // Audio y Pantalla
                 audio.play().catch(function(error) {
-                    console.log("El navegador requiere interacción previa para reproducir audio.", error);
+                    console.log("Audio play error", error);
                 });
-                // Intentar fullscreen (puede ser bloqueado si no es interacción directa del usuario en algunos navegadores)
-                // activarPantallaCompleta(); 
         
                 setTimeout(function() {
                     contenedor.style.display = 'none';
-                    // Iniciar animación de elementos internos una vez abierto el sobre
-                    observer.disconnect(); // Reiniciar observer para que detecte desde el principio
+                    // Re-iniciar observer para animaciones
+                    observer.disconnect();
                     document.querySelectorAll('.fade-in-section').forEach(section => {
                         observer.observe(section);
                     });
@@ -422,11 +467,12 @@
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                 const template = (val, label) => `
-                    <div class="flex flex-col items-center mx-2">
-                        <span class="text-3xl md:text-5xl font-bold font-serif text-olive">${val}</span>
-                        <span class="text-xs font-sans tracking-widest text-terracotta mt-1 uppercase">${label}</span>
+                    <div class="flex flex-col items-center w-16 md:w-20">
+                        <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border border-sand/30 flex items-center justify-center bg-white shadow-sm mb-2">
+                            <span class="text-xl md:text-2xl font-serif text-olive">${val}</span>
+                        </div>
+                        <span class="text-[10px] font-sans tracking-widest text-gray-400 uppercase">${label}</span>
                     </div>
-                    ${label !== 'Seg' ? '<span class="text-2xl text-sand mt-2">:</span>' : ''}
                 `;
 
                 document.getElementById("countdown").innerHTML = 
@@ -437,7 +483,7 @@
 
             }, 1000);
 
-            // --- 3. Animación al hacer Scroll (Intersection Observer) ---
+            // --- 3. Intersection Observer ---
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
