@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boda de Denilson & Belen</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- VARIABLES DE COLORES (Tu Paleta) --- */
+        /* --- VARIABLES DE COLORES --- */
         :root {
             --verde-oliva: #5E604B;
             --terracota: #B0714E;
@@ -18,6 +18,7 @@
             --blanco: #FFFFFF;
         }
 
+        /* Reset básico */
         * {
             margin: 0;
             padding: 0;
@@ -28,269 +29,182 @@
             font-family: 'Montserrat', sans-serif;
             background-color: var(--fondo);
             color: var(--verde-oliva);
-            overflow-x: hidden; /* Evita scroll horizontal */
+            overflow-x: hidden; /* Evita scroll horizontal no deseado */
+            line-height: 1.6; /* Mejor lectura */
         }
 
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             font-family: 'Great Vibes', cursive;
             font-weight: 400;
         }
+        
+        h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--terracota); }
 
-        /* --- ESTILOS DEL SOBRE (PORTADA INTERACTIVA) --- */
+        /* --- ESTILOS DEL SOBRE (PORTADA INTERACTIVA) - SIN CAMBIOS --- */
         #contenedor-a-ocultar {
-            width: 100%;
-            height: 100vh;
-            overflow: hidden; 
-            position: fixed; 
-            z-index: 9999; 
-            top: 0;
-            left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 100%; height: 100vh; overflow: hidden; position: fixed; z-index: 9999; top: 0; left: 0; display: flex; justify-content: center; align-items: center;
         }
-
         #contenedor-izquierda, #contenedor-derecha {
-            position: absolute; 
-            top: 0;
-            width: 50%; /* Inicialmente 50% */
-            height: 100%;
-            background-color: var(--verde-oliva); /* Color del sobre */
-            transition: transform 2s ease-out; 
-            z-index: 2;
-            /* Sombra para dar efecto de papel superpuesto */
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.2);
+            position: absolute; top: 0; width: 50%; height: 100%; background-color: var(--verde-oliva); transition: transform 2s ease-out; z-index: 2; box-shadow: inset 0 0 50px rgba(0,0,0,0.2);
         }
-
-        #contenedor-izquierda {
-            left: 0;
-            border-right: 1px solid var(--terracota);
-            background: linear-gradient(135deg, var(--verde-oliva) 0%, #4a4c3b 100%);
-        }
-
-        #contenedor-derecha {
-            right: 0;
-            border-left: 1px solid var(--terracota);
-            background: linear-gradient(225deg, var(--verde-oliva) 0%, #4a4c3b 100%);
-        }
-
-        .sello-contenedor {
-            position: absolute;
-            z-index: 10;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .sello-contenedor:hover {
-            transform: scale(1.1);
-        }
-
-        /* Clases para animación JS */
+        #contenedor-izquierda { left: 0; border-right: 1px solid var(--terracota); background: linear-gradient(135deg, var(--verde-oliva) 0%, #4a4c3b 100%); }
+        #contenedor-derecha { right: 0; border-left: 1px solid var(--terracota); background: linear-gradient(225deg, var(--verde-oliva) 0%, #4a4c3b 100%); }
+        .sello-contenedor { position: absolute; z-index: 10; cursor: pointer; transition: transform 0.3s; }
+        .sello-contenedor:hover { transform: scale(1.1); }
         .move-left { transform: translateX(-100%); }
         .move-right { transform: translateX(100%); }
         .fade-out { opacity: 0; transition: opacity 3s ease-out; pointer-events: none;}
 
-        /* --- CONTENIDO PRINCIPAL --- */
+        /* --- CONTENIDO PRINCIPAL DE LA INVITACIÓN --- */
         .main-invitacion {
             width: 100%;
-            max-width: 800px; /* Ancho máximo estilo carta */
-            margin: 0 auto;
+            max-width: 850px; /* Ancho máximo controlado */
+            margin: 0 auto; /* Centrado en pantallas grandes */
             background-color: var(--fondo);
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            box-shadow: 0 0 30px rgba(0,0,0,0.08);
             opacity: 0; /* Oculto al inicio */
             animation: fadeInPage 3s forwards;
             animation-delay: 1s;
+            overflow: hidden; /* Para que las esquinas redondeadas de fotos no salgan */
         }
 
-        @keyframes fadeInPage {
-            to { opacity: 1; }
-        }
+        @keyframes fadeInPage { to { opacity: 1; } }
 
-        section {
-            padding: 60px 20px;
+        /* --- SECCIONES Y ESPACIADO MEJORADO --- */
+        section, header {
+            /* Mayor padding arriba/abajo y a los lados */
+            padding: 70px 30px; 
             text-align: center;
         }
+        
+        /* Contenedor interno para limitar el ancho del texto y evitar que se pegue a los bordes */
+        .content-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
 
-        /* Imágenes */
-        img {
+        /* Imágenes generales */
+        img.img-responsive {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
+        /* Estilos Específicos de Header */
+        .header-section { padding-top: 0; }
         .foto-principal {
             width: 100%;
-            height: 400px;
+            height: 450px;
             object-fit: cover;
             object-position: center;
-            border-radius: 0 0 100px 100px;
-            margin-bottom: 30px;
+            /* Forma curva inferior */
+            border-radius: 0 0 50% 50% / 0 0 100px 100px; 
+            margin-bottom: 40px;
         }
-
-        /* Tipografía específica */
         .nombres {
-            font-size: 4rem;
+            font-size: 5rem;
             color: var(--terracota);
-            line-height: 1.2;
-            margin-bottom: 10px;
+            line-height: 1.1;
+            margin: 15px 0;
         }
-        
-        .subtitulo {
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        .fecha-destacada {
-            font-size: 1.5rem;
-            margin: 20px 0;
-            font-weight: bold;
-            color: var(--verde-oliva);
-        }
-
-        .versiculo {
-            font-style: italic;
-            color: #777;
+        .subtitulo { text-transform: uppercase; letter-spacing: 4px; font-size: 0.9rem; color: var(--verde-oliva);}
+        .fecha-destacada { font-size: 1.8rem; margin: 30px 0; font-weight: 600; color: var(--verde-oliva); letter-spacing: 1px;}
+        .versiculo-box {
+            border-top: 1px solid var(--beige);
+            border-bottom: 1px solid var(--beige);
+            padding: 30px 10px;
+            margin: 40px auto;
             max-width: 80%;
-            margin: 0 auto;
-            line-height: 1.6;
         }
+        .versiculo { font-style: italic; color: #666; font-size: 1.1rem; }
 
         /* Contador */
         .contador-wrapper {
             background-color: var(--peach);
-            padding: 40px 20px;
-            border-radius: 15px;
-            margin: 30px 0;
+            padding: 50px 20px;
+            border-radius: 20px;
+            margin: 40px auto;
+            max-width: 800px;
+            box-shadow: inset 0 0 20px rgba(176, 113, 78, 0.2);
         }
-        .contador {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .tiempo-box {
-            display: flex;
-            flex-direction: column;
-        }
-        .tiempo-numero {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--terracota);
-        }
-        .tiempo-texto {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
+        .contador { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
+        .tiempo-box { display: flex; flex-direction: column; margin: 0 5px; }
+        .tiempo-numero { font-size: 2.5rem; font-weight: bold; color: var(--terracota); font-family: 'Montserrat'; line-height: 1;}
+        .tiempo-texto { font-size: 0.8rem; text-transform: uppercase; margin-top: 5px; letter-spacing: 1px;}
 
-        /* Eventos */
-        .eventos-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
+        /* Eventos Cards */
+        .eventos-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 40px; }
         .evento-card {
             background: white;
-            padding: 30px;
-            border: 1px solid var(--beige);
-            border-radius: 10px;
-            flex: 1 1 300px;
-        }
-        .btn-mapa {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 25px;
-            background-color: var(--verde-oliva);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: background 0.3s;
-        }
-        .btn-mapa:hover { background-color: var(--terracota); }
-
-        /* Itinerario */
-        .itinerario-lista {
-            list-style: none;
-            text-align: left;
-            max-width: 400px;
-            margin: 0 auto;
-            border-left: 2px solid var(--beige);
-            padding-left: 20px;
-        }
-        .itinerario-item { margin-bottom: 25px; position: relative; }
-        .itinerario-item::before {
-            content: '♥';
-            position: absolute;
-            left: -29px;
-            background: var(--fondo);
-            color: var(--terracota);
-            padding: 5px;
-        }
-        .hora { font-weight: bold; color: var(--terracota); }
-
-        /* Regalos */
-        .qr-container {
-            border: 2px dashed var(--terracota);
-            padding: 20px;
-            display: inline-block;
-            border-radius: 10px;
-            margin-top: 20px;
-            background: white;
-        }
-
-        /* Galería */
-        .galeria {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-        .galeria img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 4px;
+            padding: 40px 30px;
+            border: 2px solid var(--peach);
+            border-radius: 15px;
+            flex: 1 1 280px; /* Flexible pero con base mínima */
+            max-width: 350px;
             transition: transform 0.3s;
         }
-        .galeria img:hover { transform: scale(1.02); }
+        .evento-card:hover { transform: translateY(-5px); border-color: var(--terracota);}
+        .btn-mapa {
+            display: inline-block; margin-top: 30px; padding: 12px 35px; background-color: var(--verde-oliva); color: white; text-decoration: none; border-radius: 50px; transition: background 0.3s; font-weight: 600; letter-spacing: 1px;
+        }
+        .btn-mapa:hover { background-color: var(--terracota); box-shadow: 0 5px 15px rgba(176, 113, 78, 0.4);}
 
-        /* Confirmación */
+        /* Itinerario */
+        .itinerario-lista { list-style: none; text-align: left; max-width: 450px; margin: 0 auto; border-left: 3px solid var(--beige); padding-left: 30px; }
+        .itinerario-item { margin-bottom: 35px; position: relative; }
+        .itinerario-item::before {
+            content: '♥'; position: absolute; left: -39px; top: 5px; background: var(--fondo); color: var(--terracota); padding: 5px; font-size: 1.2rem;
+        }
+        .hora { font-weight: 700; color: var(--terracota); font-size: 1.2rem; display: block;}
+        .actividad { font-size: 1.1rem; }
+
+        /* Regalos & Vestimenta */
+        .qr-container {
+            border: 3px dashed var(--terracota); padding: 25px; display: inline-block; border-radius: 15px; margin-top: 30px; background: white;
+        }
+        .icono-animado-vestimenta { width: 120px; height: auto; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;}
+
+        /* Galería */
+        .galeria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 30px;}
+        .galeria-grid img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; transition: transform 0.3s; cursor: pointer;}
+        .galeria-grid img:hover { transform: scale(1.03); z-index: 2; box-shadow: 0 10px 20px rgba(0,0,0,0.2);}
+
+        /* --- Footer y RSVP Ornamentado --- */
         .rsvp-section {
-            background-color: var(--verde-oliva);
-            color: var(--fondo);
-            padding: 50px 20px;
-            border-radius: 20px 20px 0 0;
+            background-color: var(--verde-oliva); color: var(--fondo); padding: 80px 30px; border-radius: 30px 30px 0 0; margin-top: 50px;
         }
-        .rsvp-section h2 { color: var(--peach); }
+        
+        /* Caja ornamentada para "Solo Adultos" */
+        .adults-only-box {
+            border: 2px solid var(--peach);
+            padding: 40px 30px;
+            margin: 0 auto 50px auto;
+            max-width: 650px;
+            position: relative;
+            background-color: rgba(94, 96, 75, 0.8); /* Un poco más oscuro que el fondo */
+        }
+        /* Esquinas decorativas (opcional, simples líneas CSS) */
+        .adults-only-box::after {
+            content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 1px solid var(--terracota); pointer-events: none;
+        }
+        .adults-only-text { font-size: 1.1rem; margin-bottom: 20px; }
+
         .btn-whatsapp {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: #25D366;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            margin-top: 20px;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: inline-flex; align-items: center; gap: 12px; background-color: #25D366; color: white; padding: 18px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; margin-top: 30px; font-size: 1.2rem; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); transition: transform 0.2s;
         }
+        .btn-whatsapp:hover { transform: scale(1.05); background-color: #20b85c; }
+        
+        .separador-floral { font-family: 'Great Vibes'; color: var(--beige); font-size: 2rem; margin: 30px 0; }
 
-        /* Utilidad */
-        .separador {
-            height: 2px;
-            width: 100px;
-            background-color: var(--beige);
-            margin: 40px auto;
-        }
-
-        /* Mobile Adjustments */
+        /* ADJUSTES MÓVILES ESPECÍFICOS */
         @media (max-width: 600px) {
-            .nombres { font-size: 3rem; }
-            .foto-principal { height: 300px; }
-            .tiempo-numero { font-size: 1.5rem; }
+            section, header { padding: 50px 25px; } /* Padding lateral asegurado en móvil */
+            .nombres { font-size: 3.5rem; }
+            .foto-principal { height: 350px; border-radius: 0 0 60px 60px; }
+            .tiempo-numero { font-size: 1.8rem; }
+            .itinerario-lista { padding-left: 20px; }
+             .adults-only-box { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -301,132 +215,157 @@
         <div id="contenedor-derecha"></div>
         <div class="sello-contenedor">
             <a id="boton-ocultar" href="#cabecera">
-                <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="120" alt="Sello de cera">
+                <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="130" alt="Sello de cera">
             </a>
-            <p style="color:white; text-align:center; margin-top:10px; font-size:0.8rem; text-shadow: 1px 1px 2px black;">ABRIR</p>
+            <p style="color:var(--peach); text-align:center; margin-top:15px; font-size:0.9rem; letter-spacing: 2px; font-weight: 600;">ABRIR INVITACIÓN</p>
         </div>
     </div>
 
     <div class="main-invitacion" id="cabecera">
         
-        <header>
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Denilson y Belen" class="foto-principal">
+        <header class="header-section">
+            <img src="https://placehold.co/850x450/D7B391/FFFFFF/png?text=Foto+Principal+Novios" alt="Denilson y Belen" class="foto-principal">
             
-            <p class="subtitulo">NUESTRA BODA</p>
-            <h1 class="nombres">Denilson & Belen</h1>
-            
-            <div class="separador"></div>
-            
-            <div class="fecha-destacada">01 de Marzo de 2026</div>
-            
-            <p class="versiculo">
-                "Por esa razón, el hombre dejará a su padre y a su madre, se unirá a su esposa y ellos serán una sola carne."
-                <br><strong>— Génesis 2:24</strong>
-            </p>
+            <div class="content-container">
+                <p class="subtitulo">ESTÁS INVITADO A LA BODA DE</p>
+                <h1 class="nombres">Denilson & Belen</h1>
+                
+                <div class="separador-floral">~ ❦ ~</div>
+                
+                <div class="fecha-destacada">Domingo, 01 de Marzo de 2026</div>
+                
+                <div class="versiculo-box">
+                    <p class="versiculo">
+                        "Por esa razón, el hombre dejará a su padre y a su madre, se unirá a su esposa y ellos serán una sola carne."
+                        <br><span style="font-family: Montserrat; font-weight: 600; font-style: normal; font-size: 0.9rem; margin-top: 10px; display: block;">— Génesis 2:24</span>
+                    </p>
+                </div>
+            </div>
         </header>
 
-        <section id="cuenta-regresiva">
-            <p style="text-transform: uppercase; letter-spacing: 2px;">Solo falta:</p>
-            <div class="contador-wrapper">
-                <div class="contador" id="reloj">
-                    </div>
+        <section id="cuenta-regresiva" style="background-color: white;">
+            <div class="content-container">
+                <p style="text-transform: uppercase; letter-spacing: 3px; font-weight: 600;">Comienza la cuenta atrás</p>
+                <div class="contador-wrapper">
+                    <div class="contador" id="reloj">
+                        </div>
+                </div>
             </div>
         </section>
 
         <section id="eventos">
-            <h2>Detalles del Evento</h2>
-            <div class="eventos-grid">
-                <div class="evento-card">
-                    <i class="fas fa-church fa-2x" style="color:var(--terracota); margin-bottom:15px;"></i>
-                    <h3>Ceremonia Religiosa</h3>
-                    <p class="hora">16:00 PM</p>
-                    <p>Lugar: Salón de Eventos Santa Cruz</p>
+            <div class="content-container">
+                <h2>Celebración</h2>
+                <p>Acompáñanos a celebrar nuestro amor en este día tan especial.</p>
+                <div class="eventos-grid">
+                    <div class="evento-card">
+                        <h3>Ceremonia Religiosa</h3>
+                        <div class="separador-floral" style="font-size: 1.5rem; margin: 15px 0;">❦</div>
+                        <p class="hora">16:00 HRS</p>
+                        <p>Lugar: Salón de Eventos Santa Cruz</p>
+                    </div>
+                    <div class="evento-card">
+                        <h3>Recepción Social</h3>
+                        <div class="separador-floral" style="font-size: 1.5rem; margin: 15px 0;">❦</div>
+                        <p class="hora">18:00 HRS</p>
+                        <p>Cena, brindis y fiesta hasta el amanecer</p>
+                    </div>
                 </div>
-                <div class="evento-card">
-                    <i class="fas fa-glass-cheers fa-2x" style="color:var(--terracota); margin-bottom:15px;"></i>
-                    <h3>Recepción Social</h3>
-                    <p class="hora">18:00 PM</p>
-                    <p>Cena, brindis y fiesta</p>
+                
+                <div style="margin-top: 40px;">
+                    <p style="font-weight: 600;">Ambos eventos se realizarán en la misma ubicación:</p>
+                    <a href="https://www.google.com/maps/place/18°10'30.9%22S+63%C2%B052'31.0%22W/@-18.175868,-63.8752845,271m/data=!3m1!1e3!4m4!3m3!8m2!3d-18.175259!4d-63.8752718?hl=es&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D" target="_blank" class="btn-mapa">
+                        <i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> Ver Ubicación en Google Maps
+                    </a>
                 </div>
-            </div>
-            
-            <div style="margin-top: 30px;">
-                <p>Ambos eventos se realizarán en la misma ubicación:</p>
-                <a href="https://www.google.com/maps/place/18°10'30.9%22S+63%C2%B052'31.0%22W/@-18.175868,-63.8752845,271m/data=!3m1!1e3!4m4!3m3!8m2!3d-18.175259!4d-63.8752718?hl=es&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D" target="_blank" class="btn-mapa">
-                    <i class="fas fa-map-marker-alt"></i> Ver Ubicación en Google Maps
-                </a>
             </div>
         </section>
 
-        <img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pareja feliz" style="width:100%; height: 300px; object-fit:cover;">
+        <img src="https://placehold.co/850x400/B0714E/FFFFFF/png?text=Foto+Intermedia+Pareja" alt="Pareja feliz" class="img-responsive" style="width: 100%; height: 350px; object-fit: cover; border-radius: 0;">
 
-        <section id="itinerario">
-            <h2>Itinerario</h2>
-            <p style="margin-bottom: 20px; font-size: 0.9rem;">Rogamos puntualidad para disfrutar de cada momento.</p>
-            <ul class="itinerario-lista">
-                <li class="itinerario-item">
-                    <span class="hora">16:00</span> - Ceremonia Religiosa
-                </li>
-                <li class="itinerario-item">
-                    <span class="hora">17:30</span> - Sesión de Fotos
-                </li>
-                <li class="itinerario-item">
-                    <span class="hora">18:00</span> - Ingreso a Recepción
-                </li>
-                <li class="itinerario-item">
-                    <span class="hora">19:00</span> - Cena
-                </li>
-                <li class="itinerario-item">
-                    <span class="hora">20:00</span> - Fiesta
-                </li>
-            </ul>
+        <section id="itinerario" style="background-color: white;">
+            <div class="content-container">
+                <h2>Itinerario del Día</h2>
+                <p style="margin-bottom: 40px; font-style: italic;">Rogamos puntualidad para disfrutar de cada momento juntos.</p>
+                <ul class="itinerario-lista">
+                    <li class="itinerario-item">
+                        <span class="hora">16:00</span> <span class="actividad">Inicio de Ceremonia Religiosa</span>
+                    </li>
+                    <li class="itinerario-item">
+                        <span class="hora">17:30</span> <span class="actividad">Sesión de Fotos con Invitados</span>
+                    </li>
+                    <li class="itinerario-item">
+                        <span class="hora">18:00</span> <span class="actividad">Ingreso a la Recepción</span>
+                    </li>
+                    <li class="itinerario-item">
+                        <span class="hora">19:00</span> <span class="actividad">Cena de Celebración</span>
+                    </li>
+                    <li class="itinerario-item">
+                        <span class="hora">20:30</span> <span class="actividad">¡Que comience la fiesta!</span>
+                    </li>
+                </ul>
+            </div>
         </section>
 
-        <div class="separador"></div>
+        <div class="separador-floral">~ ❦ ~</div>
 
         <section id="vestimenta">
-            <i class="fas fa-user-tie fa-3x" style="color:var(--verde-oliva); margin-bottom:15px;"></i>
-            <h2>Código de Vestimenta</h2>
-            <p style="font-size: 1.2rem; margin-top: 10px;">FORMAL</p>
-            <p style="color: #666; font-size: 0.9rem;">Elegancia y estilo</p>
+            <div class="content-container">
+                <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExajJ5aWc1b3B6d2F4a3h6aGZ5Ynh3aGZ5Ynh3aGZ5Ynh3aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xUPGcxpCW3U2cR3Jg4/giphy.gif" alt="Animación Vestimenta Formal" class="icono-animado-vestimenta" style="border-radius: 50%; border: 3px solid var(--terracota); padding: 5px;">
+                
+                <h2>Código de Vestimenta</h2>
+                <p style="font-size: 1.3rem; margin-top: 15px; font-weight: 600; letter-spacing: 2px;">FORMAL / ELEGANTE</p>
+                <p style="color: #666; margin-top: 10px;">Pongámonos guapos para la ocasión.</p>
+            </div>
         </section>
 
         <section id="regalos" style="background-color: white;">
-            <h2>Regalos</h2>
-            <p>Su presencia es nuestro mejor regalo. Si desean tener un detalle con nosotros, ponemos a su disposición nuestra lluvia de sobres digital.</p>
-            
-            <div class="qr-container">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PagoBodaEjemplo" alt="QR para regalo" width="150">
-                <p style="margin-top: 10px; font-weight: bold;">Escanear para enviar</p>
+            <div class="content-container">
+                <i class="fas fa-gift fa-3x" style="color:var(--terracota); margin-bottom: 20px;"></i>
+                <h2>Regalos</h2>
+                <p style="max-width: 600px; margin: 0 auto;">Su presencia es nuestro regalo más valioso. No obstante, si desean tener un detalle adicional con nosotros para comenzar esta nueva etapa, dispondremos de un buzón de sobres digital.</p>
+                
+                <div class="qr-container">
+                    <img src="https://placehold.co/200x200/5E604B/FFFFFF/png?text=TU+C%C3%93DIGO+QR+AQU%C3%8D" alt="QR para regalo" width="180" height="180">
+                    <p style="margin-top: 15px; font-weight: bold; color: var(--verde-oliva);">Escanear para enviar presente</p>
+                </div>
             </div>
         </section>
 
         <section id="galeria">
-            <h2>Nuestra Historia</h2>
-            <div class="galeria">
-                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Foto 1">
-                <img src="https://images.unsplash.com/photo-1522673607200-1645062cd958?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Foto 2">
-                <img src="https://images.unsplash.com/photo-1520854221256-17451cc330e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Foto 3">
-                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Foto 4">
+            <div class="content-container">
+                <h2>Nuestros Momentos</h2>
+                <p style="margin-bottom: 30px;">Un pequeño vistazo a nuestra historia de amor.</p>
+                <div class="galeria-grid">
+                    <img src="https://placehold.co/400x300/D7B391/FFFFFF/png?text=Foto+Galer%C3%ADa+1" alt="Foto 1">
+                    <img src="https://placehold.co/400x300/B0714E/FFFFFF/png?text=Foto+Galer%C3%ADa+2" alt="Foto 2">
+                    <img src="https://placehold.co/400x300/5E604B/FFFFFF/png?text=Foto+Galer%C3%ADa+3" alt="Foto 3">
+                    <img src="https://placehold.co/400x300/FFE8CF/5E604B/png?text=Foto+Galer%C3%ADa+4" alt="Foto 4">
+                </div>
             </div>
         </section>
 
         <div class="rsvp-section">
-            <h3 style="color: white; margin-bottom: 10px;">IMPORTANTE</h3>
-            <p style="margin-bottom: 20px;">Recepción exclusiva para adultos.</p>
-            
-            <div class="separador" style="background-color: var(--peach);"></div>
+            <div class="content-container">
+                
+                <div class="adults-only-box">
+                    <h3 style="color: var(--peach); font-size: 2.2rem; margin-bottom: 20px;">Una Nota Importante</h3>
+                    <div class="separador-floral" style="color: var(--peach); font-size: 1.5rem; margin: 15px 0;">~ ❦ ~</div>
+                    <p class="adults-only-text">Amamos profundamente a los niños de nuestra familia y amigos. Sin embargo, para esta ocasión tan significativa, hemos preparado una velada pensada exclusivamente para el disfrute y la relajación de los adultos.</p>
+                    <p class="adults-only-text">Agradecemos de corazón su comprensión y esperamos que puedan organizar su agenda para acompañarnos y celebrar juntos, sin preocupaciones, hasta el amanecer.</p>
+                    <i class="fas fa-glass-cheers fa-2x" style="color:var(--peach); margin-top: 15px;"></i>
+                </div>
 
-            <h2>Confirmación de Asistencia</h2>
-            <p style="margin-top: 10px; color: white;">Esperamos contar con tu presencia en este día tan especial.<br>Por favor confirma tu asistencia antes del 15 de Febrero.</p>
-            
-            <a href="https://wa.me/591XXXXXXXX?text=Hola%20Denilson%20y%20Belen,%20confirmo%20mi%20asistencia%20a%20su%20boda%20%E2%9D%A4%EF%B8%8F" target="_blank" class="btn-whatsapp">
-                <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
-            </a>
+                <img src="https://placehold.co/600x300/D7B391/FFFFFF/png?text=%C2%A1Los+Esperamos!+Foto+Final" alt="Foto Despedida" class="img-responsive" style="border: 3px solid var(--peach);">
 
-            <div style="margin-top: 40px;">
-                <img src="https://images.unsplash.com/photo-1532386377726-21f422b9c736?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Foto Final" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px;">
-                <p style="margin-top: 20px; font-family: 'Great Vibes'; font-size: 2rem; color: var(--peach);">¡Los esperamos!</p>
+                <h2 style="color: var(--peach); margin-top: 40px; font-size: 3rem;">¡Los esperamos!</h2>
+                <p style="color: white; font-size: 1.1rem; margin-bottom: 30px;">Por favor, confirma tu asistencia antes del 15 de Febrero para ayudarnos a organizar todo perfectamente.</p>
+                
+                <a href="https://wa.me/591XXXXXXXX?text=Hola%20Denilson%20y%20Belen,%20%C2%A1qu%C3%A9%20alegr%C3%ADa!%20Confirmo%20mi%20asistencia%20a%20su%20boda.%20Ser%C3%A1%20un%20honor%20acompa%C3%B1arlos.%20%E2%9D%A4%EF%B8%8F" target="_blank" class="btn-whatsapp">
+                    <i class="fab fa-whatsapp fa-lg"></i> Confirmar por WhatsApp
+                </a>
+
+                <p style="margin-top: 50px; font-size: 0.8rem; color: var(--peach);">Con amor, Denilson & Belen</p>
             </div>
         </div>
 
@@ -436,73 +375,61 @@
         var audio; 
         
         document.addEventListener('DOMContentLoaded', function() {
-            // --- CÓDIGO DEL SOBRE (Tu script original adaptado) ---
+            // --- LÓGICA DEL SOBRE INTERACTIVO ---
             var botonOcultar = document.getElementById('boton-ocultar');
             var contenedor = document.getElementById('contenedor-a-ocultar');
             var contenedorIzquierda = document.getElementById('contenedor-izquierda');
             var contenedorDerecha = document.getElementById('contenedor-derecha');
             
-            // Carga la canción
             audio = new Audio('https://invitali.com/wp-content/uploads/2025/09/KARAOKE-POR-TODA-LA-VIDA-FONSECA.mp3');
             audio.loop = true; 
         
-            function activarPantallaCompleta() {
-                var elemento = document.documentElement;
-                if (elemento.requestFullscreen) { elemento.requestFullscreen(); }
-                else if (elemento.mozRequestFullScreen) { elemento.mozRequestFullScreen(); }
-                else if (elemento.webkitRequestFullscreen) { elemento.webkitRequestFullscreen(); }
-                else if (elemento.msRequestFullscreen) { elemento.msRequestFullscreen(); }
-            }
-        
             botonOcultar.addEventListener('click', function(e) {
                 e.preventDefault(); 
-        
-                // Animación
                 contenedorIzquierda.classList.add('move-left');
                 contenedorDerecha.classList.add('move-right');
                 contenedor.classList.add('fade-out');
         
-                // Audio
                 audio.play().catch(function(error) {
-                    console.log("El navegador bloqueó la reproducción automática: ", error);
+                    console.log("Auto-play bloqueado por el navegador (normal en móviles): ", error);
+                    // Si falla el autoplay, se podría mostrar un botón discreto de "Play música"
                 });
-                // activarPantallaCompleta(); // Opcional, a veces molesta en móviles
         
                 setTimeout(function() {
                     contenedor.style.display = 'none';
                 }, 3000); 
             });
 
-            // --- CUENTA REGRESIVA ---
-            // Fecha: 1 de Marzo de 2026
+            // --- LÓGICA DE LA CUENTA REGRESIVA ---
+            // Fecha objetivo: 1 de Marzo de 2026, 16:00 hrs
             const fechaBoda = new Date('March 1, 2026 16:00:00').getTime();
 
             const intervalo = setInterval(function() {
                 const ahora = new Date().getTime();
                 const distancia = fechaBoda - ahora;
 
-                // Cálculos
+                // Cálculos de tiempo
                 const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
                 const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
                 const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
 
-                // Mostrar resultado
+                // Renderizado en HTML
                 const template = `
-                    <div class="tiempo-box"><span class="tiempo-numero">${dias}</span><span class="tiempo-texto">Días</span></div>
-                    <div class="tiempo-box"><span class="tiempo-numero">:</span></div>
-                    <div class="tiempo-box"><span class="tiempo-numero">${horas}</span><span class="tiempo-texto">Hs</span></div>
-                    <div class="tiempo-box"><span class="tiempo-numero">:</span></div>
-                    <div class="tiempo-box"><span class="tiempo-numero">${minutos}</span><span class="tiempo-texto">Min</span></div>
-                    <div class="tiempo-box"><span class="tiempo-numero">:</span></div>
-                    <div class="tiempo-box"><span class="tiempo-numero">${segundos}</span><span class="tiempo-texto">Seg</span></div>
+                    <div class="tiempo-box"><span class="tiempo-numero">${dias < 10 ? '0'+dias : dias}</span><span class="tiempo-texto">Días</span></div>
+                    <div class="tiempo-numero" style="color:var(--beige)">:</div>
+                    <div class="tiempo-box"><span class="tiempo-numero">${horas < 10 ? '0'+horas : horas}</span><span class="tiempo-texto">Hs</span></div>
+                    <div class="tiempo-numero" style="color:var(--beige)">:</div>
+                    <div class="tiempo-box"><span class="tiempo-numero">${minutos < 10 ? '0'+minutos : minutos}</span><span class="tiempo-texto">Min</span></div>
+                    <div class="tiempo-numero" style="color:var(--beige)">:</div>
+                    <div class="tiempo-box"><span class="tiempo-numero">${segundos < 10 ? '0'+segundos : segundos}</span><span class="tiempo-texto">Seg</span></div>
                 `;
                 
                 document.getElementById("reloj").innerHTML = template;
 
                 if (distancia < 0) {
                     clearInterval(intervalo);
-                    document.getElementById("reloj").innerHTML = "¡Llegó el gran día!";
+                    document.getElementById("reloj").innerHTML = "<h3 style='color:var(--terracota)'>¡Hoy es el gran día!</h3>";
                 }
             }, 1000);
         });
