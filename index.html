@@ -3,370 +3,452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boda Denilson y Belen</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Boda de Denilson y Belen</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        :root {
-            --verde-oliva: #5E604B;
-            --terracota: #B0714E;
-            --beige: #D7B391;
-            --peach: #FFE8CF;
-            --fondo: #FAF9F5;
-            --blanco: #FFFFFF;
+    <!-- Configuración de Colores -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        olive: '#5E604B',
+                        terracotta: '#B0714E',
+                        sand: '#D7B391',
+                        peach: '#FFE8CF',
+                        cream: '#FAF9F5',
+                    },
+                    fontFamily: {
+                        script: ['"Great Vibes"', 'cursive'],
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
         }
+    </script>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    <style>
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--fondo);
-            color: var(--verde-oliva);
+            background-color: #FAF9F5;
             overflow-x: hidden;
         }
 
-        h1, h2, h3 { font-family: 'Great Vibes', cursive; font-weight: 400; }
-        h2 { font-size: 3.5rem; color: var(--terracota); margin-bottom: 20px; }
-
-        /* --- 1. SOBRE CON 4 DOBLECES (CSS AVANZADO) --- */
+        /* --- Estilos de la Animación de Entrada (Tu Código Adaptado) --- */
         #contenedor-a-ocultar {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            z-index: 9999; display: flex; justify-content: center; align-items: center;
-            background-color: var(--fondo); /* Fondo detrás del sobre */
-            perspective: 1500px; /* Para efecto 3D al abrir */
+            width: 100%;
+            height: 100vh;
+            overflow: hidden; 
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .sobre {
-            position: relative; width: 100%; height: 100%; max-width: 800px; max-height: 600px;
-            display: flex; justify-content: center; align-items: center;
-        }
-        
-        /* En móvil el sobre ocupa todo */
-        @media(max-width: 600px){ .sobre { max-width: 100%; max-height: 100%; } }
-
-        /* Las 4 solapas triangulares */
-        .solapa {
-            position: absolute; width: 100%; height: 100%;
-            transition: all 1.5s ease-in-out;
+        /* Mitades del sobre con los colores de la paleta */
+        #contenedor-izquierda, #contenedor-derecha {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background-size: cover;
+            background-position: center;
         }
 
-        /* Izquierda */
-        .solapa-izquierda {
-            background-color: #555743; /* Un tono más oscuro que verde oliva */
-            clip-path: polygon(0 0, 50% 50%, 0 100%);
-            z-index: 2;
-        }
-        /* Derecha */
-        .solapa-derecha {
-            background-color: #555743;
-            clip-path: polygon(100% 0, 50% 50%, 100% 100%);
-            z-index: 2;
-        }
-        /* Abajo (Fondo del cierre) */
-        .solapa-abajo {
-            background-color: var(--verde-oliva);
-            clip-path: polygon(0 100%, 50% 50%, 100% 100%);
-            z-index: 3;
-        }
-        /* Arriba (La tapa que se abre) */
-        .solapa-arriba {
-            background-color: #696b54; /* Un poco más claro */
-            clip-path: polygon(0 0, 50% 50%, 100% 0);
-            z-index: 4;
-            transform-origin: top; /* Rota desde arriba */
+        #contenedor-izquierda {
+            left: 0;
+            background-color: #5E604B; /* Olive */
+            border-right: 1px solid #D7B391;
+            /* Textura opcional */
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); 
         }
 
-        .sello-contenedor {
-            position: absolute; z-index: 10; cursor: pointer;
-            transition: transform 0.3s;
+        #contenedor-derecha {
+            right: 0;
+            background-color: #5E604B; /* Olive */
+            border-left: 1px solid #D7B391;
+             /* Textura opcional */
+             background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
         }
-        .sello-contenedor:hover { transform: scale(1.1); }
 
-        /* Animaciones JS */
-        .abrir-tapa { transform: rotateX(180deg); z-index: 1 !important; opacity: 0.5;}
-        .deslizar-lados { transform: scale(1.5); opacity: 0; transition: all 1s ease 0.5s;} /* Se desvanece */
-        .ocultar-todo { pointer-events: none; opacity: 0; transition: opacity 1s ease 1s;}
-
-        /* --- 2. CONTENIDO PRINCIPAL --- */
-        .main-invitacion {
-            max-width: 800px; margin: 0 auto; opacity: 0;
-            animation: aparecer 2s forwards 1.5s; /* Aparece después del sobre */
-            background: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-        @keyframes aparecer { to { opacity: 1; } }
-
-        /* Olas SVG Separadores */
-        .ola-svg { width: 100%; height: auto; display: block; line-height: 0; margin-bottom: -1px;}
-        .ola-svg-bottom { transform: rotate(180deg); margin-top: -1px; margin-bottom: 0;}
-
-        /* Header */
-        header { text-align: center; position: relative; }
-        .foto-portada { width: 100%; height: 500px; object-fit: cover; }
-        .header-content { padding: 40px 20px; }
-        
-        .nombres { font-size: 4.5rem; line-height: 1; margin: 10px 0; color: var(--terracota);}
-        
-        /* FECHA ESTILIZADA */
-        .calendario-box {
-            border: 2px solid var(--verde-oliva);
-            display: inline-block;
-            padding: 15px 40px;
-            margin: 30px 0;
+        /* El sello central */
+        .sello-container {
             position: relative;
+            z-index: 10000;
+            transition: opacity 1s ease;
         }
-        .calendario-box::before { /* Adorno */
-            content: '♥'; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            background: white; padding: 0 10px; color: var(--terracota); font-size: 1.5rem;
+
+        .sello-pulse {
+            animation: pulse-animation 2s infinite;
         }
-        .cal-mes { text-transform: uppercase; letter-spacing: 4px; font-size: 1.2rem; display: block; color: var(--verde-oliva);}
-        .cal-num { font-size: 4rem; font-weight: 700; display: block; line-height: 1; color: var(--terracota); font-family: 'Montserrat';}
-        .cal-anio { font-size: 1.2rem; letter-spacing: 4px; color: #777;}
 
-        /* Cuenta Regresiva */
-        .contador-grid { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
-        .c-item { background: var(--peach); padding: 15px; border-radius: 8px; min-width: 70px; }
-        .c-num { font-size: 1.5rem; font-weight: bold; color: var(--verde-oliva); display: block; }
-        .c-label { font-size: 0.7rem; text-transform: uppercase; }
-
-        /* Itinerario con Íconos Hermosos */
-        .itinerario-row { display: flex; align-items: center; margin-bottom: 30px; text-align: left; position: relative; }
-        .icono-fase {
-            width: 60px; height: 60px; background: var(--verde-oliva); color: var(--peach);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 1.5rem; margin-right: 20px; flex-shrink: 0;
-            border: 3px solid var(--beige);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        @keyframes pulse-animation {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(215, 179, 145, 0.7); border-radius: 50%; }
+            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(215, 179, 145, 0); border-radius: 50%; }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(215, 179, 145, 0); border-radius: 50%; }
         }
-        .info-fase h3 { font-family: 'Montserrat'; font-size: 1.1rem; font-weight: 700; color: var(--terracota); margin-bottom: 5px; }
 
-        /* Vestimenta */
-        .vestimenta-box {
-            background-color: var(--fondo); border: 1px dashed var(--terracota);
-            padding: 30px; margin: 20px; border-radius: 10px;
+        /* Clases de animación */
+        .move-left { transform: translateX(-100%); }
+        .move-right { transform: translateX(100%); }
+        .fade-out { opacity: 0; pointer-events: none; transition: opacity 1.5s ease-out; }
+        .hide-sello { opacity: 0; pointer-events: none; }
+
+        /* --- Estilos Generales de la Invitación --- */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, visibility;
         }
-        
-        /* Botones */
-        .btn-accion {
-            background-color: var(--verde-oliva); color: white; padding: 15px 30px;
-            text-decoration: none; border-radius: 50px; display: inline-block; margin-top: 15px;
-            font-weight: bold; transition: background 0.3s;
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
         }
-        .btn-accion:hover { background-color: var(--terracota); }
 
-        /* Galería */
-        .galeria-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 20px; }
-        .galeria-grid img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; }
-
-        /* QR */
-        .qr-img { border: 5px solid var(--peach); border-radius: 10px; }
-
-        /* Media Queries */
-        @media (max-width: 600px) {
-            .nombres { font-size: 3.5rem; }
-            .itinerario-row { flex-direction: column; text-align: center; }
-            .icono-fase { margin: 0 auto 10px auto; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
-<body>
+<body class="text-olive antialiased selection:bg-terracotta selection:text-white">
 
+    <!-- PANTALLA DE APERTURA (SOBRE) -->
     <div id="contenedor-a-ocultar">
-        <div class="sobre" id="sobre">
-            <div class="solapa solapa-izquierda"></div>
-            <div class="solapa solapa-derecha"></div>
-            <div class="solapa solapa-abajo"></div>
-            <div class="solapa solapa-arriba" id="tapa-sobre"></div> <div class="sello-contenedor" id="boton-sello">
-                 <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="120" alt="Sello">
-                <div style="color: white; font-size: 0.8rem; text-shadow: 1px 1px 2px black; text-align: center; margin-top: 5px;">ABRIR</div>
-            </div>
+        <div id="contenedor-izquierda" class="flex items-center justify-end pr-4">
+            <p class="text-cream font-script text-4xl opacity-50 rotate-90 hidden md:block">D & B</p>
+        </div>
+        <div id="contenedor-derecha"></div>
+        
+        <div class="sello-container">
+            <a id="boton-ocultar" href="#cabecera" class="cursor-pointer block sello-pulse">
+                <!-- Sello de cera proporcionado -->
+                <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="120" alt="Abrir invitación">
+                <p class="text-white text-center font-sans text-xs mt-2 tracking-widest uppercase">Abrir invitación</p>
+            </a>
         </div>
     </div>
 
-    <div class="main-invitacion" id="top">
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="max-w-3xl mx-auto bg-cream shadow-2xl min-h-screen relative pb-12 overflow-hidden">
         
-        <header>
-            <img src="https://placehold.co/800x500/D7B391/FFFFFF/png?text=Denilson+y+Belen" class="foto-portada" alt="Novios">
+        <!-- Elementos decorativos fondo -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-5">
+            <div class="absolute -top-20 -left-20 w-96 h-96 bg-olive rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 -right-20 w-80 h-80 bg-terracotta rounded-full blur-3xl"></div>
+        </div>
+
+        <!-- 1. Header & Foto Principal -->
+        <header id="cabecera" class="relative pt-12 px-6 text-center fade-in-section">
+            <p class="text-terracotta font-sans tracking-[0.3em] uppercase text-sm mb-4">La boda de</p>
+            <h1 class="font-script text-6xl md:text-8xl text-olive mb-2">Denilson & Belen</h1>
             
-            <div class="header-content">
-                <p style="letter-spacing: 3px; text-transform: uppercase; font-size: 0.8rem;">Nos casamos</p>
-                <h1 class="nombres">Denilson & Belen</h1>
-                
-                <div style="font-size: 2rem; color: var(--terracota); margin: 15px 0;">
-                    <i class="fa-solid fa-ring"></i>
+            <div class="my-8 relative">
+                <div class="w-full h-96 md:h-[500px] overflow-hidden rounded-t-[150px] border-4 border-double border-sand">
+                    <!-- Foto de Novios Placeholder -->
+                    <img src="https://images.unsplash.com/photo-1583939003579-73013917a611?q=80&w=2070&auto=format&fit=crop" 
+                         alt="Denilson y Belen" class="w-full h-full object-cover">
                 </div>
+            </div>
 
-                <div class="calendario-box">
-                    <span class="cal-mes">Marzo</span>
-                    <span class="cal-num">01</span>
-                    <span class="cal-anio">Domingo 2026</span>
-                </div>
-
-                <div style="max-width: 600px; margin: 0 auto; color: #666; font-style: italic;">
-                    "Por esa razón, el hombre dejará a su padre y a su madre, se unirá a su esposa y ellos serán una sola carne."<br>
-                    <strong>Génesis 2:24</strong>
-                </div>
+            <p class="font-serif text-2xl italic text-terracotta mb-2">01 de Marzo de 2026</p>
+            
+            <div class="py-8 px-4 max-w-lg mx-auto">
+                <p class="font-serif text-lg md:text-xl text-olive/80 leading-relaxed">
+                    "Por esa razón, el hombre dejará a su padre y a su madre, se unirá a su esposa y ellos serán una sola carne."
+                </p>
+                <p class="font-sans text-xs font-bold mt-2 text-terracotta tracking-widest">— GÉNESIS 2:24</p>
             </div>
         </header>
 
-        <svg class="ola-svg" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="#FAF9F5" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
-
-        <section style="background-color: var(--fondo); padding: 40px 20px; text-align: center;">
-            <p style="text-transform: uppercase;">Cuenta Regresiva</p>
-            <div class="contador-grid" id="reloj"></div>
+        <!-- 2. Countdown -->
+        <section class="py-8 text-center px-4 fade-in-section">
+            <h3 class="font-sans text-sm tracking-widest text-olive mb-6 uppercase">Sólo falta</h3>
+            <div id="countdown" class="flex justify-center gap-4 md:gap-8 font-serif text-terracotta">
+                <!-- Se llena con JS -->
+            </div>
         </section>
 
-        <svg class="ola-svg ola-svg-bottom" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="#FFFFFF" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
-
-        <section style="background-color: white; padding: 40px 20px;">
-            <div style="max-width: 600px; margin: 0 auto;">
-                <h2>Celebración</h2>
-                <p style="margin-bottom: 30px;">Salón de Eventos Santa Cruz</p>
+        <!-- 3. Eventos (Ceremonia y Recepción) -->
+        <section class="py-12 px-6 fade-in-section">
+            <div class="glass-card rounded-xl p-8 shadow-sm border-t-4 border-olive">
+                <h2 class="font-script text-5xl text-center text-olive mb-8">Nuestra Boda</h2>
                 
-                <div class="itinerario-row">
-                    <div class="icono-fase"><i class="fa-solid fa-church"></i></div>
-                    <div class="info-fase">
-                        <h3>Ceremonia Religiosa</h3>
-                        <p>16:00 PM</p>
+                <div class="grid md:grid-cols-2 gap-8 text-center relative">
+                    <!-- Línea divisora vertical para desktop -->
+                    <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-sand/50 transform -translate-x-1/2"></div>
+
+                    <!-- Ceremonia -->
+                    <div class="space-y-4">
+                        <i class="fa-solid fa-church text-4xl text-terracotta"></i>
+                        <h3 class="font-serif text-2xl font-bold text-olive">Ceremonia Religiosa</h3>
+                        <p class="font-sans text-sm text-gray-600">Horario</p>
+                        <p class="font-serif text-3xl text-olive">16:30 hrs</p>
+                    </div>
+
+                    <!-- Recepción -->
+                    <div class="space-y-4">
+                        <i class="fa-solid fa-champagne-glasses text-4xl text-terracotta"></i>
+                        <h3 class="font-serif text-2xl font-bold text-olive">Recepción Social</h3>
+                        <p class="font-sans text-sm text-gray-600">Horario</p>
+                        <p class="font-serif text-3xl text-olive">18:00 hrs</p>
                     </div>
                 </div>
 
-                <div class="itinerario-row">
-                    <div class="icono-fase"><i class="fa-solid fa-champagne-glasses"></i></div>
-                    <div class="info-fase">
-                        <h3>Recepción Social</h3>
-                        <p>18:00 PM</p>
-                    </div>
+                <div class="mt-8 text-center pt-8 border-t border-dashed border-sand">
+                    <p class="font-serif text-lg text-olive mb-4">Ubicación para ambos eventos</p>
+                    <a href="https://www.google.com/maps/place/18°10'30.9%22S+63°52'31.0%22W/@-18.175868,-63.8752845,271m/data=!3m1!1e3!4m4!3m3!8m2!3d-18.175259!4d-63.8752718?hl=es&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D" 
+                       target="_blank"
+                       class="inline-block bg-terracotta text-cream px-8 py-3 rounded-full font-sans text-sm tracking-widest hover:bg-olive transition duration-300 shadow-lg">
+                        <i class="fa-solid fa-location-dot mr-2"></i> VER MAPA
+                    </a>
                 </div>
-
-                <a href="https://www.google.com/maps/place/18°10'30.9%22S+63%C2%B052'31.0%22W/@-18.175868,-63.8752845,271m/data=!3m1!1e3!4m4!3m3!8m2!3d-18.175259!4d-63.8752718?hl=es&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D" class="btn-accion" target="_blank">
-                    <i class="fa-solid fa-location-dot"></i> Ver Ubicación
-                </a>
             </div>
         </section>
 
-        <img src="https://placehold.co/800x400/B0714E/FFFFFF/png?text=Nosotros" style="width:100%; display:block;" alt="Foto">
+        <!-- 4. Foto Hermosa Intermedia -->
+        <section class="fade-in-section">
+            <img src="https://images.unsplash.com/photo-1519225463359-2a682da67f1d?q=80&w=2070&auto=format&fit=crop" 
+                 alt="Amor eterno" class="w-full h-80 object-cover opacity-90">
+        </section>
 
-        <section style="background-color: var(--fondo); padding: 50px 20px;">
-            <div style="max-width: 500px; margin: 0 auto;">
-                <h2>Itinerario</h2>
+        <!-- 5. Itinerario -->
+        <section class="py-16 px-6 fade-in-section">
+            <h2 class="font-script text-5xl text-center text-olive mb-12">Itinerario</h2>
+            <div class="relative border-l-2 border-sand ml-6 md:ml-auto md:mr-auto md:w-1/2 space-y-10 pl-8">
                 
-                <div class="itinerario-row">
-                    <div class="icono-fase"><i class="fa-solid fa-camera"></i></div>
-                    <div class="info-fase"><h3>17:30 - Fotos</h3></div>
+                <div class="relative">
+                    <span class="absolute -left-[41px] top-1 bg-terracotta text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"><i class="fa-solid fa-check"></i></span>
+                    <h4 class="font-serif text-xl font-bold text-olive">Llegada de invitados</h4>
+                    <p class="font-sans text-sm text-gray-600">16:00 - 16:30 hrs</p>
                 </div>
-                <div class="itinerario-row">
-                    <div class="icono-fase"><i class="fa-solid fa-door-open"></i></div>
-                    <div class="info-fase"><h3>18:00 - Ingreso</h3></div>
-                </div>
-                <div class="itinerario-row">
-                    <div class="icono-fase"><i class="fa-solid fa-utensils"></i></div>
-                    <div class="info-fase"><h3>19:00 - Cena</h3></div>
-                </div>
-                <div class="itinerario-row">
-                    <div class="icono-fase"><i class="fa-solid fa-music"></i></div>
-                    <div class="info-fase"><h3>20:30 - Fiesta</h3></div>
-                </div>
-            </div>
-        </section>
-
-        <section style="background-color: white; padding: 50px 20px; text-align: center;">
-            <div class="vestimenta-box">
-                <div style="font-size: 2.5rem; color: var(--terracota); margin-bottom: 15px;">
-                    <i class="fa-solid fa-user-tie"></i> <i class="fa-solid fa-person-dress"></i>
-                </div>
-                <h2>Código de Vestimenta</h2>
                 
-                <p style="font-weight: bold; margin-bottom: 10px;">FORMAL DE GALA.</p>
-                <p>Dejar el color blanco reservado para la novia.<br>Mujeres utilizar zapatos cómodos por el jardín.</p>
-            </div>
+                <div class="relative">
+                    <span class="absolute -left-[41px] top-1 bg-terracotta text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"><i class="fa-solid fa-ring"></i></span>
+                    <h4 class="font-serif text-xl font-bold text-olive">Ceremonia</h4>
+                    <p class="font-sans text-sm text-gray-600">16:30 - 17:30 hrs</p>
+                </div>
 
-            <div style="margin-top: 50px;">
-                <i class="fa-solid fa-gift" style="font-size: 2rem; color: var(--verde-oliva);"></i>
-                <h2 style="font-size: 2.5rem;">Regalos</h2>
-                <img src="https://placehold.co/150x150/000000/FFFFFF/png?text=QR+PAGO" class="qr-img" width="150" alt="QR">
-                <p style="margin-top: 10px;">Lluvia de sobres</p>
+                <div class="relative">
+                    <span class="absolute -left-[41px] top-1 bg-terracotta text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"><i class="fa-solid fa-camera"></i></span>
+                    <h4 class="font-serif text-xl font-bold text-olive">Sesión de Fotos</h4>
+                    <p class="font-sans text-sm text-gray-600">17:30 - 18:00 hrs</p>
+                </div>
+
+                <div class="relative">
+                    <span class="absolute -left-[41px] top-1 bg-terracotta text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"><i class="fa-solid fa-utensils"></i></span>
+                    <h4 class="font-serif text-xl font-bold text-olive">Cena y Fiesta</h4>
+                    <p class="font-sans text-sm text-gray-600">18:00 en adelante</p>
+                </div>
             </div>
         </section>
 
-        <svg class="ola-svg" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="#5E604B" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
-
-        <section style="background-color: var(--verde-oliva); padding: 20px 0 60px 0; color: white; text-align: center;">
-            <h2 style="color: var(--peach);">Galería</h2>
-            <div class="galeria-grid">
-                <img src="https://placehold.co/400x300/D7B391/FFFFFF/png?text=Foto1" alt="1">
-                <img src="https://placehold.co/400x300/B0714E/FFFFFF/png?text=Foto2" alt="2">
-                <img src="https://placehold.co/400x300/FFE8CF/5E604B/png?text=Foto3" alt="3">
-                <img src="https://placehold.co/400x300/FAF9F5/5E604B/png?text=Foto4" alt="4">
+        <!-- 6. Detalles Importantes (Puntualidad, Adultos, Dress Code) -->
+        <section class="py-12 px-6 bg-olive/5 fade-in-section">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <!-- Puntualidad -->
+                <div class="p-4">
+                    <i class="fa-regular fa-clock text-3xl text-terracotta mb-3"></i>
+                    <h4 class="font-serif text-xl font-bold text-olive mb-2">Puntualidad</h4>
+                    <p class="font-sans text-sm text-gray-600">Agradecemos su presencia puntual para iniciar la ceremonia a tiempo.</p>
+                </div>
+                <!-- Dress Code -->
+                <div class="p-4">
+                    <i class="fa-solid fa-user-tie text-3xl text-terracotta mb-3"></i>
+                    <h4 class="font-serif text-xl font-bold text-olive mb-2">Código de Vestimenta</h4>
+                    <p class="font-serif text-lg font-bold uppercase tracking-widest text-olive">Formal</p>
+                    <p class="font-sans text-sm text-gray-600 mt-2">Ellas: Vestido Largo<br>Ellos: Traje y corbata</p>
+                </div>
+                <!-- Adultos -->
+                <div class="p-4">
+                    <i class="fa-solid fa-martini-glass-citrus text-3xl text-terracotta mb-3"></i>
+                    <h4 class="font-serif text-xl font-bold text-olive mb-2">Solo Adultos</h4>
+                    <p class="font-sans text-sm text-gray-600">Amamos a sus pequeños, pero queremos que disfruten la noche con nosotros. Recepción sin niños.</p>
+                </div>
             </div>
+        </section>
 
-            <div style="border: 1px solid var(--peach); padding: 20px; margin: 40px 20px; border-radius: 10px;">
-                <p><strong>IMPORTANTE:</strong> Recepción exclusiva para adultos.<br>Gracias por su comprensión.</p>
-            </div>
+        <!-- 7. Foto Hermosa -->
+        <section class="py-8 fade-in-section">
+             <div class="mx-6 h-64 overflow-hidden rounded-xl">
+                 <img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=2574&auto=format&fit=crop" 
+                 alt="Detalles" class="w-full h-full object-cover">
+             </div>
+        </section>
 
-            <h3 style="color:white; margin-bottom: 20px;">Confirmar Asistencia</h3>
+        <!-- 8. Regalos (QR) -->
+        <section class="py-12 px-6 text-center fade-in-section">
+            <h2 class="font-script text-5xl text-olive mb-4">Regalos</h2>
+            <p class="font-serif text-lg text-gray-600 mb-8 max-w-md mx-auto">
+                Su presencia es nuestro mejor regalo. Si desean tener un detalle con nosotros, agradecemos su aporte en nuestra lluvia de sobres digital.
+            </p>
             
-            <a href="https://wa.me/591XXXXXXXX" class="btn-accion" style="background-color: #25D366; color: white;">
-                <i class="fa-brands fa-whatsapp"></i> Enviar Mensaje
-            </a>
-
-            <img src="https://placehold.co/800x300/D7B391/FFFFFF/png?text=¡Los+Esperamos!" style="width: 90%; border-radius: 10px; margin-top: 40px; border: 4px solid var(--peach);" alt="Fin">
+            <div class="bg-white p-6 inline-block rounded-xl shadow-lg border border-sand">
+                <!-- Placeholder de QR -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=GraciasPorElRegaloDenilsonyBelen&color=5E604B" 
+                     alt="QR Pago" class="mx-auto mb-2 opacity-90">
+                <p class="font-sans text-xs text-olive font-bold tracking-widest mt-2">ESCANEAR PARA TRANSFERIR</p>
+            </div>
         </section>
 
-    </div>
+        <!-- 9. Galería -->
+        <section class="py-12 px-4 fade-in-section">
+            <div class="grid grid-cols-2 gap-2 md:gap-4">
+                <img src="https://images.unsplash.com/photo-1532054992925-4c07a9c8491c?q=80&w=1000&auto=format&fit=crop" class="w-full h-48 md:h-64 object-cover rounded-tl-2xl rounded-br-2xl border-2 border-cream shadow-md">
+                <img src="https://images.unsplash.com/photo-1588673755325-10ce690626a4?q=80&w=1000&auto=format&fit=crop" class="w-full h-48 md:h-64 object-cover rounded-tr-2xl rounded-bl-2xl border-2 border-cream shadow-md">
+                <img src="https://images.unsplash.com/photo-1595168866166-f40b08da22c0?q=80&w=1000&auto=format&fit=crop" class="w-full h-48 md:h-64 object-cover rounded-tr-2xl rounded-bl-2xl border-2 border-cream shadow-md">
+                <img src="https://images.unsplash.com/photo-1623862413727-2c1a1f599974?q=80&w=1000&auto=format&fit=crop" class="w-full h-48 md:h-64 object-cover rounded-tl-2xl rounded-br-2xl border-2 border-cream shadow-md">
+            </div>
+        </section>
+
+        <!-- 10. Confirmación / RSVP -->
+        <section class="py-16 px-6 bg-peach/20 text-center fade-in-section">
+            <h2 class="font-script text-5xl text-olive mb-6">Confirmación</h2>
+            <p class="font-serif text-xl text-olive mb-8 max-w-md mx-auto">
+                Para nosotros es muy importante contar con tu presencia. Por favor confirma tu asistencia antes del 15 de Febrero.
+            </p>
+            
+            <a href="https://wa.me/?text=Hola%20Denilson%20y%20Belen,%20¡con%20gusto%20asistiré%20a%20su%20boda!" 
+               target="_blank"
+               class="inline-flex items-center bg-[#25D366] text-white px-8 py-4 rounded-full font-sans font-bold shadow-lg hover:bg-[#128C7E] transition transform hover:scale-105">
+                <i class="fa-brands fa-whatsapp text-2xl mr-2"></i> CONFIRMAR EN WHATSAPP
+            </a>
+        </section>
+
+        <!-- 11. Foto Final y Footer -->
+        <footer class="relative h-[400px] fade-in-section">
+             <img src="https://images.unsplash.com/photo-1606103920295-9a091573f160?q=80&w=2070&auto=format&fit=crop" 
+                  class="w-full h-full object-cover grayscale opacity-60">
+             
+             <div class="absolute inset-0 flex flex-col items-center justify-center bg-olive/30 text-white">
+                <h2 class="font-script text-6xl mb-2">Gracias</h2>
+                <p class="font-serif text-xl tracking-widest uppercase">Por acompañarnos</p>
+                <p class="font-sans text-xs mt-8 opacity-80">Denilson & Belen • 2026</p>
+             </div>
+        </footer>
+
+    </main>
 
     <script>
+        // --- 1. Lógica del "Sobre" (Tu código adaptado) ---
+        var audio; 
+        
         document.addEventListener('DOMContentLoaded', function() {
-            var botonSello = document.getElementById('boton-sello');
+            var botonOcultar = document.getElementById('boton-ocultar');
             var contenedor = document.getElementById('contenedor-a-ocultar');
-            var tapaSobre = document.getElementById('tapa-sobre');
-            var audio = new Audio('https://invitali.com/wp-content/uploads/2025/09/KARAOKE-POR-TODA-LA-VIDA-FONSECA.mp3');
-            audio.loop = true;
+            var contenedorIzquierda = document.getElementById('contenedor-izquierda');
+            var contenedorDerecha = document.getElementById('contenedor-derecha');
+            var selloContainer = document.querySelector('.sello-container');
+            
+            audio = new Audio('https://invitali.com/wp-content/uploads/2025/09/KARAOKE-POR-TODA-LA-VIDA-FONSECA.mp3');
+            audio.loop = true; 
+        
+            function activarPantallaCompleta() {
+                var elemento = document.documentElement;
+                if (elemento.requestFullscreen) { elemento.requestFullscreen().catch(err => console.log(err)); } 
+                else if (elemento.mozRequestFullScreen) { elemento.mozRequestFullScreen(); } 
+                else if (elemento.webkitRequestFullscreen) { elemento.webkitRequestFullscreen(); } 
+                else if (elemento.msRequestFullscreen) { elemento.msRequestFullscreen(); }
+            }
+        
+            botonOcultar.addEventListener('click', function(e) {
+                e.preventDefault(); 
+        
+                // Ocultar sello
+                selloContainer.classList.add('hide-sello');
 
-            botonSello.addEventListener('click', function() {
-                // 1. Reproducir audio
-                audio.play().catch(e => console.log("Audio bloqueado"));
-
-                // 2. Animación Tapa Arriba (Abre el sobre)
-                tapaSobre.classList.add('abrir-tapa');
-                
-                // 3. Desvanecer Sello
-                botonSello.style.opacity = '0';
-
-                // 4. Mover todo el sobre y desaparecer
-                setTimeout(() => {
-                    document.querySelector('.sobre').classList.add('deslizar-lados');
-                }, 500);
-
-                setTimeout(() => {
-                    contenedor.classList.add('ocultar-todo');
-                }, 1500);
+                // Abrir puertas
+                contenedorIzquierda.classList.add('move-left');
+                contenedorDerecha.classList.add('move-right');
+        
+                // Desvanecer contenedor global
+                contenedor.classList.add('fade-out');
+        
+                // Audio y Pantalla
+                audio.play().catch(function(error) {
+                    console.log("El navegador requiere interacción previa para reproducir audio.", error);
+                });
+                // Intentar fullscreen (puede ser bloqueado si no es interacción directa del usuario en algunos navegadores)
+                // activarPantallaCompleta(); 
+        
+                setTimeout(function() {
+                    contenedor.style.display = 'none';
+                    // Iniciar animación de elementos internos una vez abierto el sobre
+                    observer.disconnect(); // Reiniciar observer para que detecte desde el principio
+                    document.querySelectorAll('.fade-in-section').forEach(section => {
+                        observer.observe(section);
+                    });
+                }, 1500); 
             });
 
-            // Cuenta Regresiva
-            const fechaBoda = new Date('March 1, 2026 16:00:00').getTime();
-            setInterval(() => {
-                const ahora = new Date().getTime();
-                const dist = fechaBoda - ahora;
-                
-                if(dist < 0) {
-                    document.getElementById('reloj').innerHTML = "¡Es Hoy!";
+            // --- 2. Lógica del Contador ---
+            const weddingDate = new Date('March 1, 2026 16:30:00').getTime();
+
+            const countdownFunction = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+
+                if (distance < 0) {
+                    clearInterval(countdownFunction);
+                    document.getElementById("countdown").innerHTML = "¡ES HOY!";
                     return;
                 }
 
-                const d = Math.floor(dist / (1000 * 60 * 60 * 24));
-                const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((dist % (1000 * 60)) / 1000);
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                document.getElementById('reloj').innerHTML = `
-                    <div class="c-item"><span class="c-num">${d}</span><span class="c-label">Días</span></div>
-                    <div class="c-item"><span class="c-num">${h}</span><span class="c-label">Hs</span></div>
-                    <div class="c-item"><span class="c-num">${m}</span><span class="c-label">Min</span></div>
-                    <div class="c-item"><span class="c-num">${s}</span><span class="c-label">Seg</span></div>
+                const template = (val, label) => `
+                    <div class="flex flex-col items-center mx-2">
+                        <span class="text-3xl md:text-5xl font-bold font-serif text-olive">${val}</span>
+                        <span class="text-xs font-sans tracking-widest text-terracotta mt-1 uppercase">${label}</span>
+                    </div>
+                    ${label !== 'Seg' ? '<span class="text-2xl text-sand mt-2">:</span>' : ''}
                 `;
+
+                document.getElementById("countdown").innerHTML = 
+                    template(days, "Días") + 
+                    template(hours, "Hrs") + 
+                    template(minutes, "Min") + 
+                    template(seconds, "Seg");
+
             }, 1000);
+
+            // --- 3. Animación al hacer Scroll (Intersection Observer) ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-section').forEach(section => {
+                observer.observe(section);
+            });
         });
     </script>
 </body>
