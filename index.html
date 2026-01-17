@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boda de Denilson & Belen</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- VARIABLES DE COLORES --- */
+        /* --- VARIABLES --- */
         :root {
             --verde-oliva: #5E604B;
             --terracota: #B0714E;
@@ -18,356 +18,365 @@
             --blanco: #FFFFFF;
         }
 
-        /* Reset básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--fondo);
             color: var(--verde-oliva);
-            overflow-x: hidden; /* Evita scroll horizontal no deseado */
-            line-height: 1.6; /* Mejor lectura */
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Great Vibes', cursive;
-            font-weight: 400;
-        }
-        
-        h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--terracota); }
+        h1, h2, h3, h4 { font-family: 'Great Vibes', cursive; font-weight: 400; }
+        h2 { font-size: 3rem; margin-bottom: 20px; color: var(--terracota); }
 
-        /* --- ESTILOS DEL SOBRE (PORTADA INTERACTIVA) - SIN CAMBIOS --- */
+        /* --- PORTADA TIPO SOBRE REALISTA --- */
         #contenedor-a-ocultar {
-            width: 100%; height: 100vh; overflow: hidden; position: fixed; z-index: 9999; top: 0; left: 0; display: flex; justify-content: center; align-items: center;
+            width: 100%; height: 100vh; position: fixed; z-index: 9999; top: 0; left: 0;
+            display: flex; justify-content: center; align-items: center;
+            background-color: transparent; /* El fondo lo dan los hijos */
+            overflow: hidden;
         }
+
+        /* Capa de fondo para tapar la web mientras está el sobre */
+        #fondo-seguridad {
+            position: absolute; width: 100%; height: 100%; background: var(--fondo); z-index: 1;
+        }
+
+        /* Las dos mitades del sobre */
         #contenedor-izquierda, #contenedor-derecha {
-            position: absolute; top: 0; width: 50%; height: 100%; background-color: var(--verde-oliva); transition: transform 2s ease-out; z-index: 2; box-shadow: inset 0 0 50px rgba(0,0,0,0.2);
+            position: absolute; top: 0; width: 50%; height: 100%; 
+            background-color: var(--verde-oliva); 
+            transition: transform 2.5s cubic-bezier(0.4, 0.0, 0.2, 1); 
+            z-index: 5;
+            display: flex; align-items: center;
         }
-        #contenedor-izquierda { left: 0; border-right: 1px solid var(--terracota); background: linear-gradient(135deg, var(--verde-oliva) 0%, #4a4c3b 100%); }
-        #contenedor-derecha { right: 0; border-left: 1px solid var(--terracota); background: linear-gradient(225deg, var(--verde-oliva) 0%, #4a4c3b 100%); }
-        .sello-contenedor { position: absolute; z-index: 10; cursor: pointer; transition: transform 0.3s; }
-        .sello-contenedor:hover { transform: scale(1.1); }
+
+        #contenedor-izquierda {
+            left: 0;
+            /* Crea el triángulo izquierdo del sobre */
+            background: linear-gradient(135deg, var(--verde-oliva) 0%, #4f523e 100%);
+            border-right: 1px solid rgba(0,0,0,0.1);
+            /* Sombra para simular que está sobre la otra hoja */
+            box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+            /* Clip path para simular la forma triangular de la solapa de un sobre */
+            clip-path: polygon(0 0, 100% 50%, 0 100%, 0 100%);
+            width: 55%; /* Un poco más ancho para solaparse */
+        }
+
+        #contenedor-derecha {
+            right: 0;
+            background: linear-gradient(225deg, var(--verde-oliva) 0%, #4f523e 100%);
+            /* Clip path inverso */
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 50%);
+            width: 55%;
+        }
+
+        /* Solapas Superior e Inferior (Decorativas para completar el sobre) */
+        .sobre-solapa-top {
+            position: absolute; top: 0; left: 0; width: 100%; height: 50%;
+            background-color: #555743; z-index: 2;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transition: transform 2s ease-in-out;
+            transform-origin: top;
+        }
+        .sobre-solapa-bottom {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
+            background-color: #555743; z-index: 3;
+            clip-path: polygon(0 100%, 50% 0, 100% 100%);
+            transition: transform 2s ease-in-out;
+            transform-origin: bottom;
+        }
+
+        .sello-contenedor {
+            position: absolute; z-index: 20; cursor: pointer; transition: transform 0.3s;
+            /* Centrado absoluto */
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+        }
+        .sello-contenedor:hover { transform: translate(-50%, -50%) scale(1.1); }
+
+        /* Animaciones de apertura */
         .move-left { transform: translateX(-100%); }
         .move-right { transform: translateX(100%); }
-        .fade-out { opacity: 0; transition: opacity 3s ease-out; pointer-events: none;}
+        .open-top { transform: rotateX(180deg); opacity: 0; } 
+        .open-bottom { transform: translateY(100%); opacity: 0; }
+        .fade-out-container { opacity: 0; transition: opacity 1s ease-out 2s; pointer-events: none; }
 
-        /* --- CONTENIDO PRINCIPAL DE LA INVITACIÓN --- */
+        /* --- CONTENIDO PRINCIPAL --- */
         .main-invitacion {
-            width: 100%;
-            max-width: 850px; /* Ancho máximo controlado */
-            margin: 0 auto; /* Centrado en pantallas grandes */
+            width: 100%; max-width: 900px; margin: 0 auto;
             background-color: var(--fondo);
-            box-shadow: 0 0 30px rgba(0,0,0,0.08);
-            opacity: 0; /* Oculto al inicio */
-            animation: fadeInPage 3s forwards;
-            animation-delay: 1s;
-            overflow: hidden; /* Para que las esquinas redondeadas de fotos no salgan */
+            box-shadow: 0 0 30px rgba(0,0,0,0.05);
+            opacity: 0; animation: fadeInPage 3s forwards; animation-delay: 1.5s;
         }
-
         @keyframes fadeInPage { to { opacity: 1; } }
 
-        /* --- SECCIONES Y ESPACIADO MEJORADO --- */
-        section, header {
-            /* Mayor padding arriba/abajo y a los lados */
-            padding: 70px 30px; 
-            text-align: center;
+        /* --- SEPARADORES DE OLAS (SVG) --- */
+        .wave-container {
+            position: absolute; width: 100%; overflow: hidden; line-height: 0; left: 0;
         }
-        
-        /* Contenedor interno para limitar el ancho del texto y evitar que se pegue a los bordes */
-        .content-container {
-            max-width: 700px;
-            margin: 0 auto;
+        .wave-container svg {
+            position: relative; display: block; width: calc(100% + 1.3px); height: 60px;
         }
+        .wave-top { top: 0; transform: rotate(180deg); }
+        .wave-bottom { bottom: 0; }
 
-        /* Imágenes generales */
-        img.img-responsive {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+        /* --- SECCIONES --- */
+        section { position: relative; padding: 80px 20px; text-align: center; }
+        .content-container { max-width: 700px; margin: 0 auto; position: relative; z-index: 2;}
 
-        /* Estilos Específicos de Header */
-        .header-section { padding-top: 0; }
+        /* Header */
+        header { padding: 0 0 50px 0; text-align: center; }
         .foto-principal {
-            width: 100%;
-            height: 450px;
-            object-fit: cover;
-            object-position: center;
-            /* Forma curva inferior */
-            border-radius: 0 0 50% 50% / 0 0 100px 100px; 
-            margin-bottom: 40px;
+            width: 100%; height: 500px; object-fit: cover;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
         }
-        .nombres {
-            font-size: 5rem;
-            color: var(--terracota);
-            line-height: 1.1;
-            margin: 15px 0;
+        .nombres { font-size: 5rem; color: var(--terracota); line-height: 1; margin: 20px 0; }
+        
+        /* Fecha Estilizada */
+        .fecha-bloque {
+            border-top: 2px solid var(--terracota);
+            border-bottom: 2px solid var(--terracota);
+            display: inline-block;
+            padding: 15px 40px;
+            margin: 30px 0;
         }
-        .subtitulo { text-transform: uppercase; letter-spacing: 4px; font-size: 0.9rem; color: var(--verde-oliva);}
-        .fecha-destacada { font-size: 1.8rem; margin: 30px 0; font-weight: 600; color: var(--verde-oliva); letter-spacing: 1px;}
-        .versiculo-box {
-            border-top: 1px solid var(--beige);
-            border-bottom: 1px solid var(--beige);
-            padding: 30px 10px;
-            margin: 40px auto;
-            max-width: 80%;
-        }
-        .versiculo { font-style: italic; color: #666; font-size: 1.1rem; }
+        .fecha-dia-semana { text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; display: block; margin-bottom: 5px; }
+        .fecha-numero { font-size: 3.5rem; font-weight: 700; line-height: 1; color: var(--verde-oliva); font-family: 'Great Vibes'; }
+        .fecha-mes-anio { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; display: block; }
 
         /* Contador */
         .contador-wrapper {
-            background-color: var(--peach);
-            padding: 50px 20px;
-            border-radius: 20px;
-            margin: 40px auto;
-            max-width: 800px;
-            box-shadow: inset 0 0 20px rgba(176, 113, 78, 0.2);
+            background-color: var(--peach); padding: 40px; border-radius: 50px; 
+            margin: 40px auto; max-width: 600px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
-        .contador { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
-        .tiempo-box { display: flex; flex-direction: column; margin: 0 5px; }
-        .tiempo-numero { font-size: 2.5rem; font-weight: bold; color: var(--terracota); font-family: 'Montserrat'; line-height: 1;}
-        .tiempo-texto { font-size: 0.8rem; text-transform: uppercase; margin-top: 5px; letter-spacing: 1px;}
-
-        /* Eventos Cards */
-        .eventos-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 40px; }
-        .evento-card {
-            background: white;
-            padding: 40px 30px;
-            border: 2px solid var(--peach);
-            border-radius: 15px;
-            flex: 1 1 280px; /* Flexible pero con base mínima */
-            max-width: 350px;
-            transition: transform 0.3s;
-        }
-        .evento-card:hover { transform: translateY(-5px); border-color: var(--terracota);}
-        .btn-mapa {
-            display: inline-block; margin-top: 30px; padding: 12px 35px; background-color: var(--verde-oliva); color: white; text-decoration: none; border-radius: 50px; transition: background 0.3s; font-weight: 600; letter-spacing: 1px;
-        }
-        .btn-mapa:hover { background-color: var(--terracota); box-shadow: 0 5px 15px rgba(176, 113, 78, 0.4);}
+        .contador { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .tiempo-numero { font-size: 2.2rem; font-weight: 700; color: var(--verde-oliva); line-height: 1; }
+        .tiempo-texto { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
 
         /* Itinerario */
-        .itinerario-lista { list-style: none; text-align: left; max-width: 450px; margin: 0 auto; border-left: 3px solid var(--beige); padding-left: 30px; }
-        .itinerario-item { margin-bottom: 35px; position: relative; }
-        .itinerario-item::before {
-            content: '♥'; position: absolute; left: -39px; top: 5px; background: var(--fondo); color: var(--terracota); padding: 5px; font-size: 1.2rem;
+        .timeline { position: relative; max-width: 500px; margin: 0 auto; padding: 20px 0; }
+        .timeline::before {
+            content: ''; position: absolute; left: 50px; top: 0; bottom: 0; width: 2px; background: var(--beige);
         }
-        .hora { font-weight: 700; color: var(--terracota); font-size: 1.2rem; display: block;}
-        .actividad { font-size: 1.1rem; }
+        .timeline-item { position: relative; margin-bottom: 40px; padding-left: 90px; text-align: left; }
+        .timeline-icon {
+            position: absolute; left: 25px; top: 0; width: 50px; height: 50px;
+            background: var(--terracota); color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transform: translateX(-50%); border: 4px solid var(--fondo); z-index: 2;
+        }
+        .timeline-time { font-weight: 700; color: var(--terracota); font-size: 1.1rem; }
+        .timeline-title { font-weight: 600; font-size: 1.2rem; margin-bottom: 5px; }
 
-        /* Regalos & Vestimenta */
-        .qr-container {
-            border: 3px dashed var(--terracota); padding: 25px; display: inline-block; border-radius: 15px; margin-top: 30px; background: white;
+        /* Vestimenta */
+        .dress-code-box {
+            border: 1px solid var(--terracota); padding: 40px 20px;
+            margin: 20px auto; max-width: 600px; position: relative;
         }
-        .icono-animado-vestimenta { width: 120px; height: auto; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;}
+        .dress-code-box::before {
+            content: '👔 👗'; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--fondo); padding: 0 15px; font-size: 1.5rem;
+        }
 
         /* Galería */
-        .galeria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 30px;}
-        .galeria-grid img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; transition: transform 0.3s; cursor: pointer;}
-        .galeria-grid img:hover { transform: scale(1.03); z-index: 2; box-shadow: 0 10px 20px rgba(0,0,0,0.2);}
+        .grid-galeria {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+        }
+        .grid-galeria img {
+            width: 100%; height: 250px; object-fit: cover; border-radius: 4px;
+        }
 
-        /* --- Footer y RSVP Ornamentado --- */
-        .rsvp-section {
-            background-color: var(--verde-oliva); color: var(--fondo); padding: 80px 30px; border-radius: 30px 30px 0 0; margin-top: 50px;
+        /* Footer / RSVP */
+        .footer-section { background-color: var(--verde-oliva); color: white; padding-bottom: 60px; margin-top: 0; }
+        .footer-section h2 { color: var(--peach); }
+        .adultos-aviso {
+            background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;
+            display: inline-block; margin-bottom: 30px; border: 1px solid var(--peach);
         }
-        
-        /* Caja ornamentada para "Solo Adultos" */
-        .adults-only-box {
-            border: 2px solid var(--peach);
-            padding: 40px 30px;
-            margin: 0 auto 50px auto;
-            max-width: 650px;
-            position: relative;
-            background-color: rgba(94, 96, 75, 0.8); /* Un poco más oscuro que el fondo */
-        }
-        /* Esquinas decorativas (opcional, simples líneas CSS) */
-        .adults-only-box::after {
-            content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 1px solid var(--terracota); pointer-events: none;
-        }
-        .adults-only-text { font-size: 1.1rem; margin-bottom: 20px; }
-
         .btn-whatsapp {
-            display: inline-flex; align-items: center; gap: 12px; background-color: #25D366; color: white; padding: 18px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; margin-top: 30px; font-size: 1.2rem; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); transition: transform 0.2s;
+            background-color: #25D366; color: white; padding: 15px 35px; border-radius: 50px;
+            text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 10px;
+            transition: transform 0.2s;
         }
-        .btn-whatsapp:hover { transform: scale(1.05); background-color: #20b85c; }
-        
-        .separador-floral { font-family: 'Great Vibes'; color: var(--beige); font-size: 2rem; margin: 30px 0; }
+        .btn-whatsapp:hover { transform: scale(1.05); }
 
-        /* ADJUSTES MÓVILES ESPECÍFICOS */
+        /* Movil */
         @media (max-width: 600px) {
-            section, header { padding: 50px 25px; } /* Padding lateral asegurado en móvil */
             .nombres { font-size: 3.5rem; }
-            .foto-principal { height: 350px; border-radius: 0 0 60px 60px; }
-            .tiempo-numero { font-size: 1.8rem; }
-            .itinerario-lista { padding-left: 20px; }
-             .adults-only-box { padding: 30px 20px; }
+            .timeline::before { left: 30px; }
+            .timeline-item { padding-left: 70px; }
+            .timeline-icon { left: 30px; width: 40px; height: 40px; font-size: 0.9rem; }
+            #contenedor-izquierda, #contenedor-derecha { width: 60%; } /* Solapamiento mayor en móvil */
+            #contenedor-izquierda { clip-path: polygon(0 0, 100% 50%, 0 100%); width: 100%; }
+            #contenedor-derecha { clip-path: polygon(100% 0, 0 50%, 100% 100%); width: 100%; background: linear-gradient(225deg, rgba(94,96,75,0.9) 0%, #4f523e 100%);}
+            .sello-contenedor { top: 50%; }
         }
     </style>
 </head>
 <body>
 
     <div id="contenedor-a-ocultar">
+        <div id="fondo-seguridad"></div> <div class="sobre-solapa-top" id="solapa-top"></div>
+        <div class="sobre-solapa-bottom" id="solapa-bottom"></div>
+        
         <div id="contenedor-izquierda"></div>
         <div id="contenedor-derecha"></div>
+
         <div class="sello-contenedor">
             <a id="boton-ocultar" href="#cabecera">
-                <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="130" alt="Sello de cera">
+                <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="130" alt="Sello" style="filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));">
             </a>
-            <p style="color:var(--peach); text-align:center; margin-top:15px; font-size:0.9rem; letter-spacing: 2px; font-weight: 600;">ABRIR INVITACIÓN</p>
+            <p style="color:var(--peach); text-align:center; margin-top:10px; font-size:0.8rem; font-weight: 600; text-shadow: 1px 1px 2px black;">ABRIR</p>
         </div>
     </div>
 
     <div class="main-invitacion" id="cabecera">
         
-        <header class="header-section">
-            <img src="https://placehold.co/850x450/D7B391/FFFFFF/png?text=Foto+Principal+Novios" alt="Denilson y Belen" class="foto-principal">
+        <header>
+            <img src="https://placehold.co/850x550/D7B391/FFFFFF/png?text=Denilson+y+Belen" alt="Foto Novios" class="foto-principal">
             
-            <div class="content-container">
-                <p class="subtitulo">ESTÁS INVITADO A LA BODA DE</p>
+            <div class="content-container" style="margin-top: -50px;">
+                <p style="text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; background: var(--fondo); display: inline-block; padding: 5px 15px;">Nuestra Boda</p>
                 <h1 class="nombres">Denilson & Belen</h1>
                 
-                <div class="separador-floral">~ ❦ ~</div>
-                
-                <div class="fecha-destacada">Domingo, 01 de Marzo de 2026</div>
-                
-                <div class="versiculo-box">
-                    <p class="versiculo">
+                <i class="fa-solid fa-rings-wedding" style="color: var(--terracota); font-size: 2rem; margin: 10px 0;"></i>
+
+                <div>
+                    <div class="fecha-bloque">
+                        <span class="fecha-dia-semana">Domingo</span>
+                        <span class="fecha-numero">01</span>
+                        <span class="fecha-mes-anio">Marzo 2026</span>
+                    </div>
+                </div>
+
+                <div style="max-width: 80%; margin: 20px auto; border-top: 1px solid var(--beige); padding-top: 20px;">
+                    <p style="font-style: italic; color: #666; font-size: 1.1rem;">
                         "Por esa razón, el hombre dejará a su padre y a su madre, se unirá a su esposa y ellos serán una sola carne."
-                        <br><span style="font-family: Montserrat; font-weight: 600; font-style: normal; font-size: 0.9rem; margin-top: 10px; display: block;">— Génesis 2:24</span>
+                        <br><strong>— Génesis 2:24</strong>
                     </p>
                 </div>
             </div>
         </header>
 
-        <section id="cuenta-regresiva" style="background-color: white;">
-            <div class="content-container">
-                <p style="text-transform: uppercase; letter-spacing: 3px; font-weight: 600;">Comienza la cuenta atrás</p>
+        <section id="cuenta-regresiva" style="background-color: white; padding-top: 0;">
+            <div class="wave-container" style="top: -1px; transform: rotate(180deg);">
+                <svg viewBox="0 0 1440 320"><path fill="#FAF9F5" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+            </div>
+
+            <div class="content-container" style="margin-top: 50px;">
+                <p style="letter-spacing: 2px;">SOLO FALTAN</p>
                 <div class="contador-wrapper">
-                    <div class="contador" id="reloj">
-                        </div>
+                    <div class="contador" id="reloj"></div>
+                </div>
+            </div>
+
+            <div class="wave-container" style="bottom: -1px;">
+                <svg viewBox="0 0 1440 320"><path fill="#FAF9F5" fill-opacity="1" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,90.7C672,85,768,107,864,122.7C960,139,1056,149,1152,138.7C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+            </div>
+        </section>
+
+        <section id="itinerario">
+            <div class="content-container">
+                <h2>Itinerario</h2>
+                <p>Cada momento es único, te esperamos puntualmente.</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i class="fas fa-church"></i></div>
+                        <div class="timeline-time">16:00 HRS</div>
+                        <div class="timeline-title">Ceremonia Religiosa</div>
+                        <p style="font-size: 0.9rem;">Salón de Eventos Santa Cruz</p>
+                        <a href="https://www.google.com/maps/place/18°10'30.9%22S+63%C2%B052'31.0%22W/@-18.175868,-63.8752845,271m/data=!3m1!1e3!4m4!3m3!8m2!3d-18.175259!4d-63.8752718?hl=es&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D" target="_blank" style="color:var(--verde-oliva); font-size:0.8rem; text-decoration: underline;">Ver Ubicación</a>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i class="fas fa-camera"></i></div>
+                        <div class="timeline-time">17:30 HRS</div>
+                        <div class="timeline-title">Sesión de Fotos</div>
+                        <p style="font-size: 0.9rem;">Fotos grupales con los novios</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i class="fas fa-door-open"></i></div>
+                        <div class="timeline-time">18:00 HRS</div>
+                        <div class="timeline-title">Recepción Social</div>
+                        <p style="font-size: 0.9rem;">Ingreso al salón principal</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i class="fas fa-utensils"></i></div>
+                        <div class="timeline-time">19:00 HRS</div>
+                        <div class="timeline-title">Cena</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i class="fas fa-music"></i></div>
+                        <div class="timeline-time">20:30 HRS</div>
+                        <div class="timeline-title">Fiesta</div>
+                        <p style="font-size: 0.9rem;">¡A bailar toda la noche!</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="eventos">
-            <div class="content-container">
-                <h2>Celebración</h2>
-                <p>Acompáñanos a celebrar nuestro amor en este día tan especial.</p>
-                <div class="eventos-grid">
-                    <div class="evento-card">
-                        <h3>Ceremonia Religiosa</h3>
-                        <div class="separador-floral" style="font-size: 1.5rem; margin: 15px 0;">❦</div>
-                        <p class="hora">16:00 HRS</p>
-                        <p>Lugar: Salón de Eventos Santa Cruz</p>
-                    </div>
-                    <div class="evento-card">
-                        <h3>Recepción Social</h3>
-                        <div class="separador-floral" style="font-size: 1.5rem; margin: 15px 0;">❦</div>
-                        <p class="hora">18:00 HRS</p>
-                        <p>Cena, brindis y fiesta hasta el amanecer</p>
-                    </div>
+        <img src="https://placehold.co/850x350/B0714E/FFFFFF/png?text=Foto+Pareja" alt="Pareja" style="width:100%; height:350px; object-fit:cover; display:block;">
+
+        <section id="detalles" style="background-color: white;">
+             <div class="wave-container" style="top: -1px; transform: rotate(180deg);">
+                <svg viewBox="0 0 1440 320"><path fill="#FAF9F5" fill-opacity="1" d="M0,32L48,48C96,64,192,96,288,96C384,96,480,64,576,58.7C672,53,768,75,864,96C960,117,1056,139,1152,133.3C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+            </div>
+
+            <div class="content-container" style="margin-top: 40px;">
+                <h2>Código de Vestimenta</h2>
+                <div class="dress-code-box">
+                    <p style="font-weight: 700; color: var(--verde-oliva); margin-bottom: 10px;">FORMAL DE GALA</p>
+                    <p style="font-size: 0.95rem; margin-bottom: 10px;">Dejar el color blanco reservado exclusivamente para la novia.</p>
+                    <p style="font-size: 0.95rem; font-style: italic;">Mujeres: Recomendamos utilizar zapatos cómodos o de tacón ancho para el jardín.</p>
                 </div>
-                
-                <div style="margin-top: 40px;">
-                    <p style="font-weight: 600;">Ambos eventos se realizarán en la misma ubicación:</p>
-                    <a href="https://www.google.com/maps/place/18°10'30.9%22S+63%C2%B052'31.0%22W/@-18.175868,-63.8752845,271m/data=!3m1!1e3!4m4!3m3!8m2!3d-18.175259!4d-63.8752718?hl=es&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D" target="_blank" class="btn-mapa">
-                        <i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> Ver Ubicación en Google Maps
+
+                <hr style="border: 0; border-top: 1px dashed var(--beige); width: 50%; margin: 40px auto;">
+
+                <h2>Regalos</h2>
+                <p>Su presencia es nuestro mejor regalo.</p>
+                <div style="border: 2px solid var(--terracota); border-radius: 10px; padding: 20px; display: inline-block; margin-top: 20px;">
+                    <img src="https://placehold.co/150x150/5E604B/FFFFFF/png?text=QR+PAGO" alt="QR" width="150">
+                    <p style="font-size: 0.8rem; margin-top: 10px; font-weight: bold;">Lluvia de Sobres Digital</p>
+                </div>
+            </div>
+            
+             <div class="wave-container" style="bottom: -1px;">
+                <svg viewBox="0 0 1440 320"><path fill="#5E604B" fill-opacity="1" d="M0,128L48,122.7C96,117,192,107,288,117.3C384,128,480,160,576,165.3C672,171,768,149,864,133.3C960,117,1056,107,1152,112C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+            </div>
+        </section>
+
+        <section class="footer-section">
+            <div class="content-container">
+                <h2 style="margin-bottom: 30px;">Momentos Felices</h2>
+                <div class="grid-galeria" style="margin-bottom: 40px;">
+                    <img src="https://placehold.co/400x300/D7B391/FFFFFF/png?text=Historia+1" alt="1">
+                    <img src="https://placehold.co/400x300/B0714E/FFFFFF/png?text=Historia+2" alt="2">
+                    <img src="https://placehold.co/400x300/5E604B/FFFFFF/png?text=Historia+3" alt="3">
+                    <img src="https://placehold.co/400x300/FFE8CF/5E604B/png?text=Historia+4" alt="4">
+                </div>
+
+                <div class="adultos-aviso">
+                    <p style="margin: 0; font-size: 1rem;">Recepción exclusiva para adultos. <br>Agradecemos su comprensión.</p>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <h3 style="color: white; font-family: 'Montserrat'; font-size: 1.2rem; text-transform: uppercase; margin-bottom: 20px;">Confirmar Asistencia</h3>
+                    <a href="https://wa.me/591XXXXXXXX?text=Confirmo%20mi%20asistencia" target="_blank" class="btn-whatsapp">
+                        <i class="fab fa-whatsapp fa-lg"></i> Enviar Mensaje
                     </a>
                 </div>
+
+                <img src="https://placehold.co/600x300/D7B391/FFFFFF/png?text=%C2%A1Los+esperamos!" alt="Final" style="width: 100%; border-radius: 10px; margin-top: 40px; border: 4px solid var(--peach);">
             </div>
         </section>
-
-        <img src="https://placehold.co/850x400/B0714E/FFFFFF/png?text=Foto+Intermedia+Pareja" alt="Pareja feliz" class="img-responsive" style="width: 100%; height: 350px; object-fit: cover; border-radius: 0;">
-
-        <section id="itinerario" style="background-color: white;">
-            <div class="content-container">
-                <h2>Itinerario del Día</h2>
-                <p style="margin-bottom: 40px; font-style: italic;">Rogamos puntualidad para disfrutar de cada momento juntos.</p>
-                <ul class="itinerario-lista">
-                    <li class="itinerario-item">
-                        <span class="hora">16:00</span> <span class="actividad">Inicio de Ceremonia Religiosa</span>
-                    </li>
-                    <li class="itinerario-item">
-                        <span class="hora">17:30</span> <span class="actividad">Sesión de Fotos con Invitados</span>
-                    </li>
-                    <li class="itinerario-item">
-                        <span class="hora">18:00</span> <span class="actividad">Ingreso a la Recepción</span>
-                    </li>
-                    <li class="itinerario-item">
-                        <span class="hora">19:00</span> <span class="actividad">Cena de Celebración</span>
-                    </li>
-                    <li class="itinerario-item">
-                        <span class="hora">20:30</span> <span class="actividad">¡Que comience la fiesta!</span>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <div class="separador-floral">~ ❦ ~</div>
-
-        <section id="vestimenta">
-            <div class="content-container">
-                <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExajJ5aWc1b3B6d2F4a3h6aGZ5Ynh3aGZ5Ynh3aGZ5Ynh3aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xUPGcxpCW3U2cR3Jg4/giphy.gif" alt="Animación Vestimenta Formal" class="icono-animado-vestimenta" style="border-radius: 50%; border: 3px solid var(--terracota); padding: 5px;">
-                
-                <h2>Código de Vestimenta</h2>
-                <p style="font-size: 1.3rem; margin-top: 15px; font-weight: 600; letter-spacing: 2px;">FORMAL / ELEGANTE</p>
-                <p style="color: #666; margin-top: 10px;">Pongámonos guapos para la ocasión.</p>
-            </div>
-        </section>
-
-        <section id="regalos" style="background-color: white;">
-            <div class="content-container">
-                <i class="fas fa-gift fa-3x" style="color:var(--terracota); margin-bottom: 20px;"></i>
-                <h2>Regalos</h2>
-                <p style="max-width: 600px; margin: 0 auto;">Su presencia es nuestro regalo más valioso. No obstante, si desean tener un detalle adicional con nosotros para comenzar esta nueva etapa, dispondremos de un buzón de sobres digital.</p>
-                
-                <div class="qr-container">
-                    <img src="https://placehold.co/200x200/5E604B/FFFFFF/png?text=TU+C%C3%93DIGO+QR+AQU%C3%8D" alt="QR para regalo" width="180" height="180">
-                    <p style="margin-top: 15px; font-weight: bold; color: var(--verde-oliva);">Escanear para enviar presente</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="galeria">
-            <div class="content-container">
-                <h2>Nuestros Momentos</h2>
-                <p style="margin-bottom: 30px;">Un pequeño vistazo a nuestra historia de amor.</p>
-                <div class="galeria-grid">
-                    <img src="https://placehold.co/400x300/D7B391/FFFFFF/png?text=Foto+Galer%C3%ADa+1" alt="Foto 1">
-                    <img src="https://placehold.co/400x300/B0714E/FFFFFF/png?text=Foto+Galer%C3%ADa+2" alt="Foto 2">
-                    <img src="https://placehold.co/400x300/5E604B/FFFFFF/png?text=Foto+Galer%C3%ADa+3" alt="Foto 3">
-                    <img src="https://placehold.co/400x300/FFE8CF/5E604B/png?text=Foto+Galer%C3%ADa+4" alt="Foto 4">
-                </div>
-            </div>
-        </section>
-
-        <div class="rsvp-section">
-            <div class="content-container">
-                
-                <div class="adults-only-box">
-                    <h3 style="color: var(--peach); font-size: 2.2rem; margin-bottom: 20px;">Una Nota Importante</h3>
-                    <div class="separador-floral" style="color: var(--peach); font-size: 1.5rem; margin: 15px 0;">~ ❦ ~</div>
-                    <p class="adults-only-text">Amamos profundamente a los niños de nuestra familia y amigos. Sin embargo, para esta ocasión tan significativa, hemos preparado una velada pensada exclusivamente para el disfrute y la relajación de los adultos.</p>
-                    <p class="adults-only-text">Agradecemos de corazón su comprensión y esperamos que puedan organizar su agenda para acompañarnos y celebrar juntos, sin preocupaciones, hasta el amanecer.</p>
-                    <i class="fas fa-glass-cheers fa-2x" style="color:var(--peach); margin-top: 15px;"></i>
-                </div>
-
-                <img src="https://placehold.co/600x300/D7B391/FFFFFF/png?text=%C2%A1Los+Esperamos!+Foto+Final" alt="Foto Despedida" class="img-responsive" style="border: 3px solid var(--peach);">
-
-                <h2 style="color: var(--peach); margin-top: 40px; font-size: 3rem;">¡Los esperamos!</h2>
-                <p style="color: white; font-size: 1.1rem; margin-bottom: 30px;">Por favor, confirma tu asistencia antes del 15 de Febrero para ayudarnos a organizar todo perfectamente.</p>
-                
-                <a href="https://wa.me/591XXXXXXXX?text=Hola%20Denilson%20y%20Belen,%20%C2%A1qu%C3%A9%20alegr%C3%ADa!%20Confirmo%20mi%20asistencia%20a%20su%20boda.%20Ser%C3%A1%20un%20honor%20acompa%C3%B1arlos.%20%E2%9D%A4%EF%B8%8F" target="_blank" class="btn-whatsapp">
-                    <i class="fab fa-whatsapp fa-lg"></i> Confirmar por WhatsApp
-                </a>
-
-                <p style="margin-top: 50px; font-size: 0.8rem; color: var(--peach);">Con amor, Denilson & Belen</p>
-            </div>
-        </div>
 
     </div>
 
@@ -375,62 +384,56 @@
         var audio; 
         
         document.addEventListener('DOMContentLoaded', function() {
-            // --- LÓGICA DEL SOBRE INTERACTIVO ---
+            // --- SOBRE INTERACTIVO ---
             var botonOcultar = document.getElementById('boton-ocultar');
             var contenedor = document.getElementById('contenedor-a-ocultar');
             var contenedorIzquierda = document.getElementById('contenedor-izquierda');
             var contenedorDerecha = document.getElementById('contenedor-derecha');
+            var solapaTop = document.getElementById('solapa-top');
+            var solapaBottom = document.getElementById('solapa-bottom');
             
             audio = new Audio('https://invitali.com/wp-content/uploads/2025/09/KARAOKE-POR-TODA-LA-VIDA-FONSECA.mp3');
             audio.loop = true; 
         
             botonOcultar.addEventListener('click', function(e) {
                 e.preventDefault(); 
+                
+                // 1. Abrir solapas superior/inferior si existen visualmente
+                // En este diseño simplificado, movemos los laterales
+                
                 contenedorIzquierda.classList.add('move-left');
                 contenedorDerecha.classList.add('move-right');
-                contenedor.classList.add('fade-out');
+                
+                // Efecto Fade Out del contenedor padre
+                contenedor.classList.add('fade-out-container');
         
-                audio.play().catch(function(error) {
-                    console.log("Auto-play bloqueado por el navegador (normal en móviles): ", error);
-                    // Si falla el autoplay, se podría mostrar un botón discreto de "Play música"
-                });
+                audio.play().catch(err => console.log("Audio autoplay bloqueado", err));
         
                 setTimeout(function() {
                     contenedor.style.display = 'none';
-                }, 3000); 
+                }, 2500); 
             });
 
-            // --- LÓGICA DE LA CUENTA REGRESIVA ---
-            // Fecha objetivo: 1 de Marzo de 2026, 16:00 hrs
+            // --- RELOJ ---
             const fechaBoda = new Date('March 1, 2026 16:00:00').getTime();
-
             const intervalo = setInterval(function() {
                 const ahora = new Date().getTime();
                 const distancia = fechaBoda - ahora;
 
-                // Cálculos de tiempo
                 const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
                 const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-                const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
 
-                // Renderizado en HTML
                 const template = `
-                    <div class="tiempo-box"><span class="tiempo-numero">${dias < 10 ? '0'+dias : dias}</span><span class="tiempo-texto">Días</span></div>
-                    <div class="tiempo-numero" style="color:var(--beige)">:</div>
-                    <div class="tiempo-box"><span class="tiempo-numero">${horas < 10 ? '0'+horas : horas}</span><span class="tiempo-texto">Hs</span></div>
-                    <div class="tiempo-numero" style="color:var(--beige)">:</div>
-                    <div class="tiempo-box"><span class="tiempo-numero">${minutos < 10 ? '0'+minutos : minutos}</span><span class="tiempo-texto">Min</span></div>
-                    <div class="tiempo-numero" style="color:var(--beige)">:</div>
-                    <div class="tiempo-box"><span class="tiempo-numero">${segundos < 10 ? '0'+segundos : segundos}</span><span class="tiempo-texto">Seg</span></div>
+                    <div class="tiempo-box"><span class="tiempo-numero">${dias}</span><br><span class="tiempo-texto">Días</span></div>
+                    <div style="font-size:2rem; color:var(--beige)">:</div>
+                    <div class="tiempo-box"><span class="tiempo-numero">${horas}</span><br><span class="tiempo-texto">Horas</span></div>
+                    <div style="font-size:2rem; color:var(--beige)">:</div>
+                    <div class="tiempo-box"><span class="tiempo-numero">${minutos}</span><br><span class="tiempo-texto">Min</span></div>
                 `;
-                
                 document.getElementById("reloj").innerHTML = template;
 
-                if (distancia < 0) {
-                    clearInterval(intervalo);
-                    document.getElementById("reloj").innerHTML = "<h3 style='color:var(--terracota)'>¡Hoy es el gran día!</h3>";
-                }
+                if (distancia < 0) clearInterval(intervalo);
             }, 1000);
         });
     </script>
