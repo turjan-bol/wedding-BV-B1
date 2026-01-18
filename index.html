@@ -27,7 +27,7 @@
                         sand: '#D7B391',
                         peach: '#FFE8CF',
                         cream: '#FAF9F5',
-                        paper: '#FDFBF7', // Nuevo color para el papel
+                        paper: '#FDFBF7',
                         graydetail: '#A0A09C',
                     },
                     fontFamily: {
@@ -76,7 +76,6 @@
             height: 100%;
             transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1);
             background-size: cover;
-            /* Sombra suave interna para dar volumen al papel */
             box-shadow: inset 0 0 40px rgba(0,0,0,0.03); 
         }
 
@@ -105,8 +104,6 @@
             border-radius: 50%;
             z-index: 3;
             box-shadow: 4px 0 10px rgba(0,0,0,0.05);
-            /* Ocultamos este borde extra para que no se vea feo al abrir, 
-               pero da el efecto curvo cerrado */
         }
 
         /* El sello central */
@@ -146,37 +143,25 @@
         .arch-image {
             border-radius: 200px 200px 20px 20px;
         }
-
-        /* Separador de ondas */
-        .wave-separator {
-            width: 100%;
-            height: 60px;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
     </style>
 </head>
 <body class="text-olive antialiased selection:bg-terracotta selection:text-white">
 
-    <!-- PANTALLA DE APERTURA (SOBRE PAPEL) -->
+    <!-- PANTALLA DE APERTURA (SOBRE) -->
     <div id="contenedor-a-ocultar">
         <div id="contenedor-izquierda" class="paper-bg flex items-center justify-end pr-8">
-            <!-- Detalle decorativo en gris sutil -->
             <div class="absolute bottom-10 left-10 opacity-20">
                 <i class="fa-solid fa-leaf text-6xl text-graydetail rotate-45"></i>
             </div>
         </div>
         <div id="contenedor-derecha" class="paper-bg">
-            <!-- Detalle decorativo en gris sutil -->
             <div class="absolute top-10 right-10 opacity-20">
                 <i class="fa-solid fa-leaf text-6xl text-graydetail -rotate-12"></i>
             </div>
         </div>
         
         <div class="sello-container">
-            <!-- Se quitó la clase 'sello-pulse' del enlace 'a' para que no afecte al texto -->
             <a id="boton-ocultar" href="#cabecera" class="cursor-pointer flex flex-col items-center group">
-                <!-- Se añadió un div contenedor con 'sello-pulse' y 'rounded-full' solo para la imagen -->
                 <div class="sello-pulse rounded-full">
                     <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="130" alt="Abrir" class="drop-shadow-xl">
                 </div>
@@ -195,243 +180,264 @@
             <div class="absolute bottom-[10%] left-[10%] w-[400px] h-[400px] bg-terracotta rounded-full blur-[90px]"></div>
         </div>
 
-        <!-- 1. Header & Foto Principal (Arco) -->
-        <header id="cabecera" class="relative pt-16 px-6 text-center fade-in-section z-10">
-            <p class="text-terracotta font-sans tracking-[0.3em] uppercase text-xs md:text-sm mb-4">Nuestra Boda</p>
-            <h1 class="font-script text-7xl md:text-9xl text-olive mb-4 drop-shadow-sm">Denilson & Belen</h1>
+        <!-- 1. HEADER REORGANIZADO -->
+        <header id="cabecera" class="relative pt-12 px-6 text-center fade-in-section z-10">
             
-            <p class="font-serif text-xl md:text-2xl text-graydetail my-6 max-w-xl mx-auto italic leading-relaxed">
-                "Tenemos el inmenso placer de invitarte a celebrar el inicio de nuestra vida juntos"
+            <!-- Logo Iniciales y Fecha -->
+            <div class="mb-8 inline-block border-b border-olive/30 pb-2">
+                <p class="font-serif text-lg tracking-widest text-olive font-semibold">D&B &nbsp;|&nbsp; 01-03-26</p>
+            </div>
+
+            <!-- Versículo -->
+            <div class="max-w-md mx-auto mb-10">
+                <p class="font-serif text-lg text-gray-600 leading-relaxed italic">
+                    "Por esa razón, el hombre dejará a su padre y a su madre, se unirá a su esposa y ellos serán una sola carne."
+                </p>
+                <p class="font-sans text-[10px] font-bold mt-2 text-terracotta tracking-widest uppercase">— Génesis 2:24</p>
+            </div>
+
+            <!-- Nombres y Texto de Invitación -->
+            <h1 class="font-script text-7xl md:text-9xl text-olive mb-6 drop-shadow-sm">Denilson & Belen</h1>
+            
+            <p class="font-serif text-xl md:text-2xl text-olive my-6 max-w-xl mx-auto leading-relaxed px-4">
+                Tenemos el inmenso placer de invitarte a celebrar el inicio de nuestra vida juntos
             </p>
             
-            <div class="my-10 relative flex justify-center">
-                <!-- Marco fluido/Arco -->
+            <!-- Foto Principal -->
+            <div class="my-8 relative flex justify-center">
                 <div class="w-full max-w-md h-[500px] overflow-hidden arch-image border-4 border-white shadow-xl relative z-10">
-                    <!-- FOTO PRINCIPAL: Vinculada a tu repo -->
                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/portada.png" 
                          onerror="this.src='https://images.unsplash.com/photo-1583939003579-73013917a611?q=80&w=2070&auto=format&fit=crop'"
                          alt="Denilson y Belen" class="w-full h-full object-cover">
                 </div>
-                <!-- Elemento decorativo detrás -->
-                <div class="absolute top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-md h-[500px] arch-image border border-sand/50 -z-10 rotate-2"></div>
             </div>
 
-            <div class="inline-block border-y border-olive/20 py-4 px-12 mb-8">
-                <p class="font-serif text-3xl text-olive">01 • 03 • 2026</p>
-            </div>
-            
-            <div class="py-6 px-4 max-w-lg mx-auto">
-                <p class="font-serif text-lg text-gray-600 leading-relaxed italic">
-                    "Por esa razón, el hombre dejará a su padre y a su madre, se unirá a su esposa y ellos serán una sola carne."
-                </p>
-                <p class="font-sans text-[10px] font-bold mt-3 text-terracotta tracking-widest uppercase">— Génesis 2:24</p>
+            <!-- Fecha en 3 divisiones -->
+            <div class="flex justify-center items-center gap-2 md:gap-8 my-10 py-6 border-y border-olive/10">
+                <div class="text-center px-2 md:px-6 border-r border-sand/50">
+                    <p class="font-serif text-xl md:text-2xl text-olive uppercase tracking-widest">Domingo</p>
+                </div>
+                <div class="text-center px-2 md:px-6 border-r border-sand/50">
+                    <p class="font-serif text-xl md:text-2xl text-olive">Marzo 01, 2026</p>
+                </div>
+                <div class="text-center px-2 md:px-6">
+                    <p class="font-serif text-xl md:text-2xl text-olive">16:30 hrs</p>
+                </div>
             </div>
         </header>
 
-        <!-- Onda Separadora -->
-        <div class="w-full overflow-hidden leading-[0] text-sand opacity-30 my-4">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-[50px]">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
-            </svg>
-        </div>
+        <!-- 2. SECCIÓN FALTAN (CONTADOR) -->
+        <section class="py-12 text-center px-4 fade-in-section bg-white/50 backdrop-blur-sm mx-4 rounded-2xl shadow-sm border border-white/60">
+            <h3 class="font-serif text-2xl md:text-3xl text-olive mb-2">Queremos que nos acompañes en nuestro día:</h3>
+            <p class="font-sans text-sm font-bold tracking-[0.2em] text-terracotta mb-8 uppercase">Domingo 1 de Marzo de 2026</p>
+            
+            <p class="font-script text-4xl text-graydetail mb-6">Faltan:</p>
 
-        <!-- 2. Countdown Circular -->
-        <section class="py-8 text-center px-4 fade-in-section">
-            <h3 class="font-sans text-xs tracking-[0.2em] text-graydetail mb-8 uppercase">Cuenta Regresiva</h3>
-            <div id="countdown" class="flex flex-wrap justify-center gap-6 md:gap-10 font-serif text-olive">
-                <!-- Se llena con JS -->
+            <div id="countdown" class="flex flex-wrap justify-center gap-4 md:gap-10 font-serif text-olive">
+                <!-- JS llena esto -->
             </div>
         </section>
 
-        <!-- 3. Eventos (Diseño Limpio y Fluido) -->
-        <section class="py-16 px-6 fade-in-section relative">
-            <div class="bg-white/70 backdrop-blur-sm rounded-[40px] p-10 shadow-lg border border-white/50 relative overflow-hidden">
-                <!-- Decoración esquina -->
-                <div class="absolute -top-10 -right-10 w-32 h-32 bg-peach/30 rounded-full blur-xl"></div>
-
-                <h2 class="font-script text-5xl text-center text-olive mb-12">Celebración</h2>
+        <!-- 3. CEREMONIA Y RECEPCIÓN -->
+        <section class="py-16 px-6 fade-in-section">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="font-script text-5xl text-olive mb-12">Detalles del Evento</h2>
                 
-                <div class="flex flex-col md:flex-row gap-12 justify-center items-center relative z-10">
-                    
+                <div class="grid md:grid-cols-2 gap-10 relative">
                     <!-- Ceremonia -->
-                    <div class="text-center group">
-                        <div class="w-20 h-20 mx-auto bg-olive/10 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110 duration-500">
-                            <i class="fa-solid fa-church text-2xl text-olive"></i>
-                        </div>
-                        <h3 class="font-serif text-2xl font-bold text-olive">Ceremonia</h3>
-                        <p class="font-sans text-sm text-gray-500 mt-1">16:30 hrs</p>
+                    <div class="bg-white p-8 rounded-t-[100px] rounded-b-[20px] shadow-sm border border-sand/20">
+                        <i class="fa-solid fa-church text-3xl text-terracotta mb-4"></i>
+                        <h3 class="font-serif text-2xl font-bold text-olive mb-2">Ceremonia Religiosa</h3>
+                        <p class="font-sans text-sm text-gray-500 mb-4">Unión ante Dios</p>
+                        <p class="font-serif text-3xl text-olive border-t border-dashed border-gray-200 pt-4">16:30 hrs</p>
                     </div>
 
-                    <div class="h-px w-24 bg-sand md:w-px md:h-24"></div>
-
                     <!-- Recepción -->
-                    <div class="text-center group">
-                        <div class="w-20 h-20 mx-auto bg-terracotta/10 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110 duration-500">
-                            <i class="fa-solid fa-champagne-glasses text-2xl text-terracotta"></i>
-                        </div>
-                        <h3 class="font-serif text-2xl font-bold text-olive">Recepción</h3>
-                        <p class="font-sans text-sm text-gray-500 mt-1">18:00 hrs</p>
+                    <div class="bg-white p-8 rounded-t-[100px] rounded-b-[20px] shadow-sm border border-sand/20">
+                        <i class="fa-solid fa-champagne-glasses text-3xl text-terracotta mb-4"></i>
+                        <h3 class="font-serif text-2xl font-bold text-olive mb-2">Recepción Social</h3>
+                        <p class="font-sans text-sm text-gray-500 mb-4">Celebración y Brindis</p>
+                        <p class="font-serif text-3xl text-olive border-t border-dashed border-gray-200 pt-4">18:00 hrs</p>
                     </div>
                 </div>
 
-                <div class="mt-12 text-center">
-                    <a href="https://www.google.com/maps/place/18°10'30.9%22S+63°52'31.0%22W/@-18.175868,-63.8752845,271m/data=!3m1!1e3!4m4!3m3!8m2!3d-18.175259!4d-63.8752718?hl=es&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D" 
+                <div class="mt-10">
+                    <p class="font-serif text-gray-600 italic mb-4">Ambos eventos se realizarán en la misma ubicación</p>
+                    <a href="https://maps.app.goo.gl/So8ZgsoGgPicASrN9" 
                        target="_blank"
-                       class="inline-block bg-olive text-cream px-10 py-4 rounded-full font-sans text-xs font-bold tracking-widest hover:bg-terracotta transition duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
-                        VER UBICACIÓN
+                       class="inline-flex items-center gap-2 bg-olive text-cream px-8 py-3 rounded-full font-sans text-xs font-bold tracking-widest hover:bg-terracotta transition duration-300 shadow-lg transform hover:-translate-y-1">
+                        <i class="fa-solid fa-location-dot"></i> VER MAPA
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- 4. Foto Ovalada -->
-        <section class="fade-in-section px-8">
-            <div class="w-full h-80 rounded-[50%] overflow-hidden border-4 border-white/50 shadow-inner mx-auto max-w-2xl">
-                <!-- FOTO OVALADA: Vinculada a tu repo -->
-                <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img5.png" 
-                     onerror="this.src='https://images.unsplash.com/photo-1519225463359-2a682da67f1d?q=80&w=2070&auto=format&fit=crop'"
-                     alt="Amor" class="w-full h-full object-cover hover:scale-105 transition duration-1000">
-            </div>
-        </section>
-
-        <!-- 5. Itinerario (Timeline Curvo) -->
-        <section class="py-20 px-6 fade-in-section">
-            <h2 class="font-script text-5xl text-center text-olive mb-16">Nuestro Día</h2>
-            <div class="max-w-xl mx-auto space-y-12 relative">
-                <!-- Línea vertical discontinua -->
-                <div class="absolute left-[27px] top-4 bottom-4 w-px border-l-2 border-dashed border-sand/50"></div>
-
-                <div class="relative pl-16">
-                    <div class="absolute left-0 w-14 h-14 bg-white border border-sand rounded-full flex items-center justify-center z-10 shadow-sm">
-                        <i class="fa-solid fa-car text-olive text-sm"></i>
-                    </div>
-                    <h4 class="font-serif text-xl text-olive">Llegada</h4>
-                    <p class="font-sans text-xs text-terracotta font-bold tracking-wider mb-1">16:00 HRS</p>
-                </div>
-                
-                <div class="relative pl-16">
-                    <div class="absolute left-0 w-14 h-14 bg-olive text-white rounded-full flex items-center justify-center z-10 shadow-md">
-                        <i class="fa-solid fa-ring text-lg"></i>
-                    </div>
-                    <h4 class="font-serif text-2xl font-bold text-olive">Sí, acepto</h4>
-                    <p class="font-sans text-xs text-terracotta font-bold tracking-wider mb-1">16:30 HRS</p>
-                    <p class="text-sm text-gray-500 italic">Ceremonia Religiosa</p>
-                </div>
-
-                <div class="relative pl-16">
-                    <div class="absolute left-0 w-14 h-14 bg-white border border-sand rounded-full flex items-center justify-center z-10 shadow-sm">
-                        <i class="fa-solid fa-camera text-olive text-sm"></i>
-                    </div>
-                    <h4 class="font-serif text-xl text-olive">Fotos</h4>
-                    <p class="font-sans text-xs text-terracotta font-bold tracking-wider mb-1">17:30 HRS</p>
-                </div>
-
-                <div class="relative pl-16">
-                    <div class="absolute left-0 w-14 h-14 bg-white border border-sand rounded-full flex items-center justify-center z-10 shadow-sm">
-                        <i class="fa-solid fa-music text-olive text-sm"></i>
-                    </div>
-                    <h4 class="font-serif text-xl text-olive">Fiesta</h4>
-                    <p class="font-sans text-xs text-terracotta font-bold tracking-wider mb-1">18:00 HRS</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Onda Separadora Invertida -->
-        <div class="w-full overflow-hidden leading-[0] text-olive opacity-5">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-[60px] rotate-180">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
-            </svg>
+        <!-- FOTO DIVISORIA 1 -->
+        <div class="w-full h-64 overflow-hidden fade-in-section my-8">
+            <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img5.png" 
+                 onerror="this.src='https://images.unsplash.com/photo-1519225463359-2a682da67f1d?q=80&w=2070&auto=format&fit=crop'"
+                 class="w-full h-full object-cover object-center opacity-90">
         </div>
 
-        <!-- 6. Detalles (Tarjetas Fluidas) -->
-        <section class="py-12 px-6 fade-in-section">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Card 1 -->
-                <div class="bg-white p-8 rounded-[30px] shadow-sm text-center border border-gray-100 hover:shadow-md transition">
-                    <i class="fa-regular fa-clock text-2xl text-sand mb-4"></i>
-                    <h4 class="font-serif text-lg font-bold text-olive">Puntualidad</h4>
-                    <p class="font-sans text-xs text-gray-500 mt-2 leading-relaxed">Rogamos llegar 15 minutos antes.</p>
+        <!-- 4. ITINERARIO -->
+        <section class="py-16 px-6 fade-in-section">
+            <h2 class="font-script text-5xl text-center text-olive mb-12">Itinerario</h2>
+            <div class="max-w-lg mx-auto space-y-8 relative pl-4">
+                <!-- Línea conectora -->
+                <div class="absolute left-[31px] top-4 bottom-4 w-0.5 bg-sand/30"></div>
+
+                <!-- Punto 1 -->
+                <div class="relative pl-20 group">
+                    <div class="absolute left-0 w-16 h-16 bg-white border border-sand rounded-full flex items-center justify-center z-10 shadow-sm group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-car text-olive text-xl"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl text-olive font-bold">Llegada</h4>
+                    <p class="font-sans text-xs text-terracotta font-bold tracking-widest mt-1">16:00 HRS</p>
+                    <p class="text-sm text-gray-500 mt-1">Bienvenida de invitados</p>
                 </div>
-                <!-- Card 2 -->
-                <div class="bg-olive p-8 rounded-[30px] shadow-md text-center text-white transform md:-translate-y-4">
-                    <i class="fa-solid fa-user-tie text-2xl mb-4 text-sand"></i>
-                    <h4 class="font-serif text-lg font-bold">Dress Code</h4>
-                    <p class="font-sans text-xs font-bold tracking-widest mt-2 mb-1">FORMAL</p>
-                    <p class="font-serif text-sm opacity-80 italic">Elegancia rigurosa</p>
+                
+                <!-- Punto 2 -->
+                <div class="relative pl-20 group">
+                    <div class="absolute left-0 w-16 h-16 bg-olive text-white rounded-full flex items-center justify-center z-10 shadow-md group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-ring text-2xl"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl text-olive font-bold">Ceremonia</h4>
+                    <p class="font-sans text-xs text-terracotta font-bold tracking-widest mt-1">16:30 HRS</p>
+                    <p class="text-sm text-gray-500 mt-1">El "Sí, acepto"</p>
                 </div>
-                <!-- Card 3 -->
-                <div class="bg-white p-8 rounded-[30px] shadow-sm text-center border border-gray-100 hover:shadow-md transition">
-                    <i class="fa-solid fa-child-reaching text-2xl text-sand mb-4"></i>
-                    <h4 class="font-serif text-lg font-bold text-olive">Adultos</h4>
-                    <p class="font-sans text-xs text-gray-500 mt-2 leading-relaxed">Evento exclusivo para adultos.</p>
+
+                <!-- Punto 3 -->
+                <div class="relative pl-20 group">
+                    <div class="absolute left-0 w-16 h-16 bg-white border border-sand rounded-full flex items-center justify-center z-10 shadow-sm group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-camera text-olive text-xl"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl text-olive font-bold">Fotos</h4>
+                    <p class="font-sans text-xs text-terracotta font-bold tracking-widest mt-1">17:30 HRS</p>
+                    <p class="text-sm text-gray-500 mt-1">Sesión con los novios</p>
+                </div>
+
+                <!-- Punto 4 -->
+                <div class="relative pl-20 group">
+                    <div class="absolute left-0 w-16 h-16 bg-white border border-sand rounded-full flex items-center justify-center z-10 shadow-sm group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-utensils text-olive text-xl"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl text-olive font-bold">Recepción</h4>
+                    <p class="font-sans text-xs text-terracotta font-bold tracking-widest mt-1">18:00 HRS</p>
+                    <p class="text-sm text-gray-500 mt-1">Cena y Fiesta</p>
                 </div>
             </div>
         </section>
 
-        <!-- 7. Galería Circular -->
-        <section class="py-16 px-4 fade-in-section">
-            <div class="grid grid-cols-2 gap-4 md:gap-6">
-                <!-- FOTO GALERÍA 1 -->
-                <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img1.png" 
-                     onerror="this.src='https://images.unsplash.com/photo-1532054992925-4c07a9c8491c?q=80&w=1000&auto=format&fit=crop'"
-                     class="w-full h-48 md:h-72 object-cover rounded-tl-[80px] rounded-br-[80px] rounded-tr-[20px] rounded-bl-[20px] shadow-md hover:opacity-90 transition">
-                
-                <!-- FOTO GALERÍA 2 -->
-                <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img2.png" 
-                     onerror="this.src='https://images.unsplash.com/photo-1588673755325-10ce690626a4?q=80&w=1000&auto=format&fit=crop'"
-                     class="w-full h-48 md:h-72 object-cover rounded-tr-[80px] rounded-bl-[80px] rounded-tl-[20px] rounded-br-[20px] shadow-md hover:opacity-90 transition">
-                
-                <!-- FOTO GALERÍA 3 -->
-                <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img3.png" 
-                     onerror="this.src='https://images.unsplash.com/photo-1595168866166-f40b08da22c0?q=80&w=1000&auto=format&fit=crop'"
-                     class="w-full h-48 md:h-72 object-cover rounded-bl-[80px] rounded-tr-[80px] rounded-tl-[20px] rounded-br-[20px] shadow-md hover:opacity-90 transition">
-                
-                <!-- FOTO GALERÍA 4 -->
-                <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img4.png" 
-                     onerror="this.src='https://images.unsplash.com/photo-1623862413727-2c1a1f599974?q=80&w=1000&auto=format&fit=crop'"
-                     class="w-full h-48 md:h-72 object-cover rounded-br-[80px] rounded-tl-[80px] rounded-tr-[20px] rounded-bl-[20px] shadow-md hover:opacity-90 transition">
+        <!-- 5. PUNTUALIDAD -->
+        <section class="py-12 px-8 fade-in-section">
+            <div class="bg-olive/5 border border-olive/10 rounded-2xl p-10 text-center max-w-2xl mx-auto">
+                <i class="fa-regular fa-clock text-4xl text-terracotta mb-4"></i>
+                <h3 class="font-serif text-2xl font-bold text-olive mb-4">Puntualidad</h3>
+                <p class="font-serif text-lg text-gray-700 leading-relaxed italic">
+                    "La fiesta comenzará puntualmente. Y queremos que disfrutes con nosotros de cada detalle. ¡Te agradeceríamos que llegues a tiempo!"
+                </p>
             </div>
         </section>
 
-        <!-- 8. Regalos -->
-        <section class="py-12 px-6 text-center fade-in-section">
-            <h2 class="font-script text-4xl text-olive mb-4">Regalos</h2>
-            <p class="font-serif text-base text-gray-500 mb-8 max-w-sm mx-auto">
-                Su presencia es lo más importante. Si desean hacernos un presente, ponemos a disposición nuestra cuenta.
+        <!-- FOTO DIVISORIA 2 -->
+        <div class="w-full h-64 overflow-hidden fade-in-section my-8">
+            <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img2.png" 
+                 onerror="this.src='https://images.unsplash.com/photo-1595168866166-f40b08da22c0?q=80&w=1000&auto=format&fit=crop'"
+                 class="w-full h-full object-cover object-center opacity-90 grayscale hover:grayscale-0 transition duration-700">
+        </div>
+
+        <!-- 6. CÓDIGO DE VESTIMENTA -->
+        <section class="py-16 px-6 fade-in-section">
+            <h2 class="font-script text-5xl text-center text-olive mb-10">Código de Vestimenta</h2>
+            
+            <div class="max-w-2xl mx-auto text-center">
+                <p class="font-serif text-2xl font-bold text-olive uppercase tracking-wider mb-8">Formal de Gala</p>
+                
+                <div class="flex justify-center gap-16 mb-8">
+                    <div class="flex flex-col items-center">
+                        <i class="fa-solid fa-user-tie text-5xl text-terracotta mb-3"></i>
+                        <span class="font-sans text-xs font-bold text-gray-500">ELLOS</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fa-solid fa-person-dress text-5xl text-terracotta mb-3"></i>
+                        <span class="font-sans text-xs font-bold text-gray-500">ELLAS</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-terracotta inline-block text-left">
+                    <p class="font-sans text-sm text-gray-600 mb-2">
+                        <i class="fa-solid fa-circle-info text-terracotta mr-2"></i>
+                        Dejar el color blanco reservado para la novia.
+                    </p>
+                    <p class="font-sans text-sm text-gray-600">
+                        <i class="fa-solid fa-shoe-prints text-terracotta mr-2"></i>
+                        Mujeres utilizar zapatos cómodos por el jardín.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. REGALOS -->
+        <section class="py-12 px-6 text-center fade-in-section bg-paper-texture">
+            <h2 class="font-script text-4xl text-olive mb-6">Regalos</h2>
+            <p class="font-serif text-lg text-gray-600 mb-8 max-w-sm mx-auto">
+                Su presencia es lo más importante. Si desean hacernos un presente, ponemos a disposición nuestro código QR.
             </p>
             
             <div class="bg-white p-4 inline-block rounded-2xl shadow-lg border border-gray-100 rotate-2 hover:rotate-0 transition duration-300">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=GraciasPorElRegaloDenilsonyBelen&color=5E604B" 
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=BodaDenilsonyBelen&color=5E604B" 
                      alt="QR Pago" class="mx-auto rounded-lg">
+                <p class="font-sans text-[10px] font-bold text-olive mt-2 tracking-widest">ESCANEAR AQUÍ</p>
             </div>
         </section>
 
-        <!-- 9. Footer & RSVP -->
-        <footer class="relative pt-20 pb-10 px-6 bg-olive text-cream mt-12 rounded-t-[50px] overflow-hidden fade-in-section">
-             <!-- Confirmación -->
+        <!-- 8. GALERÍA -->
+        <section class="py-16 px-4 fade-in-section">
+            <div class="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
+                <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img1.png" class="w-full h-48 md:h-72 object-cover rounded-tl-[60px] shadow-md hover:scale-[1.02] transition">
+                <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img2.png" class="w-full h-48 md:h-72 object-cover rounded-tr-[60px] shadow-md hover:scale-[1.02] transition">
+                <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img3.png" class="w-full h-48 md:h-72 object-cover rounded-bl-[60px] shadow-md hover:scale-[1.02] transition">
+                <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img4.png" class="w-full h-48 md:h-72 object-cover rounded-br-[60px] shadow-md hover:scale-[1.02] transition">
+            </div>
+        </section>
+
+        <!-- 9. SOLO ADULTOS -->
+        <section class="py-10 px-6 fade-in-section">
+            <div class="flex flex-col items-center justify-center text-center">
+                <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-ban text-red-400 text-xl mr-1"></i>
+                    <i class="fa-solid fa-child text-gray-400 text-2xl"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-olive">Recepción solo para adultos</h3>
+                <p class="font-sans text-sm text-gray-500 mt-2 max-w-xs">
+                    Amamos a sus pequeños, pero queremos que disfruten la noche con libertad. Agradecemos su comprensión.
+                </p>
+            </div>
+        </section>
+
+        <!-- 10. CONFIRMACIÓN Y FOOTER -->
+        <footer class="relative pt-20 pb-10 px-6 bg-olive text-cream mt-8 rounded-t-[50px] overflow-hidden fade-in-section">
              <div class="relative z-10 text-center mb-16">
                 <h2 class="font-script text-5xl mb-6">Confirmación</h2>
-                <p class="font-sans text-sm opacity-80 mb-8 max-w-md mx-auto">
-                    Por favor confirma tu asistencia antes del 15 de Febrero.
+                <p class="font-serif text-lg opacity-90 mb-8 max-w-md mx-auto">
+                    Para una mejor organización, por favor confirmen su asistencia antes del 15 de Febrero.
                 </p>
                 <a href="https://wa.me/?text=Hola%20Denilson%20y%20Belen,%20¡con%20gusto%20asistiré%20a%20su%20boda!" 
                     target="_blank"
-                    class="inline-block border border-cream/50 bg-cream/10 backdrop-blur-md text-white px-8 py-3 rounded-full font-sans text-xs font-bold hover:bg-white hover:text-olive transition">
-                     CONFIRMAR ASISTENCIA
+                    class="inline-flex items-center bg-[#25D366] text-white px-8 py-4 rounded-full font-sans font-bold shadow-lg hover:bg-[#128C7E] transition transform hover:scale-105">
+                     <i class="fa-brands fa-whatsapp text-2xl mr-2"></i> ENVIAR MENSAJE
                  </a>
              </div>
 
              <!-- Créditos -->
              <div class="relative z-10 text-center border-t border-white/10 pt-8">
-                 <h2 class="font-script text-3xl opacity-90">Denilson & Belen</h2>
-                 <p class="font-sans text-[10px] mt-2 opacity-50 tracking-[0.3em]">MARZO 2026</p>
+                 <h2 class="font-script text-4xl opacity-90">Denilson & Belen</h2>
+                 <p class="font-sans text-[10px] mt-2 opacity-50 tracking-[0.3em]">01 • 03 • 2026</p>
              </div>
              
              <!-- Imagen Fondo Footer -->
-             <div class="absolute inset-0 opacity-10 mix-blend-overlay">
-                 <!-- FOTO FONDO FINAL -->
+             <div class="absolute inset-0 opacity-20 mix-blend-overlay">
                  <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/portada.png" 
-                      onerror="this.src='https://images.unsplash.com/photo-1606103920295-9a091573f160?q=80&w=2070&auto=format&fit=crop'"
                       class="w-full h-full object-cover">
              </div>
         </footer>
@@ -474,7 +480,7 @@
                 }, 1500); 
             });
 
-            // --- 2. Lógica del Contador ---
+            // --- 2. Lógica del Contador (FECHA: 1 DE MARZO 2026) ---
             const weddingDate = new Date('March 1, 2026 16:30:00').getTime();
 
             const countdownFunction = setInterval(function() {
