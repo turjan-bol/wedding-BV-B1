@@ -124,24 +124,36 @@
             transform: none;
         }
 
-        /* --- Estilos para Fotos Full Width --- */
-        .photo-full {
-            width: 100%;
-            display: block;
+        /* --- Estilos para Fotos Full Width con Waves --- */
+        .photo-wave-container {
             position: relative;
+            width: 100%;
             overflow: hidden;
         }
         
-        .photo-full img {
+        .photo-wave-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 1.5s ease;
+            display: block;
         }
 
-        /* Efecto sutil de zoom al pasar el mouse */
-        .photo-full:hover img {
-            transform: scale(1.05);
+        /* --- Estilos Galería Curva --- */
+        .gallery-item {
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
         }
 
         .wave-separator {
@@ -150,7 +162,6 @@
             direction: ltr;
         }
 
-        /* --- Estilos Iconos --- */
         .icon-modern {
             width: 48px;
             height: 48px;
@@ -180,55 +191,59 @@
     <!-- CONTENIDO PRINCIPAL -->
     <main class="max-w-3xl mx-auto bg-cream min-h-screen relative overflow-hidden shadow-2xl border-x border-white/50">
         
-        <!-- 1. HEADER -->
-        <header id="cabecera" class="relative pt-16 text-center fade-in-section bg-cream pb-0">
+        <!-- 1. HEADER (Modificado con Flex-col y Orders para reordenar en móvil) -->
+        <header id="cabecera" class="relative pt-16 text-center fade-in-section bg-cream pb-0 flex flex-col">
             <!-- Logo Iniciales -->
-            <div class="mb-12">
+            <div class="mb-12 order-1">
                 <div class="inline-block border border-olive/30 px-6 py-2 rounded-full">
                     <p class="font-sans text-xs tracking-[0.3em] text-olive font-bold">D&B • 01.03.26</p>
                 </div>
             </div>
 
-            <!-- Versículo -->
-            <div class="max-w-md mx-auto px-6 mb-12">
+            <!-- Versículo (Orden 3 en móvil, 2 en desktop) -->
+            <div class="max-w-md mx-auto px-6 mb-12 order-3 md:order-2">
                 <p class="font-serif text-xl text-gray-600 leading-relaxed italic">
                     "Por esa razón, el hombre dejará a su padre y a su madre, se unirá a su esposa y ellos serán una sola carne."
                 </p>
                 <p class="font-sans text-[10px] font-bold mt-4 text-terracotta tracking-widest uppercase">— Génesis 2:24</p>
             </div>
 
-            <!-- Nombres -->
-            <h1 class="font-script text-7xl md:text-9xl text-olive mb-6 leading-none px-4">Denilson <span class="text-terracotta text-5xl md:text-7xl">&</span> Belen</h1>
+            <!-- Nombres (Orden 4 en móvil, 3 en desktop) -->
+            <h1 class="font-script text-7xl md:text-9xl text-olive mb-6 leading-none px-4 order-4 md:order-3">Denilson <span class="text-terracotta text-5xl md:text-7xl">&</span> Belen</h1>
             
-            <p class="font-serif text-xl text-olive/80 my-10 max-w-lg mx-auto leading-relaxed px-6">
+            <p class="font-serif text-xl text-olive/80 my-10 max-w-lg mx-auto leading-relaxed px-6 order-5 md:order-4">
                 Tenemos el inmenso placer de invitarte a celebrar el inicio de nuestra vida juntos
             </p>
             
-            <!-- Foto Principal: FULL WIDTH -->
-            <div class="mt-12 mb-0 photo-full h-[500px]">
+            <!-- Foto Principal: Reordenada a posición 2 en móvil, 5 en desktop -->
+            <div class="mt-12 mb-0 photo-wave-container h-[400px] md:h-[550px] relative order-2 md:order-5 w-full">
                 <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/portada.png" 
                      onerror="this.src='https://images.unsplash.com/photo-1583939003579-73013917a611?q=80&w=2070&auto=format&fit=crop'"
                      alt="Denilson y Belen">
-                <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-cream to-transparent"></div>
+                
+                <!-- Wave SVG Bottom (Transición a Crema) -->
+                <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10">
+                    <!-- CORREGIDO: viewBox aumentado a 320 y altura aumentada a h-24 para evitar cortes -->
+                    <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full">
+                        <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                    </svg>
+                </div>
             </div>
 
-            <!-- Fecha Estilizada (Nueva Sección) -->
-            <div class="py-16 px-4 bg-cream">
+            <!-- Fecha Estilizada (Orden 6) -->
+            <div class="py-16 px-4 bg-cream order-6">
                 <div class="max-w-xl mx-auto border-y-2 border-double border-olive/20 py-8 px-4 bg-olive/5 shadow-sm">
                     <div class="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0">
-                        <!-- Día Nombre -->
                         <div class="text-center md:flex-1">
                             <p class="font-sans text-xs tracking-[0.4em] text-terracotta uppercase mb-2">NOS CASAMOS EL</p>
                             <p class="font-serif text-3xl text-olive tracking-widest uppercase border-b border-olive/10 pb-1 inline-block md:block md:border-none md:pb-0">Domingo</p>
                         </div>
                         
-                        <!-- Día Número -->
                         <div class="text-center md:px-10 md:border-x md:border-olive/20 relative">
                             <p class="font-serif text-7xl md:text-8xl text-olive font-bold leading-none">01</p>
                             <p class="font-serif text-xl md:text-2xl text-olive italic -mt-2">Marzo 2026</p>
                         </div>
 
-                        <!-- Hora -->
                         <div class="text-center md:flex-1">
                             <p class="font-sans text-xs tracking-[0.4em] text-terracotta uppercase mb-2">A LAS</p>
                             <p class="font-serif text-3xl text-olive tracking-widest border-b border-olive/10 pb-1 inline-block md:block md:border-none md:pb-0">16:30 hrs</p>
@@ -299,11 +314,27 @@
             </div>
         </section>
 
-        <!-- FOTO DIVISORIA: FULL WIDTH -->
-        <div class="fade-in-section mt-12 mb-0 photo-full h-80">
+        <!-- FOTO DIVISORIA 2: FULL WIDTH CON WAVE SUPERIOR E INFERIOR -->
+        <div class="fade-in-section mt-12 mb-0 photo-wave-container h-[400px] relative">
+            <!-- Wave SVG Top (Blanco a Foto) -->
+            <div class="absolute top-0 left-0 w-full leading-[0] text-cream z-10 rotate-180">
+                <!-- CORREGIDO: viewBox 320 y h-24 -->
+                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full">
+                    <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
+
             <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img5.png" 
                  onerror="this.src='https://images.unsplash.com/photo-1519225463359-2a682da67f1d?q=80&w=2070&auto=format&fit=crop'"
                  class="w-full h-full object-cover">
+
+            <!-- Wave SVG Bottom (Foto a Blanco) -->
+            <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10">
+                <!-- CORREGIDO: viewBox 320 y h-24 -->
+                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full">
+                    <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
         </div>
 
         <!-- 4. ITINERARIO -->
@@ -319,7 +350,6 @@
                         <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Bienvenida</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10">
-                        <!-- Icono: Carro -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E604B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
                             <circle cx="7" cy="17" r="2" />
@@ -338,7 +368,6 @@
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">16:30 HRS</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
-                        <!-- Icono: Anillos -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                              <circle cx="8" cy="12" r="5" />
                              <circle cx="16" cy="12" r="5" />
@@ -357,7 +386,6 @@
                         <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Recuerdos</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10">
-                        <!-- Icono: Cámara -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E604B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
                             <circle cx="12" cy="13" r="3" />
@@ -374,7 +402,6 @@
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">18:00 HRS</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
-                        <!-- Icono: Música -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E604B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 18V5l12-2v13" />
                             <circle cx="6" cy="18" r="3" />
@@ -422,11 +449,25 @@
             </svg>
         </div>
 
-        <!-- FOTO DIVISORIA: FULL WIDTH -->
-        <div class="fade-in-section mt-12 mb-0 photo-full h-64">
+        <!-- FOTO DIVISORIA 3: FULL WIDTH CON WAVES -->
+        <div class="fade-in-section mt-12 mb-0 photo-wave-container h-[400px] relative">
+            <div class="absolute top-0 left-0 w-full leading-[0] text-cream z-10 rotate-180">
+                <!-- CORREGIDO: viewBox 320 y h-24 -->
+                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full">
+                    <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
+            
             <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img2.png" 
                  onerror="this.src='https://images.unsplash.com/photo-1595168866166-f40b08da22c0?q=80&w=1000&auto=format&fit=crop'"
                  class="w-full h-full object-cover">
+
+            <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10">
+                <!-- CORREGIDO: viewBox 320 y h-24 -->
+                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full">
+                    <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
         </div>
 
         <!-- 6. CÓDIGO DE VESTIMENTA -->
@@ -478,25 +519,26 @@
                      <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/regalos.svg" class="w-8 h-8 object-contain" alt="Regalo">
                  </div>
                 <div class="bg-white p-8 rounded-2xl shadow-xl border border-sand/30">
-                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/qr.jpeg" alt="QR Pago" class="mx-auto mix-blend-multiply opacity-90 mb-4 rounded-lg w-64">
+                    <!-- QR Más Grande -->
+                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/qr.jpeg" alt="QR Pago" class="mx-auto mix-blend-multiply opacity-90 mb-4 rounded-lg w-72">
                     <p class="font-sans text-[10px] font-bold text-olive tracking-[0.3em] uppercase">Escanear Aquí</p>
                 </div>
             </div>
         </section>
 
-        <!-- 8. GALERÍA -->
+        <!-- 8. GALERÍA (Curva Asimétrica) -->
         <section class="py-20 px-4 fade-in-section">
             <div class="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
-                <div class="h-64 photo-full">
+                <div class="h-64 gallery-item rounded-tl-[60px] rounded-br-[20px]">
                      <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img1.png" class="w-full h-full object-cover">
                 </div>
-                <div class="h-64 photo-full">
+                <div class="h-64 gallery-item rounded-tr-[60px] rounded-bl-[20px]">
                      <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img2.png" class="w-full h-full object-cover">
                 </div>
-                <div class="h-64 photo-full">
+                <div class="h-64 gallery-item rounded-bl-[60px] rounded-tr-[20px]">
                      <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img3.png" class="w-full h-full object-cover">
                 </div>
-                <div class="h-64 photo-full">
+                <div class="h-64 gallery-item rounded-br-[60px] rounded-tl-[20px]">
                      <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img4.png" class="w-full h-full object-cover">
                 </div>
             </div>
