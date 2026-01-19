@@ -13,7 +13,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- FontAwesome -->
+    <!-- FontAwesome (Backup) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Configuración de Colores -->
@@ -27,17 +27,16 @@
                         sand: '#D7B391',
                         peach: '#FFE8CF',
                         cream: '#FAF9F5',
-                        paper: '#FDFBF7',
-                        graydetail: '#A0A09C',
-                        gold: '#C5A059',
+                        white: '#FFFFFF',
                     },
                     fontFamily: {
                         script: ['"Great Vibes"', 'cursive'],
                         serif: ['"Cormorant Garamond"', 'serif'],
                         sans: ['"Montserrat"', 'sans-serif'],
                     },
-                    backgroundImage: {
-                        'paper-texture': "url('data:image/svg+xml,%3Csvg width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 100 100\\' xmlns=\\'http://www.w3.org/2000/svg\\' %3E%3Cfilter id=\\'noise\\'%3E%3CfeTurbulence type=\\'fractalNoise\\' baseFrequency=\\'0.8\\' numOctaves=\\'3\\' stitchTiles=\\'stitch\\'/%3E%3C/filter%3E%3Crect width=\\'100%25\\' height=\\'100%25\\' filter=\\'url(%23noise)\\' opacity=\\'0.08\\'/%3E%3C/svg%3E')",
+                    borderRadius: {
+                        'blob': '60% 40% 30% 70% / 60% 30% 70% 40%',
+                        'blob-2': '30% 70% 70% 30% / 30% 30% 70% 70%',
                     }
                 }
             }
@@ -65,8 +64,7 @@
         }
 
         .paper-bg {
-            background-color: #FDFBF7;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+            background-color: #5E604B; /* Olive Base para el sobre */
         }
 
         #contenedor-izquierda, #contenedor-derecha {
@@ -76,49 +74,26 @@
             height: 100%;
             transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1);
             background-size: cover;
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.03); 
         }
 
         #contenedor-izquierda {
             left: 0;
-            border-right: 1px solid #e5e5e5;
+            border-right: 1px solid rgba(255,255,255,0.1);
             z-index: 2;
+            background: linear-gradient(135deg, #5E604B 0%, #4a4c3b 100%);
         }
 
         #contenedor-derecha {
             right: 0;
-            border-left: 1px solid #e5e5e5;
+            border-left: 1px solid rgba(255,255,255,0.1);
             z-index: 1;
-        }
-
-        #contenedor-izquierda::after {
-            content: '';
-            position: absolute;
-            right: -30px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 60px;
-            height: 120%;
-            background: inherit;
-            border-radius: 50%;
-            z-index: 3;
-            box-shadow: 4px 0 10px rgba(0,0,0,0.05);
+            background: linear-gradient(225deg, #5E604B 0%, #4a4c3b 100%);
         }
 
         .sello-container {
             position: relative;
             z-index: 10000;
             transition: opacity 1s ease;
-        }
-
-        .sello-pulse {
-            animation: pulse-animation 2s infinite;
-        }
-
-        @keyframes pulse-animation {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(176, 113, 78, 0.3); border-radius: 50%; }
-            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(176, 113, 78, 0); border-radius: 50%; }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(176, 113, 78, 0); border-radius: 50%; }
         }
 
         .move-left { transform: translateX(-100%); }
@@ -137,548 +112,426 @@
             transform: none;
         }
 
-        /* --- Marcos Ornamentales --- */
-        .ornamental-frame {
-            position: relative;
-            padding: 10px;
-            background: #fff;
-            border: 1px solid #D7B391; /* Borde fino interior */
-            outline: 1px solid #5E604B; /* Borde exterior */
-            outline-offset: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.5s ease;
+        /* --- Formas Orgánicas para Fotos --- */
+        .organic-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            overflow: hidden;
+            transition: border-radius 0.5s ease;
+        }
+        .organic-shape:hover {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
         }
         
-        .ornamental-frame:hover {
-            transform: scale(1.02);
+        .arch-modern {
+            border-radius: 200px 200px 20px 20px;
         }
 
-        .ornamental-frame img {
-            display: block;
+        .wave-separator {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            line-height: 0;
+            direction: ltr;
         }
 
-        /* Títulos con ornamentos */
-        .section-title-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 3rem;
-        }
-        
-        .section-ornament {
-            color: #B0714E;
-            opacity: 0.6;
-            margin-bottom: 0.5rem;
+        /* --- Nuevos Iconos Lineales (Estilo SVG Clean) --- */
+        .icon-modern {
             width: 50px;
-        }
-
-        .icon-box {
-            width: 90px;
-            height: 90px;
-            border: 1px solid #5E604B;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem auto;
-            transform: rotate(45deg); /* Rombo */
-            background: #FAF9F5;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .icon-box::after {
-            content: '';
-            position: absolute;
-            inset: 4px;
-            border: 1px solid #D7B391;
-            pointer-events: none;
-        }
-
-        .icon-content {
-            transform: rotate(-45deg); /* Enderezar contenido */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
+            height: 50px;
             color: #5E604B;
-        }
-        
-        .icon-box:hover {
-            background: #5E604B;
-            border-color: #B0714E;
-        }
-        .icon-box:hover .icon-content {
-            color: #FAF9F5;
+            stroke-width: 1.5;
         }
         
     </style>
 </head>
-<body class="text-olive antialiased selection:bg-terracotta selection:text-white">
+<body class="text-olive antialiased selection:bg-terracotta selection:text-white font-serif">
 
     <!-- PANTALLA DE APERTURA (SOBRE) -->
     <div id="contenedor-a-ocultar">
-        <div id="contenedor-izquierda" class="paper-bg flex items-center justify-end pr-8">
-            <div class="absolute bottom-10 left-10 opacity-20">
-                <i class="fa-solid fa-leaf text-6xl text-graydetail rotate-45"></i>
-            </div>
-        </div>
-        <div id="contenedor-derecha" class="paper-bg">
-            <div class="absolute top-10 right-10 opacity-20">
-                <i class="fa-solid fa-leaf text-6xl text-graydetail -rotate-12"></i>
-            </div>
-        </div>
+        <div id="contenedor-izquierda"></div>
+        <div id="contenedor-derecha"></div>
         
         <div class="sello-container">
             <a id="boton-ocultar" href="#cabecera" class="cursor-pointer flex flex-col items-center group">
-                <div class="sello-pulse rounded-full">
-                    <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="130" alt="Abrir" class="drop-shadow-xl">
+                <div class="rounded-full shadow-2xl transition transform group-hover:scale-105">
+                    <img src="https://invitali.com/wp-content/uploads/2025/05/SelloInv-b74fe3fc-copia-copia.webp" width="130" alt="Abrir" class="drop-shadow-lg">
                 </div>
-                <span class="mt-4 font-serif italic text-gray-500 text-sm tracking-wider">Abrir invitación</span>
+                <span class="mt-4 font-sans text-white/80 text-xs tracking-[0.3em] uppercase">Abrir invitación</span>
             </a>
         </div>
     </div>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="max-w-3xl mx-auto bg-paper-texture bg-cream shadow-2xl min-h-screen relative pb-12 overflow-hidden border-x border-white/50">
+    <main class="max-w-3xl mx-auto bg-cream min-h-screen relative overflow-hidden shadow-2xl">
         
         <!-- 1. HEADER -->
-        <header id="cabecera" class="relative pt-16 px-6 text-center fade-in-section z-10">
-            <!-- Logo Iniciales y Fecha -->
-            <div class="mb-10 inline-flex flex-col items-center">
-                <p class="font-serif text-2xl tracking-[0.2em] text-olive font-medium border-b border-olive/20 pb-2">D&B</p>
-                <p class="font-sans text-[10px] tracking-[0.3em] text-terracotta mt-1">01.03.26</p>
+        <header id="cabecera" class="relative pt-16 text-center fade-in-section bg-cream">
+            <!-- Logo Iniciales -->
+            <div class="mb-12">
+                <div class="inline-block border border-olive/30 px-6 py-2 rounded-full">
+                    <p class="font-sans text-xs tracking-[0.3em] text-olive font-bold">D&B • 01.03.26</p>
+                </div>
             </div>
 
             <!-- Versículo -->
-            <div class="max-w-md mx-auto mb-10">
-                <p class="font-serif text-xl text-gray-600 leading-relaxed italic font-light">
+            <div class="max-w-md mx-auto px-6 mb-12">
+                <p class="font-serif text-xl text-gray-600 leading-relaxed italic">
                     "Por esa razón, el hombre dejará a su padre y a su madre, se unirá a su esposa y ellos serán una sola carne."
                 </p>
-                <div class="flex justify-center items-center gap-2 mt-3 opacity-60">
-                    <div class="h-px w-8 bg-terracotta"></div>
-                    <i class="fa-solid fa-heart text-[10px] text-terracotta"></i>
-                    <div class="h-px w-8 bg-terracotta"></div>
-                </div>
-                <p class="font-sans text-[10px] font-bold mt-2 text-terracotta tracking-widest uppercase">— Génesis 2:24</p>
+                <p class="font-sans text-[10px] font-bold mt-4 text-terracotta tracking-widest uppercase">— Génesis 2:24</p>
             </div>
 
             <!-- Nombres -->
-            <h1 class="font-script text-7xl md:text-9xl text-olive mb-6 drop-shadow-sm leading-tight p-2">Denilson <span class="text-terracotta text-5xl md:text-7xl align-middle">&</span> Belen</h1>
+            <h1 class="font-script text-7xl md:text-9xl text-olive mb-6 leading-none px-4">Denilson <span class="text-terracotta text-5xl md:text-7xl">&</span> Belen</h1>
             
-            <p class="font-serif text-xl md:text-2xl text-olive my-8 max-w-xl mx-auto leading-relaxed px-4 font-light">
+            <p class="font-serif text-xl text-olive/80 my-8 max-w-lg mx-auto leading-relaxed px-6">
                 Tenemos el inmenso placer de invitarte a celebrar el inicio de nuestra vida juntos
             </p>
             
-            <!-- Foto Principal con Marco Ornamental -->
-            <div class="my-10 px-4 flex justify-center">
-                <div class="w-full max-w-md h-[500px] ornamental-frame">
+            <!-- Foto Principal Moderna -->
+            <div class="my-10 px-6 relative z-10">
+                <div class="w-full h-[500px] arch-modern overflow-hidden shadow-xl mx-auto max-w-md relative">
+                    <div class="absolute inset-0 border-[1px] border-white/50 z-20 pointer-events-none m-4 rounded-[180px_180px_10px_10px]"></div>
                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/portada.png" 
                          onerror="this.src='https://images.unsplash.com/photo-1583939003579-73013917a611?q=80&w=2070&auto=format&fit=crop'"
-                         alt="Denilson y Belen">
+                         alt="Denilson y Belen" class="w-full h-full object-cover">
                 </div>
             </div>
 
-            <!-- Fecha Estilizada -->
-            <div class="flex justify-center items-center gap-4 md:gap-8 my-12 py-8 border-y border-double border-olive/10 bg-white/30 backdrop-blur-sm">
-                <div class="text-center px-4 md:px-6 border-r border-olive/20">
-                    <p class="font-serif text-xl md:text-2xl text-olive uppercase tracking-widest">Domingo</p>
+            <!-- Fecha Moderna -->
+            <div class="flex justify-center items-center gap-6 md:gap-12 pb-16 pt-8">
+                <div class="text-right">
+                    <p class="font-serif text-2xl text-olive uppercase tracking-widest">Domingo</p>
                 </div>
-                <div class="text-center px-4 md:px-6 border-r border-olive/20">
-                    <p class="font-serif text-3xl md:text-4xl text-olive font-semibold">01</p>
-                    <p class="font-sans text-xs tracking-widest uppercase text-terracotta">Marzo 2026</p>
+                <div class="h-12 w-px bg-terracotta/50"></div>
+                <div class="text-center">
+                    <p class="font-sans text-sm tracking-[0.3em] text-terracotta uppercase mb-1">Marzo</p>
+                    <p class="font-serif text-5xl text-olive font-bold leading-none">01</p>
+                    <p class="font-sans text-xs tracking-widest text-gray-400 mt-1">2026</p>
                 </div>
-                <div class="text-center px-4 md:px-6">
-                    <p class="font-serif text-xl md:text-2xl text-olive italic">16:30 hrs</p>
+                <div class="h-12 w-px bg-terracotta/50"></div>
+                <div class="text-left">
+                    <p class="font-serif text-2xl text-olive italic">16:30 hrs</p>
                 </div>
             </div>
         </header>
 
-        <!-- ORNAMENTO SEPARADOR: CALENDARIO -->
-        <div class="text-center fade-in-section opacity-60 text-olive my-10">
-            <!-- Icono Calendario (dia-de-la-boda) -->
-            <svg class="mx-auto" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-                <path d="M12 18.5l-1-1a3 3 0 014.2-4.2l-3.2 3.2 3.2 3.2a3 3 0 01-4.2-4.2l1-1" fill="currentColor" fill-opacity="0.3" stroke="none"/>
-                <path d="M11 14h2" /> <!-- Simplified symbol inside -->
+        <!-- WAVE SEPARATOR 1 (Cream to Olive Light) -->
+        <div class="wave-separator text-[#5E604B] text-opacity-5">
+            <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
 
-        <!-- 2. CONTADOR -->
-        <section class="py-10 text-center px-4 fade-in-section mx-6 rounded-lg bg-white border border-sand/20 shadow-sm relative overflow-hidden">
-             <!-- Marco decorativo en esquinas -->
-             <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-olive"></div>
-             <div class="absolute top-2 right-2 w-4 h-4 border-t border-r border-olive"></div>
-             <div class="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-olive"></div>
-             <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-olive"></div>
-
-            <h3 class="font-serif text-2xl text-gray-600 mb-2 italic">Queremos que nos acompañes en nuestro día</h3>
-            <div class="h-px w-16 bg-terracotta mx-auto mb-6"></div>
+        <!-- 2. CONTADOR (Fondo Olive Light) -->
+        <section class="py-12 text-center px-4 fade-in-section bg-[#5E604B]/5 -mt-1">
+            <p class="font-sans text-xs tracking-[0.2em] text-terracotta uppercase mb-4">Save the Date</p>
+            <h3 class="font-serif text-3xl text-olive mb-10 italic">Queremos que nos acompañes</h3>
             
-            <p class="font-script text-5xl text-olive mb-8">Faltan:</p>
-
-            <div id="countdown" class="flex flex-wrap justify-center gap-6 md:gap-12 font-serif text-olive pb-4">
+            <div id="countdown" class="flex flex-wrap justify-center gap-6 md:gap-12 font-serif text-olive">
                 <!-- JS -->
             </div>
         </section>
 
-        <!-- 3. CEREMONIA Y RECEPCIÓN -->
+        <!-- WAVE SEPARATOR 2 (Olive Light to White) -->
+        <div class="wave-separator text-[#5E604B] text-opacity-5 rotate-180 -mt-1">
+            <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+
+        <!-- 3. CELEBRACIÓN -->
         <section class="py-20 px-6 fade-in-section">
-            <div class="max-w-3xl mx-auto text-center">
-                
-                <div class="section-title-wrapper">
-                    <!-- Ornamento Vectorial Título -->
-                    <svg class="section-ornament" viewBox="0 0 100 20" fill="none" stroke="currentColor">
-                        <path d="M0 10 Q 25 20, 50 10 T 100 10" stroke-width="1" />
-                    </svg>
-                    <h2 class="font-script text-6xl text-olive">Celebración</h2>
-                </div>
-                
-                <div class="grid md:grid-cols-2 gap-12 relative">
-                    <!-- Ceremonia -->
-                    <div class="relative p-8 border border-sand/20 bg-white">
-                        <div class="icon-box">
-                            <div class="icon-content">
-                                <!-- SVG: Arco de Boda (Ceremonia) -->
-                                <svg width="45" height="45" viewBox="0 0 512 512" fill="currentColor">
-                                    <path d="M480,224V144c0-79.4-64.6-144-144-144H176C96.6,0,32,64.6,32,144v80H0v32h32v256h64V256h320v256h64V256h32v-32H480z M256,64c35.3,0,64,28.7,64,64h-32c0-17.6-14.4-32-32-32s-32,14.4-32,32H192C192,92.7,220.7,64,256,64z M96,144c0-44.1,35.9-80,80-80v32c-26.5,0-48,21.5-48,48v80H96V144z M416,224h-32v-80c0-26.5-21.5-48-48-48V64c44.1,0,80,35.9,80,80V224z" opacity="0.9"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <h3 class="font-serif text-2xl font-bold text-olive mb-1 tracking-wider uppercase">Ceremonia</h3>
-                        <p class="font-sans text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-4">Religiosa</p>
-                        <div class="h-px w-10 bg-olive mx-auto mb-4"></div>
-                        <p class="font-serif text-4xl text-terracotta font-medium">16:30</p>
-                    </div>
-
-                    <!-- Recepción -->
-                    <div class="relative p-8 border border-sand/20 bg-white">
-                        <div class="icon-box">
-                            <div class="icon-content">
-                                <!-- SVG: Brindis (Recepción) -->
-                                <svg width="45" height="45" viewBox="0 0 512 512" fill="currentColor">
-                                    <path d="M375.2,126.3l-59.5-68C309.4,50.9,301.2,46.7,292,46.7h-36V10.7c0-5.9-4.8-10.7-10.7-10.7h-21.3
-                                        c-5.9,0-10.7,4.8-10.7,10.7v101.3c0,29.4,23.9,53.3,53.3,53.3h3.6l49.8,174.3c3.4,11.9,14.3,20.3,26.7,20.3h10.7v141.3H320
-                                        c-5.9,0-10.7,4.8-10.7,10.7c0,5.9,4.8,10.7,10.7,10.7h96c5.9,0,10.7-4.8,10.7-10.7c0-5.9-4.8-10.7-10.7-10.7h-37.3V390.7h10.7
-                                        c12.4,0,23.3-8.4,26.7-20.3l49.8-174.3h3.6c29.4,0,53.3-23.9,53.3-53.3V101.3c0-29.4-23.9-53.3-53.3-53.3
-                                        c-9.2,0-17.4,4.2-23.7,11.6l-59.5,68C382.7,128.9,378.8,128.9,375.2,126.3z M296.8,101.3l29.9,34.1
-                                        c0.5,0.6,1.4,0.6,1.9,0l29.9-34.1c1.8-2,4.8-2,6.6,0l29.9,34.1c0.5,0.6,1.4,0.6,1.9,0l29.9-34.1c2.1-2.4,5.8-2.5,8-0.2
-                                        c4.6,4.9,7.3,11.4,7.3,18.2V144H288v-24.5C288,112.7,290.7,106.2,296.8,101.3z" opacity="0.9"/>
-                                        <path d="M192,277.3h-10.7C168.9,277.3,158,268.9,154.6,257l-49.8-174.3h-3.6c-29.4,0-53.3-23.9-53.3-53.3V0h-21.3v29.3
-                                        c0,29.4-23.9,53.3-53.3,53.3H-21.3c-5.9,0-10.7,4.8-10.7,10.7s4.8,10.7,10.7,10.7h37.3v141.3H-21.3c-5.9,0-10.7,4.8-10.7,10.7
-                                        c0,5.9,4.8,10.7,10.7,10.7h96c5.9,0,10.7-4.8,10.7-10.7c0-5.9-4.8-10.7-10.7-10.7H37.3V104h10.7c12.4,0,23.3,8.4,26.7,20.3
-                                        l49.8,174.3h3.6c29.4,0,53.3,23.9,53.3,53.3v26.7c0,5.9,4.8,10.7,10.7,10.7h21.3c5.9,0,10.7-4.8,10.7-10.7v-101.3
-                                        C224,248,209.6,268.3,192,277.3z" opacity="0.9"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <h3 class="font-serif text-2xl font-bold text-olive mb-1 tracking-wider uppercase">Recepción</h3>
-                        <p class="font-sans text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-4">Social</p>
-                        <div class="h-px w-10 bg-olive mx-auto mb-4"></div>
-                        <p class="font-serif text-4xl text-terracotta font-medium">18:00</p>
-                    </div>
-                </div>
-
-                <div class="mt-16">
-                    <p class="font-serif text-gray-600 italic mb-6">Ambos eventos se realizarán en el mismo lugar</p>
-                    <a href="https://maps.app.goo.gl/So8ZgsoGgPicASrN9" 
-                       target="_blank"
-                       class="inline-flex items-center gap-2 border border-olive text-olive px-10 py-3 font-sans text-xs font-bold tracking-[0.2em] hover:bg-olive hover:text-white transition duration-500 uppercase shadow-sm">
-                        <!-- SVG: Map Location (ubicación) -->
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                            <circle cx="12" cy="10" r="3"></circle>
+            <h2 class="font-script text-6xl text-olive text-center mb-16">Celebración</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <!-- Ceremonia -->
+                <div class="text-center group">
+                    <div class="inline-flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-cream group-hover:bg-olive/10 transition duration-500">
+                        <!-- Icono SVG: Iglesia/Capilla Lineal -->
+                        <svg class="icon-modern" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 21h18M5 21V7l8-4 8 4v14M13 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
+                            <path d="M9 21v-5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v5"/>
                         </svg>
-                        Ver Ubicación
-                    </a>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-olive uppercase tracking-widest">Ceremonia</h3>
+                    <p class="font-sans text-xs text-gray-500 uppercase tracking-widest mt-2 mb-2">Religiosa</p>
+                    <p class="font-serif text-4xl text-terracotta">16:30</p>
                 </div>
+
+                <!-- Recepción -->
+                <div class="text-center group">
+                    <div class="inline-flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-cream group-hover:bg-olive/10 transition duration-500">
+                        <!-- Icono SVG: Brindis Lineal -->
+                        <svg class="icon-modern" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 21h8m-4-4v4"/>
+                            <path d="M12 17a6 6 0 0 0 6-6V5a2 2 0 1 0-4 0l-2 6-2-6a2 2 0 0 0-4 0v6a6 6 0 0 0 6 6Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-olive uppercase tracking-widest">Recepción</h3>
+                    <p class="font-sans text-xs text-gray-500 uppercase tracking-widest mt-2 mb-2">Social</p>
+                    <p class="font-serif text-4xl text-terracotta">18:00</p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <p class="font-serif text-gray-600 italic mb-6">Ambos eventos se realizarán en el mismo lugar</p>
+                <a href="https://maps.app.goo.gl/So8ZgsoGgPicASrN9" 
+                   target="_blank"
+                   class="inline-flex items-center gap-3 border-b border-olive pb-1 text-olive font-sans text-xs font-bold tracking-[0.2em] hover:text-terracotta hover:border-terracotta transition uppercase">
+                    <!-- Icono Mapa Lineal -->
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    Ver Ubicación
+                </a>
             </div>
         </section>
 
-        <!-- FOTO DIVISORIA -->
-        <div class="fade-in-section my-8 px-6">
-            <div class="h-80 ornamental-frame">
+        <!-- FOTO DIVISORIA ORGANICA -->
+        <div class="fade-in-section my-12 px-8">
+            <div class="h-80 w-full organic-shape shadow-xl">
                 <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img5.png" 
                      onerror="this.src='https://images.unsplash.com/photo-1519225463359-2a682da67f1d?q=80&w=2070&auto=format&fit=crop'"
-                     class="grayscale hover:grayscale-0 transition duration-1000">
+                     class="w-full h-full object-cover">
             </div>
         </div>
 
-        <!-- 4. ITINERARIO ELEGANTE -->
-        <section class="py-20 px-6 fade-in-section bg-paper-texture">
-            <div class="section-title-wrapper">
-                <svg class="section-ornament" viewBox="0 0 100 20" fill="none" stroke="currentColor">
-                     <path d="M0 10 Q 25 0, 50 10 T 100 10" stroke-width="1" />
-                </svg>
-                <h2 class="font-script text-6xl text-olive">Itinerario</h2>
-            </div>
+        <!-- 4. ITINERARIO (Timeline Limpio) -->
+        <section class="py-20 px-6 fade-in-section">
+            <h2 class="font-script text-6xl text-olive text-center mb-16">Itinerario</h2>
             
-            <div class="max-w-xl mx-auto relative pl-4 md:pl-0">
-                <!-- Línea central muy fina -->
-                <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-olive/20 md:-translate-x-1/2"></div>
-
-                <!-- Punto 1: LLEGADA (Coche) -->
-                <div class="flex flex-col md:flex-row items-center justify-between mb-12 relative group pl-12 md:pl-0">
-                    <div class="md:w-[45%] md:text-right md:pr-6 text-left w-full">
-                        <h4 class="font-serif text-xl text-olive font-bold uppercase tracking-wider">Llegada</h4>
-                        <p class="text-xs text-gray-500 italic mt-1">Bienvenida invitados</p>
+            <div class="max-w-xl mx-auto space-y-12 pl-8 md:pl-0 border-l border-olive/10 md:border-none">
+                
+                <!-- Item 1: Llegada -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
+                    <div class="md:w-[45%] md:text-right md:pr-10">
+                        <h4 class="font-serif text-xl text-olive font-bold">Llegada</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Bienvenida</p>
                     </div>
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 w-12 h-12 bg-white border border-olive flex items-center justify-center z-10 p-2">
-                        <!-- SVG: Wedding Car -->
-                        <svg viewBox="0 0 512 512" fill="currentColor" class="text-olive w-full h-full">
-                           <path d="M496.8,241.2l-23.7-56.9c-5.7-13.7-18.7-22.6-33.5-23.1l-66.2-2.1l-25.1-66.4c-7.9-20.9-27.9-34.9-50.3-35.1l-102.5-1.1
-                            c-22.7-0.2-43.2,13.7-51.4,34.9l-26.6,68.6H56c-30.9,0-56,25.1-56,56v80c0,13.3,10.7,24,24,24h8c0,48.6,39.4,88,88,88
-                            s88-39.4,88-88h96c0,48.6,39.4,88,88,88s88-39.4,88-88h8c13.3,0,24-10.7,24-24v-32C512,254.1,506,246.3,496.8,241.2z M120,373.3
-                            c-22.1,0-40-17.9-40-40s17.9-40,40-40s40,17.9,40,40S142.1,373.3,120,373.3z M193.8,160l20.4-52.6c1.6-4.2,5.7-7,10.2-6.9l80.4,0.9
-                            c4.5,0,8.5,2.8,10.1,6.9l18.8,49.8L193.8,160z M392,373.3c-22.1,0-40-17.9-40-40s17.9-40,40-40s40,17.9,40,40
-                            S414.1,373.3,392,373.3z"/>
-                        </svg>
+                    <!-- Icono Centro -->
+                    <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10">
+                        <div class="w-3 h-3 bg-olive rounded-full"></div>
                     </div>
-                    <div class="md:w-[45%] md:pl-6 text-left w-full mt-1 md:mt-0">
+                    <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0">
                         <p class="font-sans text-xs text-terracotta font-bold tracking-widest">16:00 HRS</p>
                     </div>
                 </div>
-                
-                <!-- Punto 2: CEREMONIA (Arco) -->
-                <div class="flex flex-col md:flex-row items-center justify-between mb-12 relative group pl-12 md:pl-0">
-                    <div class="md:w-[45%] md:text-right md:pr-6 text-left w-full order-1 md:order-1">
+
+                <!-- Item 2: Ceremonia -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
+                    <div class="md:w-[45%] md:text-right md:pr-10 md:order-1 order-2">
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">16:30 HRS</p>
                     </div>
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 w-12 h-12 bg-olive border border-olive flex items-center justify-center z-10 order-2 p-2">
-                         <!-- SVG: Arch Small (Inverse) -->
-                        <svg viewBox="0 0 512 512" fill="#FFF" class="w-full h-full">
-                             <path d="M416,224V112c0-88.4-71.6-160-160-160S96,23.6,96,112v112H32v64h32v272h64V288h256v272h64V288h32v-64H416z M288,64
-                                c35.3,0,64,28.7,64,64h-32c0-17.7-14.3-32-32-32s-32,14.3-32,32h-32C224,92.7,252.7,64,288,64z"/>
+                    <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
+                        <!-- Icono Anillos Lineal -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                             <circle cx="8" cy="12" r="5" />
+                             <circle cx="16" cy="12" r="5" />
                         </svg>
                     </div>
-                    <div class="md:w-[45%] md:pl-6 text-left w-full mt-1 md:mt-0 order-3">
-                        <h4 class="font-serif text-xl text-olive font-bold uppercase tracking-wider">Ceremonia</h4>
-                        <p class="text-xs text-gray-500 italic mt-1">Sí, acepto</p>
+                    <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0 md:order-3 order-3">
+                        <h4 class="font-serif text-xl text-olive font-bold">Ceremonia</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Sí, acepto</p>
                     </div>
                 </div>
 
-                <!-- Punto 3: FOTOS (Cámara) -->
-                <div class="flex flex-col md:flex-row items-center justify-between mb-12 relative group pl-12 md:pl-0">
-                    <div class="md:w-[45%] md:text-right md:pr-6 text-left w-full">
-                        <h4 class="font-serif text-xl text-olive font-bold uppercase tracking-wider">Fotos</h4>
-                        <p class="text-xs text-gray-500 italic mt-1">Recuerdos eternos</p>
+                <!-- Item 3: Fotos -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
+                    <div class="md:w-[45%] md:text-right md:pr-10">
+                        <h4 class="font-serif text-xl text-olive font-bold">Fotos</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Recuerdos</p>
                     </div>
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 w-12 h-12 bg-white border border-olive flex items-center justify-center z-10 p-2">
-                        <!-- SVG: Wedding Photo -->
-                        <svg viewBox="0 0 512 512" fill="currentColor" class="text-olive w-full h-full">
-                            <path d="M458.7,96h-67.4l-25-53.6C361.6,32.3,351.5,25.7,340.5,25.7H171.5c-11,0-21.1,6.5-25.8,16.7L120.7,96H53.3
-                            C23.9,96,0,119.9,0,149.3v266.7C0,445.4,23.9,469.3,53.3,469.3h405.3c29.4,0,53.3-23.9,53.3-53.3V149.3
-                            C512,119.9,488.1,96,458.7,96z M256,394.7c-76.5,0-138.7-62.2-138.7-138.7S179.5,117.3,256,117.3S394.7,179.5,394.7,256
-                            S332.5,394.7,256,394.7z"/>
-                            <circle cx="256" cy="256" r="96" fill="currentColor"/>
-                        </svg>
+                    <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10">
+                        <div class="w-3 h-3 bg-olive rounded-full"></div>
                     </div>
-                    <div class="md:w-[45%] md:pl-6 text-left w-full mt-1 md:mt-0">
+                    <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0">
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">17:30 HRS</p>
                     </div>
                 </div>
 
-                <!-- Punto 4: RECEPCIÓN (Bola Disco) -->
-                <div class="flex flex-col md:flex-row items-center justify-between relative group pl-12 md:pl-0">
-                    <div class="md:w-[45%] md:text-right md:pr-6 text-left w-full">
+                <!-- Item 4: Recepción -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
+                    <div class="md:w-[45%] md:text-right md:pr-10 md:order-1 order-2">
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">18:00 HRS</p>
                     </div>
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 w-12 h-12 bg-white border border-olive flex items-center justify-center z-10 p-2">
-                         <!-- SVG: Disco Ball -->
-                         <svg viewBox="0 0 512 512" fill="currentColor" class="text-olive w-full h-full">
-                            <path d="M256,0C148.6,0,58.1,80.1,44.2,183.1h105.7l13.9-69.5l30.3,55.6L164.8,256l29.3,86.8l-30.3,55.6l-13.9-69.5H44.2
-                            c13.9,102.9,104.4,183.1,211.8,183.1s197.9-80.1,211.8-183.1H362.1l-13.9,69.5l-30.3-55.6l29.3-86.8l-29.3-86.8l30.3-55.6l13.9,69.5
-                            h105.7C453.9,80.1,363.4,0,256,0z"/>
-                        </svg>
+                    <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
+                        <div class="w-3 h-3 bg-olive rounded-full"></div>
                     </div>
-                    <div class="md:w-[45%] md:pl-6 text-left w-full mt-1 md:mt-0">
-                        <h4 class="font-serif text-xl text-olive font-bold uppercase tracking-wider">Recepción</h4>
-                        <p class="text-xs text-gray-500 italic mt-1">Cena y Baile</p>
+                    <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0 md:order-3 order-3">
+                        <h4 class="font-serif text-xl text-olive font-bold">Recepción</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Fiesta</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- WAVE SEPARATOR 3 (White to Peach Light) -->
+        <div class="wave-separator text-[#FFE8CF] text-opacity-30">
+            <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
 
         <!-- 5. PUNTUALIDAD -->
-        <section class="py-16 px-6 fade-in-section relative overflow-hidden">
-            <div class="max-w-4xl mx-auto flex flex-col items-center gap-8 relative z-10 text-center border-y border-olive/10 py-12">
+        <section class="py-16 px-6 fade-in-section bg-[#FFE8CF]/30 -mt-1">
+            <div class="max-w-4xl mx-auto flex flex-col items-center gap-6 text-center">
                 
-                <!-- Icono Puntualidad (Boda / Reloj) -->
-                <div class="w-24 h-24 rounded-full border border-olive flex items-center justify-center p-4">
-                     <svg viewBox="0 0 512 512" fill="currentColor" class="text-olive w-full h-full">
-                        <path d="M256,0C114.6,0,0,114.6,0,256s114.6,256,256,256s256-114.6,256-256S397.4,0,256,0z M256,472c-119.3,0-216-96.7-216-216
-                        S136.7,40,256,40s216,96.7,216,216S375.3,472,256,472z"/>
-                        <path d="M363,235h-86V123c0-11-9-20-20-20s-20,9-20,20v132c0,11,9,20,20,20h106c11,0,20-9,20-20S374,235,363,235z"/>
-                        <path d="M256,80c-8.8,0-16-7.2-16-16s7.2-16,16-16s16,7.2,16,16S264.8,80,256,80z"/>
-                    </svg>
-                </div>
+                <!-- Icono Reloj Lineal -->
+                <svg class="icon-modern w-16 h-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
 
                 <div>
-                    <div class="section-title-wrapper mb-4">
-                         <h3 class="font-serif text-4xl text-olive">Puntualidad</h3>
-                         <div class="h-px w-20 bg-terracotta mt-2"></div>
-                    </div>
-                    <p class="font-serif text-xl font-light leading-relaxed italic opacity-90 max-w-lg mx-auto">
+                    <h3 class="font-serif text-3xl text-olive mb-4">Puntualidad</h3>
+                    <p class="font-serif text-xl font-light leading-relaxed italic text-gray-700 max-w-lg mx-auto">
                         "La fiesta comenzará puntualmente. Queremos que disfrutes con nosotros de cada detalle desde el primer momento."
                     </p>
-                    <p class="font-sans text-[10px] tracking-[0.2em] mt-6 opacity-70 uppercase text-terracotta">Rogamos su amable presencia a tiempo</p>
+                    <p class="font-sans text-[10px] tracking-[0.2em] mt-6 opacity-60 uppercase">Rogamos su amable presencia a tiempo</p>
                 </div>
             </div>
         </section>
+        
+        <!-- WAVE SEPARATOR 4 (Peach to White) -->
+        <div class="wave-separator text-[#FFE8CF] text-opacity-30 rotate-180 -mt-1">
+            <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
 
         <!-- FOTO DIVISORIA -->
-        <div class="fade-in-section my-8 px-6">
-            <div class="h-64 ornamental-frame">
+        <div class="fade-in-section my-12 px-8">
+            <div class="h-64 organic-shape shadow-lg rotate-1">
                 <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img2.png" 
                      onerror="this.src='https://images.unsplash.com/photo-1595168866166-f40b08da22c0?q=80&w=1000&auto=format&fit=crop'"
-                     class="object-center">
+                     class="w-full h-full object-cover">
             </div>
         </div>
 
         <!-- 6. CÓDIGO DE VESTIMENTA -->
-        <section class="py-24 px-6 fade-in-section">
-            <div class="section-title-wrapper">
-                <svg class="section-ornament" viewBox="0 0 100 20" fill="none" stroke="currentColor">
-                     <path d="M0 10 L 50 0 L 100 10" stroke-width="1" />
-                </svg>
-                <h2 class="font-script text-6xl text-olive mb-2">Código de Vestimenta</h2>
-                <p class="font-serif text-xl text-terracotta uppercase tracking-widest font-semibold mt-4">Formal de Gala</p>
-            </div>
+        <section class="py-20 px-6 fade-in-section">
+            <h2 class="font-script text-6xl text-olive mb-2 text-center">Código de Vestimenta</h2>
+            <p class="font-serif text-xl text-terracotta uppercase tracking-widest font-semibold mt-4 mb-16 text-center">Formal de Gala</p>
             
-            <div class="max-w-3xl mx-auto grid grid-cols-2 gap-8 md:gap-16">
+            <div class="max-w-3xl mx-auto grid grid-cols-2 gap-12">
                 <!-- Ellos: Traje -->
-                <div class="text-center p-8 border border-sand/30 bg-white shadow-sm hover:shadow-md transition duration-500">
-                    <div class="mb-6 text-olive flex justify-center h-20">
-                        <svg viewBox="0 0 512 512" fill="currentColor" class="w-full h-full">
-                            <path d="M405.3,128c-12.5-35.4-46.3-60.7-85.3-64v-2.7c0-34.1-27.9-62-62-62H256c-34.1,0-62,27.9-62,62v2.7
-                            c-39,3.3-72.8,28.7-85.3,64H32v384h192V330.7h64V512h192V128H405.3z M194,149.3h-22.3l21.3-37.2L194,149.3z M256,42.7
-                            c11.1,0,20.3,8.4,21.9,19.2l-21.9,38.3l-21.9-38.3C235.7,51.1,244.9,42.7,256,42.7z M256,128l36.5-64h26.4L256,170.7L193.1,64
-                            h26.4L256,128z M266.7,288v-77.9l42.7-74.7v37.3l-42.7,149.3V288z M352,128h-22.3l0.9-37.2L352,128z"/>
+                <div class="text-center">
+                    <div class="mb-6 flex justify-center">
+                        <!-- Icono Traje Lineal Simple -->
+                        <svg class="icon-modern w-20 h-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 3h6v18h-6M9 3H3v18h6M9 3v18M15 3v18M9 3l3 3 3-3"/>
                         </svg>
                     </div>
-                    <h3 class="font-serif text-lg font-bold text-olive tracking-widest border-b border-olive/20 pb-2 inline-block mb-2">ELLOS</h3>
-                    <p class="font-sans text-xs text-gray-500 mt-2 uppercase">Traje y Corbata</p>
+                    <h3 class="font-serif text-lg font-bold text-olive tracking-widest inline-block mb-2">ELLOS</h3>
+                    <p class="font-sans text-xs text-gray-500 uppercase">Traje y Corbata</p>
                 </div>
 
                 <!-- Ellas: Vestido -->
-                <div class="text-center p-8 border border-sand/30 bg-white shadow-sm hover:shadow-md transition duration-500">
-                    <div class="mb-6 text-olive flex justify-center h-20">
-                        <svg viewBox="0 0 512 512" fill="currentColor" class="w-full h-full">
-                           <path d="M256,0C177.3,0,111.4,56.7,100.8,131.7c-26.1,185,27.2,380.3,27.2,380.3h256c0,0,53.3-195.3,27.2-380.3
-                           C400.6,56.7,334.7,0,256,0z M256,42.7c19.3,0,36.5,10.1,46.5,25.3c-14.3,6.2-29.8,9.7-46.5,9.7s-32.2-3.6-46.5-9.7
-                           C219.5,52.8,236.7,42.7,256,42.7z"/>
+                <div class="text-center">
+                    <div class="mb-6 flex justify-center">
+                         <!-- Icono Vestido Lineal Simple -->
+                         <svg class="icon-modern w-20 h-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 22h6c1-5 4-9 4-13a4 4 0 0 0-14 0c0 4 3 8 4 13Z"/>
+                            <path d="M9 2v4a3 3 0 0 0 6 0V2"/>
                         </svg>
                     </div>
-                    <h3 class="font-serif text-lg font-bold text-olive tracking-widest border-b border-olive/20 pb-2 inline-block mb-2">ELLAS</h3>
-                    <p class="font-sans text-xs text-gray-500 mt-2 uppercase">Vestido Largo</p>
+                    <h3 class="font-serif text-lg font-bold text-olive tracking-widest inline-block mb-2">ELLAS</h3>
+                    <p class="font-sans text-xs text-gray-500 uppercase">Vestido Largo</p>
                 </div>
             </div>
 
-            <div class="mt-12 max-w-lg mx-auto text-center relative">
-                <div class="inline-flex items-center justify-center gap-2 mb-4 text-terracotta">
-                    <div class="h-px w-8 bg-current"></div>
-                    <i class="fa-solid fa-circle-exclamation text-xs"></i>
-                    <div class="h-px w-8 bg-current"></div>
-                </div>
-                <p class="font-sans text-xs text-gray-600 mb-2 leading-relaxed uppercase tracking-wider">
-                    Reservar el color blanco para la novia.
+            <div class="mt-12 text-center">
+                <p class="font-sans text-xs text-gray-600 mb-2 uppercase tracking-wider">
+                    <span class="text-terracotta mr-2">•</span> Reservar el color blanco para la novia
                 </p>
-                <p class="font-sans text-xs text-gray-600 leading-relaxed uppercase tracking-wider">
-                    Recomendamos zapatos cómodos para el jardín.
+                <p class="font-sans text-xs text-gray-600 uppercase tracking-wider">
+                    <span class="text-terracotta mr-2">•</span> Recomendamos zapatos cómodos para jardín
                 </p>
             </div>
         </section>
 
         <!-- 7. REGALOS -->
-        <section class="py-16 px-6 text-center fade-in-section bg-paper-texture">
-            <div class="section-title-wrapper">
-                 <svg class="section-ornament" viewBox="0 0 100 20" fill="none" stroke="currentColor">
-                     <path d="M0 10 Q 50 20, 100 10" stroke-width="1" />
-                 </svg>
-                <h2 class="font-script text-5xl text-olive mb-6">Regalos</h2>
-            </div>
+        <section class="py-20 px-6 text-center fade-in-section relative bg-cream">
+            <h2 class="font-script text-5xl text-olive mb-6">Regalos</h2>
             
             <p class="font-serif text-xl text-gray-600 mb-10 max-w-md mx-auto italic">
                 "Su presencia es nuestro mejor regalo. Si desean tener un detalle con nosotros, agradecemos su aporte a nuestra luna de miel."
             </p>
             
-            <div class="bg-white inline-block border-2 border-olive/20 outline outline-1 outline-offset-4 outline-olive/40 p-8 rounded-lg shadow-lg">
-                <!-- Icono Regalo -->
-                <div class="w-12 h-12 mx-auto mb-4 text-terracotta">
-                    <svg viewBox="0 0 512 512" fill="currentColor" class="w-full h-full">
-                        <path d="M448,128h-46.4c6.7-10.9,10.4-23.2,10.4-36c0-41.9-38.1-76-85-76c-31.4,0-58.8,15.2-74,38.1L256,58.7l3-3.6
-                        c-15.2-22.9-42.6-38.1-74-38.1c-46.9,0-85,34.1-85,76c0,12.8,3.7,25.1,10.4,36H64c-17.7,0-32,14.3-32,32v64c0,17.7,14.3,32,32,32
-                        v224c0,17.7,14.3,32,32,32h320c17.7,0,32-14.3,32-32V256c17.7,0,32-14.3,32-32v-64C480,142.3,465.7,128,448,128z M185,54.4
-                        c26.9,0,49.2,18.7,56.4,44.2c-15.3-7-32.3-10.6-49.4-10.6c-4.9,0-9.7,0.3-14.5,0.9C174.5,70,178.6,54.4,185,54.4z M177.5,120
-                        c12.2,0,24,2.6,34.8,7.3l-10.6,12.7c-4.3,5.2-12.8,5.2-17.1,0l-16-19.1C171.7,120.3,174.6,120,177.5,120z M327,54.4
-                        c6.4,0,10.5,15.6,7.5,34.5c-4.8-0.6-9.6-0.9-14.5-0.9c-17.1,0-34.1,3.6-49.4,10.6C277.8,73.1,300.1,54.4,327,54.4z M334.5,120
-                        c2.9,0,5.8,0.3,8.8,0.9l-16,19.1c-4.3,5.2-12.8,5.2-17.1,0l-10.6-12.7C310.5,122.6,322.3,120,334.5,120z"/>
+            <div class="inline-block relative">
+                 <!-- Icono Regalo Flotante -->
+                 <div class="absolute -top-6 -right-6 bg-white p-3 rounded-full shadow-md border border-olive/20">
+                     <svg class="w-6 h-6 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 12 20 22 4 22 4 12"/>
+                        <rect x="2" y="7" width="20" height="5"/>
+                        <line x1="12" y1="22" x2="12" y2="7"/>
+                        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+                        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
                     </svg>
+                 </div>
+                <div class="bg-white p-6 rounded-2xl shadow-xl border border-sand/30">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=BodaDenilsonyBelen&color=5E604B" 
+                         alt="QR Pago" class="mx-auto mix-blend-multiply opacity-90 mb-4 rounded-lg">
+                    <p class="font-sans text-[10px] font-bold text-olive tracking-[0.3em] uppercase">Escanear Aquí</p>
                 </div>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=BodaDenilsonyBelen&color=5E604B" 
-                     alt="QR Pago" class="mx-auto mix-blend-multiply opacity-90 mb-4">
-                <p class="font-sans text-[10px] font-bold text-olive tracking-[0.3em] uppercase">Escanear Aquí</p>
             </div>
         </section>
 
         <!-- 8. GALERÍA -->
         <section class="py-20 px-4 fade-in-section">
-            <div class="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <div class="h-56 md:h-80 ornamental-frame">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img1.png" class="object-cover">
+            <div class="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
+                <div class="h-64 organic-shape">
+                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img1.png" class="w-full h-full object-cover">
                 </div>
-                <div class="h-56 md:h-80 ornamental-frame">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img2.png" class="object-cover">
+                <div class="h-64 organic-shape" style="border-radius: 40% 60% 70% 30% / 50% 30% 70% 50%">
+                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img2.png" class="w-full h-full object-cover">
                 </div>
-                <div class="h-56 md:h-80 ornamental-frame">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img3.png" class="object-cover">
+                <div class="h-64 organic-shape" style="border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%">
+                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img3.png" class="w-full h-full object-cover">
                 </div>
-                <div class="h-56 md:h-80 ornamental-frame">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img4.png" class="object-cover">
+                <div class="h-64 organic-shape" style="border-radius: 30% 70% 60% 40% / 40% 60% 40% 60%">
+                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img4.png" class="w-full h-full object-cover">
                 </div>
             </div>
         </section>
 
         <!-- 9. SOLO ADULTOS -->
         <section class="py-16 px-6 fade-in-section">
-            <div class="max-w-xl mx-auto border-y border-olive/20 py-8 flex flex-col items-center gap-4 text-center">
-                <!-- Icono Solo Adultos (No Kids) -->
-                <div class="w-20 h-20 border border-olive rounded-full flex items-center justify-center mb-2">
-                     <svg width="48" height="48" viewBox="0 0 512 512" fill="currentColor" class="text-olive">
-                        <path d="M256,0C114.6,0,0,114.6,0,256s114.6,256,256,256s256-114.6,256-256S397.4,0,256,0z M256,472c-119.1,0-216-96.9-216-216
-                        c0-51.5,18.1-98.8,48.3-136.9l304.6,304.6C354.8,453.9,307.5,472,256,472z M423.7,392.9L119.1,88.3C157.2,58.1,204.5,40,256,40
-                        c119.1,0,216,96.9,216,216C472,307.5,453.9,354.8,423.7,392.9z"/>
-                        <path d="M256,128c-26.5,0-48,21.5-48,48h96C304,149.5,282.5,128,256,128z"/>
-                        <circle cx="256" cy="224" r="16"/>
-                        <path d="M256,256c-35.3,0-64,28.7-64,64h128C320,284.7,291.3,256,256,256z"/>
-                     </svg>
+            <div class="max-w-xl mx-auto border border-olive/20 rounded-full py-6 px-10 flex flex-col md:flex-row items-center gap-6 text-center md:text-left bg-white shadow-sm">
+                <!-- Icono Copa Lineal -->
+                <div class="flex-shrink-0">
+                     <svg class="w-10 h-10 text-olive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M18 6L16.2 13.2C15.76 14.96 14.28 16.32 12.51 16.49C12.34 16.5 12.17 16.5 12 16.5C11.83 16.5 11.66 16.5 11.49 16.49C9.72 16.32 8.24 14.96 7.8 13.2L6 6"/>
+                        <path d="M6 6H18"/>
+                        <path d="M12 16V22"/>
+                        <path d="M8 22H16"/>
+                    </svg>
                 </div>
                 
                 <div>
-                    <h3 class="font-serif text-2xl font-bold text-olive mb-1 tracking-widest uppercase">Solo Adultos</h3>
-                    <p class="font-serif text-sm text-gray-600 leading-relaxed italic max-w-xs mx-auto mt-2">
-                        "Amamos a los niños, pero esta noche es para que los adultos disfruten con total libertad."
+                    <h3 class="font-serif text-xl font-bold text-olive mb-1 tracking-widest uppercase">Solo Adultos</h3>
+                    <p class="font-serif text-sm text-gray-600 leading-relaxed italic mt-1">
+                        "Noche libre de niños, para que los adultos disfruten con total libertad."
                     </p>
                 </div>
             </div>
         </section>
 
+        <!-- WAVE SEPARATOR FOOTER -->
+        <div class="wave-separator text-[#5E604B]">
+            <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+
         <!-- 10. CONFIRMACIÓN Y FOOTER -->
-        <footer class="relative pt-24 pb-12 px-6 bg-[#4A4C3B] text-cream mt-12 overflow-hidden fade-in-section border-t-8 border-double border-terracotta">
-             <div class="relative z-10 text-center mb-16">
-                 <!-- Icono Confirmación (Votos/Lista) -->
-                 <div class="mb-6 text-terracotta opacity-80 flex justify-center">
-                     <svg width="60" height="60" viewBox="0 0 512 512" fill="currentColor">
-                        <path d="M368,0H144C108.7,0,80,28.7,80,64v384c0,35.3,28.7,64,64,64h224c35.3,0,64-28.7,64-64V64C432,28.7,403.3,0,368,0z M224,96
-                        h128v32H224V96z M224,192h128v32H224V192z M352,416H160V288h192V416z"/>
-                        <circle cx="176" cy="112" r="16"/>
-                        <circle cx="176" cy="208" r="16"/>
+        <footer class="relative pb-16 px-6 bg-olive text-cream overflow-hidden fade-in-section">
+             <div class="relative z-10 text-center">
+                 <!-- Icono Confirmación Lineal -->
+                 <div class="mb-6 text-terracotta/80 flex justify-center">
+                     <svg class="w-16 h-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
                      </svg>
                  </div>
                 <h2 class="font-script text-6xl mb-8 text-[#E8DCC4]">Confirmación</h2>
@@ -687,26 +540,16 @@
                 </p>
                 <a href="https://wa.me/?text=Hola%20Denilson%20y%20Belen,%20¡con%20gusto%20asistiré%20a%20su%20boda!" 
                     target="_blank"
-                    class="group inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/30 text-white px-10 py-4 font-sans text-sm font-bold shadow-xl hover:bg-white hover:text-olive transition-all duration-300 uppercase tracking-widest">
-                     <i class="fa-brands fa-whatsapp text-2xl group-hover:scale-110 transition"></i> 
+                    class="group inline-flex items-center gap-3 bg-cream text-olive border border-transparent hover:border-cream hover:bg-transparent hover:text-cream px-10 py-4 font-sans text-sm font-bold shadow-xl rounded-full transition-all duration-300 uppercase tracking-widest">
+                     <i class="fa-brands fa-whatsapp text-2xl"></i> 
                      <span>Confirmar</span>
                  </a>
              </div>
 
              <!-- Créditos -->
-             <div class="relative z-10 text-center border-t border-white/10 pt-10 mt-10">
+             <div class="relative z-10 text-center border-t border-white/10 pt-12 mt-16">
                  <h2 class="font-script text-5xl opacity-80 mb-2">Denilson & Belen</h2>
-                 <div class="flex items-center justify-center gap-4 text-[10px] opacity-60 font-sans tracking-[0.3em]">
-                     <span>EST.</span>
-                     <span>•</span>
-                     <span>2026</span>
-                 </div>
-             </div>
-             
-             <!-- Imagen Fondo Footer -->
-             <div class="absolute inset-0 opacity-10 mix-blend-overlay">
-                 <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/portada.png" 
-                      class="w-full h-full object-cover grayscale">
+                 <p class="text-[10px] opacity-60 font-sans tracking-[0.3em]">EST. 2026</p>
              </div>
         </footer>
 
@@ -767,18 +610,19 @@
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                 const template = (val, label) => `
-                    <div class="flex flex-col items-center w-16 md:w-20 group">
-                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border border-sand/30 flex items-center justify-center bg-white shadow-sm mb-2 group-hover:scale-105 transition duration-500">
-                            <span class="text-2xl md:text-3xl font-serif text-olive">${val}</span>
-                        </div>
-                        <span class="text-[10px] font-sans tracking-widest text-gray-400 uppercase group-hover:text-terracotta transition">${label}</span>
+                    <div class="flex flex-col items-center w-20">
+                        <span class="text-4xl md:text-5xl font-serif text-olive font-medium mb-1">${val}</span>
+                        <span class="text-[10px] font-sans tracking-[0.2em] text-gray-400 uppercase">${label}</span>
                     </div>
                 `;
 
                 document.getElementById("countdown").innerHTML = 
                     template(days, "Días") + 
+                    '<div class="text-3xl text-olive/30 font-light px-2 py-2">:</div>' +
                     template(hours, "Hrs") + 
+                    '<div class="text-3xl text-olive/30 font-light px-2 py-2">:</div>' +
                     template(minutes, "Min") + 
+                    '<div class="text-3xl text-olive/30 font-light px-2 py-2">:</div>' +
                     template(seconds, "Seg");
 
             }, 1000);
