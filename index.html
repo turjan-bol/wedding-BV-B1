@@ -180,16 +180,9 @@
 
     <!-- PANTALLA DE APERTURA -->
     <div id="contenedor-a-ocultar">
-        <div id="contenedor-izquierda" class="paper-bg flex items-center justify-end pr-8">
-            <div class="absolute bottom-10 left-10 opacity-20">
-                <i class="fa-solid fa-leaf text-6xl text-graydetail rotate-45"></i>
-            </div>
-        </div>
-        <div id="contenedor-derecha" class="paper-bg">
-            <div class="absolute top-10 right-10 opacity-20">
-                <i class="fa-solid fa-leaf text-6xl text-graydetail -rotate-12"></i>
-            </div>
-        </div>
+        <!-- Se eliminaron los elementos decorativos (hojas) de los contenedores izquierda y derecha -->
+        <div id="contenedor-izquierda" class="paper-bg flex items-center justify-end pr-8"></div>
+        <div id="contenedor-derecha" class="paper-bg"></div>
         
         <div class="sello-container">
             <a id="boton-ocultar" href="#cabecera" class="cursor-pointer flex flex-col items-center group">
@@ -295,10 +288,10 @@
                 <!-- Ceremonia -->
                 <div class="text-center group">
                     <div class="inline-flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-cream group-hover:bg-olive/10 transition duration-500">
-                        <svg class="icon-modern" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 21h18M5 21V7l8-4 8 4v14M13 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
-                            <path d="M9 21v-5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v5"/>
-                        </svg>
+                        <!-- Icono SVG Personalizado: Ceremonia -->
+                        <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/ceremonia.svg" 
+                             class="w-12 h-12 object-contain" 
+                             alt="Ceremonia">
                     </div>
                     <h3 class="font-serif text-2xl font-bold text-olive uppercase tracking-widest">Ceremonia</h3>
                     <p class="font-sans text-xs text-gray-500 uppercase tracking-widest mt-2 mb-2">Religiosa</p>
@@ -308,10 +301,10 @@
                 <!-- Recepción -->
                 <div class="text-center group">
                     <div class="inline-flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-cream group-hover:bg-olive/10 transition duration-500">
-                        <svg class="icon-modern" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M8 21h8m-4-4v4"/>
-                            <path d="M12 17a6 6 0 0 0 6-6V5a2 2 0 1 0-4 0l-2 6-2-6a2 2 0 0 0-4 0v6a6 6 0 0 0 6 6Z"/>
-                        </svg>
+                        <!-- Icono SVG Personalizado: Recepción -->
+                        <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/recepci%C3%B3n.svg" 
+                             class="w-12 h-12 object-contain" 
+                             alt="Recepción">
                     </div>
                     <h3 class="font-serif text-2xl font-bold text-olive uppercase tracking-widest">Recepción</h3>
                     <p class="font-sans text-xs text-gray-500 uppercase tracking-widest mt-2 mb-2">Social</p>
