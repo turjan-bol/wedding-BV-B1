@@ -247,7 +247,8 @@
 
                         <div class="text-center md:flex-1">
                             <p class="font-sans text-xs tracking-[0.4em] text-terracotta uppercase mb-2">A LAS</p>
-                            <p class="font-serif text-3xl text-olive tracking-widest border-b border-olive/10 pb-1 inline-block md:block md:border-none md:pb-0">16:30 hrs</p>
+                            <!-- Actualizado a 15:00 hrs para coincidir con el itinerario -->
+                            <p class="font-serif text-3xl text-olive tracking-widest border-b border-olive/10 pb-1 inline-block md:block md:border-none md:pb-0">15:00 hrs</p>
                         </div>
                     </div>
                 </div>
@@ -342,20 +343,39 @@
         <section class="py-20 px-6 fade-in-section">
             <h2 class="font-script text-6xl text-olive text-center mb-16">Itinerario</h2>
             
-            <div class="max-w-xl mx-auto space-y-12 pl-8 md:pl-0 border-l border-olive/10 md:border-none">
+            <div class="max-w-2xl mx-auto space-y-12 pl-8 md:pl-0 border-l border-olive/10 md:border-none">
                 
-                <!-- Item 1: Llegada -->
+                <!-- 1. Ceremonia Civil (DERECHA) -->
+                <!-- Desktop: Time Left | Icon Center | Title Right -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
+                    <div class="md:w-[45%] md:text-right md:pr-10 md:order-1 order-2">
+                         <p class="font-sans text-xs text-terracotta font-bold tracking-widest">15:00 HRS</p>
+                    </div>
+                    <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
+                        <!-- Icono: Anillos/Firma -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> <!-- Escudo/Legal -->
+                             <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0 md:order-3 order-3">
+                        <h4 class="font-serif text-xl text-olive font-bold">Ceremonia Civil</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Unión Legal</p>
+                    </div>
+                </div>
+
+                <!-- 2. Entre Copas y Recuerdos (IZQUIERDA) -->
+                <!-- Desktop: Title Left | Icon Center | Time Right -->
                 <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
                     <div class="md:w-[45%] md:text-right md:pr-10">
-                        <h4 class="font-serif text-xl text-olive font-bold">Llegada</h4>
-                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Bienvenida</p>
+                        <h4 class="font-serif text-xl text-olive font-bold">Copas y Recuerdos</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Cóctel de Bienvenida</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10">
+                        <!-- Icono: Cámara/Copa -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E604B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
-                            <circle cx="7" cy="17" r="2" />
-                            <path d="M9 17h6" />
-                            <circle cx="17" cy="17" r="2" />
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                            <circle cx="12" cy="13" r="4"/>
                         </svg>
                     </div>
                     <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0">
@@ -363,57 +383,120 @@
                     </div>
                 </div>
 
-                <!-- Item 2: Ceremonia -->
+                <!-- 3. Entrada Sr y Sra ARTEAGA (DERECHA) -->
                 <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
                     <div class="md:w-[45%] md:text-right md:pr-10 md:order-1 order-2">
-                         <p class="font-sans text-xs text-terracotta font-bold tracking-widest">16:30 HRS</p>
+                         <p class="font-sans text-xs text-terracotta font-bold tracking-widest">17:30 HRS</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-                             <circle cx="8" cy="12" r="5" />
-                             <circle cx="16" cy="12" r="5" />
+                        <!-- Icono: Puerta/Entrada -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                             <circle cx="12" cy="7" r="4"/>
                         </svg>
                     </div>
                     <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0 md:order-3 order-3">
-                        <h4 class="font-serif text-xl text-olive font-bold">Ceremonia</h4>
-                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Sí, acepto</p>
+                        <h4 class="font-serif text-xl text-olive font-bold">Entrada Sr y Sra Arteaga</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Gran Entrada</p>
                     </div>
                 </div>
 
-                <!-- Item 3: Fotos -->
+                <!-- 4. Brindis Social (IZQUIERDA) -->
                 <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
                     <div class="md:w-[45%] md:text-right md:pr-10">
-                        <h4 class="font-serif text-xl text-olive font-bold">Fotos</h4>
-                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Recuerdos</p>
+                        <h4 class="font-serif text-xl text-olive font-bold">Brindis Social</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Salud por los novios</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10">
+                        <!-- Icono: Copas -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E604B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
-                            <circle cx="12" cy="13" r="3" />
+                            <path d="M8 22h8"/>
+                            <path d="M12 15v7"/>
+                            <path d="M17 3c0 4.5-2.5 7.5-5 9c-2.5-1.5-5-4.5-5-9"/>
+                            <path d="M17 3h-5"/>
+                            <path d="M7 3h5"/>
                         </svg>
                     </div>
                     <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0">
-                         <p class="font-sans text-xs text-terracotta font-bold tracking-widest">17:30 HRS</p>
+                         <p class="font-sans text-xs text-terracotta font-bold tracking-widest">18:00 HRS</p>
                     </div>
                 </div>
 
-                <!-- Item 4: Recepción -->
+                <!-- 5. Baile de los Novios (DERECHA) -->
                 <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
                     <div class="md:w-[45%] md:text-right md:pr-10 md:order-1 order-2">
-                         <p class="font-sans text-xs text-terracotta font-bold tracking-widest">18:00 HRS</p>
+                         <p class="font-sans text-xs text-terracotta font-bold tracking-widest">18:30 HRS</p>
                     </div>
-                    <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E604B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 18V5l12-2v13" />
-                            <circle cx="6" cy="18" r="3" />
-                            <circle cx="18" cy="16" r="3" />
+                    <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
+                        <!-- Icono: Música -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                             <path d="M9 18V5l12-2v13"/>
+                             <circle cx="6" cy="18" r="3"/>
+                             <circle cx="18" cy="16" r="3"/>
                         </svg>
                     </div>
                     <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0 md:order-3 order-3">
-                        <h4 class="font-serif text-xl text-olive font-bold">Recepción</h4>
-                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Fiesta</p>
+                        <h4 class="font-serif text-xl text-olive font-bold">Baile de los Novios</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Primer Baile</p>
                     </div>
                 </div>
+
+                <!-- 6. Cena (IZQUIERDA) -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
+                    <div class="md:w-[45%] md:text-right md:pr-10">
+                        <h4 class="font-serif text-xl text-olive font-bold">Cena</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Banquete</p>
+                    </div>
+                    <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10">
+                        <!-- Icono: Cubiertos -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E604B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+                            <path d="M7 2v20"/>
+                            <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
+                        </svg>
+                    </div>
+                    <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0">
+                         <p class="font-sans text-xs text-terracotta font-bold tracking-widest">19:00 HRS</p>
+                    </div>
+                </div>
+
+                <!-- 7. ¡HEY! FIESTA (DERECHA) -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
+                    <div class="md:w-[45%] md:text-right md:pr-10 md:order-1 order-2">
+                         <p class="font-sans text-xs text-terracotta font-bold tracking-widest">19:40 HRS</p>
+                    </div>
+                    <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
+                        <!-- Icono: Fiesta/Disco -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                             <circle cx="12" cy="12" r="10"/>
+                             <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                             <path d="M2 12h20"/>
+                             <path d="M12 2a14.5 14.5 0 0 1 0 20 14.5 14.5 0 0 1 0-20"/>
+                        </svg>
+                    </div>
+                    <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0 md:order-3 order-3">
+                        <h4 class="font-serif text-lg text-olive font-bold uppercase leading-tight">¡Hey! ¿No se suponía que esto era una fiesta?</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">¡A bailar!</p>
+                    </div>
+                </div>
+
+                <!-- 8. ALGO ME GUSTA DE TI (IZQUIERDA) -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
+                    <div class="md:w-[45%] md:text-right md:pr-10">
+                        <h4 class="font-serif text-xl text-olive font-bold uppercase">Algo me gusta de ti</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Hora Loca</p>
+                    </div>
+                    <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10">
+                        <!-- Icono: Corazón/Estrella -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E604B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                        </svg>
+                    </div>
+                    <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0">
+                         <p class="font-sans text-xs text-terracotta font-bold tracking-widest">00:30 HRS</p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
