@@ -48,8 +48,8 @@
 
         /* Corrección Global para SVGs */
         svg {
-            display: block; /* Elimina espacio fantasma debajo de elementos inline */
-            shape-rendering: geometricPrecision; /* Mejora la nitidez de los bordes */
+            display: block;
+            shape-rendering: geometricPrecision;
         }
 
         /* --- Estilos de la Animación de Entrada --- */
@@ -135,7 +135,7 @@
             position: relative;
             width: 100%;
             overflow: hidden;
-            background-color: #FAF9F5; /* Fondo de seguridad igual al body */
+            background-color: #FAF9F5;
         }
         
         .photo-wave-container img {
@@ -145,22 +145,27 @@
             display: block;
         }
 
-        /* --- Estilos Galería Curva --- */
-        .gallery-item {
-            overflow: hidden;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s ease;
+        /* --- Estilos Galería Masonry --- */
+        .masonry-column {
+            padding: 0 4px;
         }
         
-        .gallery-item img {
+        .masonry-item {
+            margin-bottom: 8px;
+            overflow: hidden;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .masonry-item img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s ease;
+            height: auto;
+            display: block;
+            border-radius: 12px;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
+        .masonry-item:hover {
+            transform: scale(1.02);
         }
 
         .wave-separator {
@@ -168,7 +173,7 @@
             line-height: 0;
             direction: ltr;
             position: relative;
-            z-index: 10; /* Asegura que la ola esté encima de la unión */
+            z-index: 10; 
         }
 
         .icon-modern {
@@ -200,12 +205,13 @@
     <!-- CONTENIDO PRINCIPAL -->
     <main class="max-w-3xl mx-auto bg-cream min-h-screen relative overflow-hidden shadow-2xl border-x border-white/50">
         
-        <!-- 1. HEADER (Ajustado: Sin padding top en móvil para que la foto suba) -->
+        <!-- 1. HEADER -->
         <header id="cabecera" class="relative pt-0 md:pt-16 text-center fade-in-section bg-cream pb-0 flex flex-col">
             
-            <!-- Logo Iniciales (FLOTANTE EN MÓVIL) -->
-            <div class="absolute top-8 w-full z-30 flex justify-center md:static md:w-auto md:block md:mb-12 md:order-1">
-                <div class="inline-block border border-olive/50 bg-white/70 backdrop-blur-md px-6 py-2 rounded-full shadow-lg md:shadow-none md:bg-transparent md:border-olive/30">
+            <!-- Logo Iniciales (POSICIÓN INFERIOR EN MÓVIL) -->
+            <!-- Mobile: absolute bottom-16. Desktop: static top -->
+            <div class="absolute bottom-28 w-full z-30 flex justify-center md:static md:w-auto md:block md:mb-12 md:order-1">
+                <div class="inline-block border border-olive/50 bg-white/80 backdrop-blur-md px-6 py-2 rounded-full shadow-lg md:shadow-none md:bg-transparent md:border-olive/30">
                     <p class="font-sans text-xs tracking-[0.3em] text-olive font-bold">D&B • 01.03.26</p>
                 </div>
             </div>
@@ -225,14 +231,13 @@
                 Tenemos el inmenso placer de invitarte a celebrar el inicio de nuestra vida juntos
             </p>
             
-            <!-- Foto Principal: (Orden 1 en móvil para ir arriba, sin margen top) -->
-            <div class="mt-0 md:mt-12 mb-0 photo-wave-container h-[50vh] md:h-[550px] relative order-1 md:order-5 w-full">
+            <!-- Foto Principal: (Orden 1 en móvil, sin margen top) -->
+            <div class="mt-0 md:mt-12 mb-0 photo-wave-container h-[60vh] md:h-[550px] relative order-1 md:order-5 w-full">
                 <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/portada.png" 
                      onerror="this.src='https://images.unsplash.com/photo-1583939003579-73013917a611?q=80&w=2070&auto=format&fit=crop'"
                      alt="Denilson y Belen">
                 
                 <!-- Wave SVG Bottom -->
-                <!-- margin-bottom: -1px para evitar línea blanca -->
                 <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10 -mb-[1px]">
                     <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block">
                         <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
@@ -263,17 +268,16 @@
             </div>
         </header>
 
-        <!-- WAVE SEPARATOR 1: Cream -> Olive Light (Countdown) -->
-        <!-- mt-[-2px] para solapamiento -->
+        <!-- WAVE SEPARATOR 1 -->
         <div class="wave-separator text-[#5E604B] text-opacity-5 -mt-[2px]">
             <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
 
-        <!-- 2. CONTADOR (Fondo Olive Light) -->
+        <!-- 2. CONTADOR (Modificado) -->
         <section class="py-12 text-center px-4 fade-in-section bg-[#5E604B]/5 -mt-[1px]">
-            <p class="font-sans text-xs tracking-[0.2em] text-terracotta uppercase mb-4">Save the Date</p>
+            <p class="font-sans text-xs tracking-[0.2em] text-terracotta uppercase mb-4">Cada día falta menos</p>
             <h3 class="font-serif text-3xl text-olive mb-10 italic">Queremos que nos acompañes</h3>
             
             <div id="countdown" class="flex flex-wrap justify-center gap-6 md:gap-12 font-serif text-olive">
@@ -281,60 +285,44 @@
             </div>
         </section>
 
-        <!-- WAVE SEPARATOR 2: Olive Light -> Cream (Celebration) -->
+        <!-- WAVE SEPARATOR 2 -->
         <div class="wave-separator text-[#5E604B] text-opacity-5 rotate-180 -mt-[2px]">
             <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
 
-        <!-- 3. CELEBRACIÓN -->
+        <!-- 3. CELEBRACIÓN (Unificado) -->
         <section class="py-20 px-6 fade-in-section -mt-[1px]">
-            <h2 class="font-script text-6xl text-olive text-center mb-16">Celebración</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-                <!-- Ceremonia -->
-                <div class="text-center group">
-                    <div class="inline-flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-cream group-hover:bg-olive/10 transition duration-500">
-                        <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/ceremonia.svg" 
-                             class="w-12 h-12 object-contain" 
-                             alt="Ceremonia">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="inline-block p-10 border-2 border-olive/10 rounded-tl-[80px] rounded-br-[80px] bg-white shadow-lg relative">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-cream p-3 rounded-full border border-olive/20">
+                        <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/ceremonia.svg" class="w-12 h-12 object-contain" alt="Icono">
                     </div>
-                    <h3 class="font-serif text-2xl font-bold text-olive uppercase tracking-widest">Ceremonia</h3>
-                    <p class="font-sans text-xs text-gray-500 uppercase tracking-widest mt-2 mb-2">Religiosa</p>
-                    <p class="font-serif text-4xl text-terracotta">16:30</p>
+                    
+                    <h2 class="font-script text-5xl md:text-6xl text-olive mb-4 mt-4">Ceremonia y Recepción Social</h2>
+                    <div class="h-px w-24 bg-terracotta mx-auto mb-6"></div>
+                    <p class="font-serif text-4xl text-olive mb-2">15:00 hrs</p>
+                    <p class="font-sans text-xs text-gray-500 uppercase tracking-widest">Misma Ubicación</p>
                 </div>
 
-                <!-- Recepción -->
-                <div class="text-center group">
-                    <div class="inline-flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-cream group-hover:bg-olive/10 transition duration-500">
-                        <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/recepci%C3%B3n.svg" 
-                             class="w-12 h-12 object-contain" 
-                             alt="Recepción">
-                    </div>
-                    <h3 class="font-serif text-2xl font-bold text-olive uppercase tracking-widest">Recepción</h3>
-                    <p class="font-sans text-xs text-gray-500 uppercase tracking-widest mt-2 mb-2">Social</p>
-                    <p class="font-serif text-4xl text-terracotta">18:00</p>
+                <div class="mt-12">
+                    <p class="font-serif text-gray-600 italic mb-6">Te esperamos para celebrar juntos</p>
+                    <a href="https://maps.app.goo.gl/So8ZgsoGgPicASrN9" 
+                       target="_blank"
+                       class="inline-flex items-center gap-3 border-b border-olive pb-1 text-olive font-sans text-xs font-bold tracking-[0.2em] hover:text-terracotta hover:border-terracotta transition uppercase">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        Ver Ubicación
+                    </a>
                 </div>
-            </div>
-
-            <div class="mt-16 text-center">
-                <p class="font-serif text-gray-600 italic mb-6">Ambos eventos se realizarán en el mismo lugar</p>
-                <a href="https://maps.app.goo.gl/So8ZgsoGgPicASrN9" 
-                   target="_blank"
-                   class="inline-flex items-center gap-3 border-b border-olive pb-1 text-olive font-sans text-xs font-bold tracking-[0.2em] hover:text-terracotta hover:border-terracotta transition uppercase">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                    Ver Ubicación
-                </a>
             </div>
         </section>
 
         <!-- FOTO DIVISORIA 2 -->
         <div class="fade-in-section mt-12 mb-0 photo-wave-container h-[400px] relative">
-            <!-- Wave SVG Top -->
             <div class="absolute top-0 left-0 w-full leading-[0] text-cream z-10 rotate-180 -mt-[1px]">
                 <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block">
                     <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
@@ -345,7 +333,6 @@
                  onerror="this.src='https://images.unsplash.com/photo-1519225463359-2a682da67f1d?q=80&w=2070&auto=format&fit=crop'"
                  class="w-full h-full object-cover">
 
-            <!-- Wave SVG Bottom -->
             <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10 -mb-[1px]">
                 <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block">
                     <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
@@ -353,7 +340,7 @@
             </div>
         </div>
 
-        <!-- 4. ITINERARIO -->
+        <!-- 4. ITINERARIO (Ajuste de íconos en móvil: w-10 h-10) -->
         <section class="py-20 px-6 fade-in-section -mt-[1px]">
             <h2 class="font-script text-6xl text-olive text-center mb-16">Itinerario</h2>
             
@@ -364,7 +351,7 @@
                     <div class="md:w-[45%] md:text-right md:pr-10 md:order-1 order-2">
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">15:00 HRS</p>
                     </div>
-                    <div class="absolute -left-[19px] top-0 md:static md:w-12 md:h-12 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1 overflow-hidden p-2">
+                    <div class="absolute -left-[20px] top-0 md:static w-10 h-10 md:w-12 md:h-12 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1 overflow-hidden p-2">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Ceremonia%20Civil.svg" class="w-full h-full object-contain filter invert brightness-0" alt="Civil">
                     </div>
                     <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0 md:order-3 order-3">
@@ -379,7 +366,7 @@
                         <h4 class="font-serif text-xl text-olive font-bold">Copas y Recuerdos</h4>
                         <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Cóctel de Bienvenida</p>
                     </div>
-                    <div class="absolute -left-[19px] top-0 md:static md:w-12 md:h-12 bg-white border border-olive rounded-full flex items-center justify-center z-10 p-2">
+                    <div class="absolute -left-[20px] top-0 md:static w-10 h-10 md:w-12 md:h-12 bg-white border border-olive rounded-full flex items-center justify-center z-10 p-2">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Recuerdos.svg" class="w-full h-full object-contain" alt="Recuerdos">
                     </div>
                     <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0">
@@ -392,7 +379,7 @@
                     <div class="md:w-[45%] md:text-right md:pr-10 md:order-1 order-2">
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">17:30 HRS</p>
                     </div>
-                    <div class="absolute -left-[19px] top-0 md:static md:w-12 md:h-12 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1 p-2">
+                    <div class="absolute -left-[20px] top-0 md:static w-10 h-10 md:w-12 md:h-12 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1 p-2">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Desfile%20novios.svg" class="w-full h-full object-contain filter invert brightness-0" alt="Entrada">
                     </div>
                     <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0 md:order-3 order-3">
@@ -407,7 +394,7 @@
                         <h4 class="font-serif text-xl text-olive font-bold">Brindis Social</h4>
                         <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Salud por los novios</p>
                     </div>
-                    <div class="absolute -left-[19px] top-0 md:static md:w-12 md:h-12 bg-white border border-olive rounded-full flex items-center justify-center z-10 p-2">
+                    <div class="absolute -left-[20px] top-0 md:static w-10 h-10 md:w-12 md:h-12 bg-white border border-olive rounded-full flex items-center justify-center z-10 p-2">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Brindis%20Social.svg" class="w-full h-full object-contain" alt="Brindis">
                     </div>
                     <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0">
@@ -420,7 +407,7 @@
                     <div class="md:w-[45%] md:text-right md:pr-10 md:order-1 order-2">
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">18:30 HRS</p>
                     </div>
-                    <div class="absolute -left-[19px] top-0 md:static md:w-12 md:h-12 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1 p-2">
+                    <div class="absolute -left-[20px] top-0 md:static w-10 h-10 md:w-12 md:h-12 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1 p-2">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Baile%20novios.svg" class="w-full h-full object-contain filter invert brightness-0" alt="Baile">
                     </div>
                     <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0 md:order-3 order-3">
@@ -435,7 +422,7 @@
                         <h4 class="font-serif text-xl text-olive font-bold">Cena</h4>
                         <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Banquete</p>
                     </div>
-                    <div class="absolute -left-[19px] top-0 md:static md:w-12 md:h-12 bg-white border border-olive rounded-full flex items-center justify-center z-10 p-2">
+                    <div class="absolute -left-[20px] top-0 md:static w-10 h-10 md:w-12 md:h-12 bg-white border border-olive rounded-full flex items-center justify-center z-10 p-2">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Cena.svg" class="w-full h-full object-contain" alt="Cena">
                     </div>
                     <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0">
@@ -448,7 +435,7 @@
                     <div class="md:w-[45%] md:text-right md:pr-10 md:order-1 order-2">
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">19:40 HRS</p>
                     </div>
-                    <div class="absolute -left-[19px] top-0 md:static md:w-12 md:h-12 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1 p-2">
+                    <div class="absolute -left-[20px] top-0 md:static w-10 h-10 md:w-12 md:h-12 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1 p-2">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Fiesta.svg" class="w-full h-full object-contain filter invert brightness-0" alt="Fiesta">
                     </div>
                     <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0 md:order-3 order-3">
@@ -463,7 +450,7 @@
                         <h4 class="font-serif text-xl text-olive font-bold uppercase">Algo me gusta de ti</h4>
                         <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Hora Loca</p>
                     </div>
-                    <div class="absolute -left-[19px] top-0 md:static md:w-12 md:h-12 bg-white border border-olive rounded-full flex items-center justify-center z-10 p-2">
+                    <div class="absolute -left-[20px] top-0 md:static w-10 h-10 md:w-12 md:h-12 bg-white border border-olive rounded-full flex items-center justify-center z-10 p-2">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Final-.svg" class="w-full h-full object-contain" alt="Hora Loca">
                     </div>
                     <div class="md:w-[45%] md:pl-10 mt-1 md:mt-0">
@@ -474,7 +461,7 @@
             </div>
         </section>
 
-        <!-- WAVE SEPARATOR 3: Cream -> Peach Light (Puntualidad) -->
+        <!-- WAVE SEPARATOR 3 -->
         <div class="wave-separator text-[#FFE8CF] text-opacity-30 -mt-[2px]">
             <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
@@ -500,14 +487,14 @@
             </div>
         </section>
         
-        <!-- WAVE SEPARATOR 4: Peach Light -> Cream -->
+        <!-- WAVE SEPARATOR 4 -->
         <div class="wave-separator text-[#FFE8CF] text-opacity-30 rotate-180 -mt-[2px]">
             <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
 
-        <!-- FOTO DIVISORIA 3: FULL WIDTH CON WAVES -->
+        <!-- FOTO DIVISORIA 3 -->
         <div class="fade-in-section mt-12 mb-0 photo-wave-container h-[400px] relative">
             <div class="absolute top-0 left-0 w-full leading-[0] text-cream z-10 rotate-180 -mt-[1px]">
                 <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block">
@@ -555,58 +542,85 @@
                 <p class="font-sans text-xs text-gray-600 mb-2 uppercase tracking-wider">
                     <span class="text-terracotta mr-2">•</span> Reservar el color blanco para la novia
                 </p>
-        <!-- 8. GALERÍA (Curva Asimétrica Expandida) -->
-        <section class="py-20 px-4 fade-in-section">
-            <h2 class="font-script text-5xl text-olive text-center mb-10">Nuestros Momentos</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
-                
-                <!-- Fila 1 -->
-                <div class="h-64 gallery-item rounded-tl-[60px] rounded-br-[20px]">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img1.png" class="w-full h-full object-cover">
-                </div>
-                <div class="h-64 gallery-item rounded-[30px]">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img2.png" class="w-full h-full object-cover">
-                </div>
-                <div class="h-64 gallery-item rounded-tr-[60px] rounded-bl-[20px]">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img3.png" class="w-full h-full object-cover">
-                </div>
-
-                <!-- Fila 2 -->
-                <div class="h-64 gallery-item rounded-bl-[60px] rounded-tr-[20px]">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img4.png" class="w-full h-full object-cover">
-                </div>
-                <div class="h-64 gallery-item rounded-[30px]">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img6.png" class="w-full h-full object-cover">
-                </div>
-                <div class="h-64 gallery-item rounded-br-[60px] rounded-tl-[20px]">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img7.png" class="w-full h-full object-cover">
-                </div>
-
-                <!-- Fila 3 -->
-                <div class="h-64 gallery-item rounded-[40px] md:col-span-1">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img8.png" class="w-full h-full object-cover">
-                </div>
-                <div class="h-64 gallery-item rounded-[40px] md:col-span-1">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img9.png" class="w-full h-full object-cover">
-                </div>
-                <div class="h-64 gallery-item rounded-[40px] md:col-span-1 col-span-2">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img10.png" class="w-full h-full object-cover object-top">
-                </div>
-                
-                <!-- Extra si hay espacio o para balancear -->
-                <div class="h-64 gallery-item rounded-[40px] col-span-2 md:col-span-3">
-                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img11.png" class="w-full h-full object-cover object-center">
-                </div>
-
+                <p class="font-sans text-xs text-gray-600 uppercase tracking-wider">
+                    <span class="text-terracotta mr-2">•</span> Recomendamos zapatos cómodos para jardín
+                </p>
             </div>
         </section>
 
-        <!-- 9. SOLO ADULTOS -->
+        <!-- 7. REGALOS -->
+        <section class="py-20 px-6 text-center fade-in-section relative bg-cream">
+            <h2 class="font-script text-5xl text-olive mb-6">Regalos</h2>
+            
+            <p class="font-serif text-xl text-gray-600 mb-10 max-w-md mx-auto italic">
+                "Su presencia es nuestro mejor regalo. Si desean tener un detalle con nosotros, agradecemos su aporte a nuestra luna de miel."
+            </p>
+            
+            <div class="inline-block relative">
+                 <div class="absolute -top-6 -right-6 bg-white p-3 rounded-full shadow-md border border-olive/20">
+                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/regalos.svg" class="w-8 h-8 object-contain" alt="Regalo">
+                 </div>
+                <div class="bg-white p-8 rounded-2xl shadow-xl border border-sand/30">
+                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/qr.jpeg" alt="QR Pago" class="mx-auto mix-blend-multiply opacity-90 mb-4 rounded-lg w-72">
+                    <p class="font-sans text-[10px] font-bold text-olive tracking-[0.3em] uppercase">Escanear Aquí</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. GALERÍA (Masonry Style con columnas CSS) -->
+        <section class="py-20 px-4 fade-in-section">
+            <h2 class="font-script text-5xl text-olive text-center mb-10">Nuestros Momentos</h2>
+            
+            <div class="max-w-5xl mx-auto columns-2 md:columns-3 gap-4 space-y-4">
+                <!-- Foto 1 -->
+                <div class="masonry-item break-inside-avoid">
+                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img1.png" alt="Foto">
+                </div>
+                <!-- Foto 6 -->
+                <div class="masonry-item break-inside-avoid">
+                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img6.png" alt="Foto">
+                </div>
+                <!-- Foto 2 -->
+                <div class="masonry-item break-inside-avoid">
+                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img2.png" alt="Foto">
+                </div>
+                <!-- Foto 7 -->
+                <div class="masonry-item break-inside-avoid">
+                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img7.png" alt="Foto">
+                </div>
+                <!-- Foto 3 -->
+                <div class="masonry-item break-inside-avoid">
+                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img3.png" alt="Foto">
+                </div>
+                <!-- Foto 8 -->
+                <div class="masonry-item break-inside-avoid">
+                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img8.png" alt="Foto">
+                </div>
+                <!-- Foto 4 -->
+                <div class="masonry-item break-inside-avoid">
+                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img4.png" alt="Foto">
+                </div>
+                <!-- Foto 9 -->
+                <div class="masonry-item break-inside-avoid">
+                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img9.png" alt="Foto">
+                </div>
+                <!-- Foto 10 -->
+                <div class="masonry-item break-inside-avoid">
+                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img10.png" alt="Foto">
+                </div>
+                <!-- Foto 11 -->
+                <div class="masonry-item break-inside-avoid">
+                    <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img11.png" alt="Foto">
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. SOLO ADULTOS (Rediseñado) -->
         <section class="py-16 px-6 fade-in-section">
-            <div class="max-w-xl mx-auto border border-olive/20 rounded-full py-6 px-10 flex flex-col md:flex-row items-center gap-6 text-center md:text-left bg-white shadow-sm">
+            <div class="max-w-xl mx-auto bg-terracotta/10 border-2 border-terracotta/30 rounded-2xl py-8 px-10 flex flex-col md:flex-row items-center gap-6 text-center md:text-left shadow-md transform hover:scale-105 transition duration-500">
                 <!-- Icono: Martini/Copa -->
-                <div class="flex-shrink-0">
-                     <svg class="w-10 h-10 text-olive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <div class="flex-shrink-0 bg-white p-3 rounded-full shadow-sm">
+                     <svg class="w-10 h-10 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M8 22h8" />
                         <path d="M12 11v11" />
                         <path d="M5 4h14a1 1 0 0 1 1 1v2a9 9 0 0 1-18 0V5a1 1 0 0 1 1-1Z" />
@@ -614,8 +628,8 @@
                 </div>
                 
                 <div>
-                    <h3 class="font-serif text-xl font-bold text-olive mb-1 tracking-widest uppercase">Solo Adultos</h3>
-                    <p class="font-serif text-sm text-gray-600 leading-relaxed italic mt-1">
+                    <h3 class="font-serif text-2xl font-bold text-terracotta mb-1 tracking-widest uppercase">Solo Adultos</h3>
+                    <p class="font-serif text-base text-gray-600 leading-relaxed italic mt-1">
                         "Noche libre de niños, para que los adultos disfruten con total libertad."
                     </p>
                 </div>
@@ -623,7 +637,6 @@
         </section>
 
         <!-- WAVE SEPARATOR FOOTER -->
-        <!-- mt-[-2px] para solapamiento -->
         <div class="wave-separator text-[#5E604B] -mt-[2px] relative z-10">
             <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
