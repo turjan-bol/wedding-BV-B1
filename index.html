@@ -46,6 +46,12 @@
             overflow-x: hidden;
         }
 
+        /* Corrección Global para SVGs */
+        svg {
+            display: block; /* Elimina espacio fantasma debajo de elementos inline */
+            shape-rendering: geometricPrecision; /* Mejora la nitidez de los bordes */
+        }
+
         /* --- Estilos de la Animación de Entrada --- */
         #contenedor-a-ocultar {
             width: 100%;
@@ -129,6 +135,7 @@
             position: relative;
             width: 100%;
             overflow: hidden;
+            background-color: #FAF9F5; /* Fondo de seguridad igual al body */
         }
         
         .photo-wave-container img {
@@ -160,6 +167,8 @@
             width: 100%;
             line-height: 0;
             direction: ltr;
+            position: relative;
+            z-index: 10; /* Asegura que la ola esté encima de la unión */
         }
 
         .icon-modern {
@@ -195,7 +204,6 @@
         <header id="cabecera" class="relative pt-0 md:pt-16 text-center fade-in-section bg-cream pb-0 flex flex-col">
             
             <!-- Logo Iniciales (FLOTANTE EN MÓVIL) -->
-            <!-- En móvil: absolute, top-8, z-30 para flotar sobre la foto. En desktop: static, order-1 -->
             <div class="absolute top-8 w-full z-30 flex justify-center md:static md:w-auto md:block md:mb-12 md:order-1">
                 <div class="inline-block border border-olive/50 bg-white/70 backdrop-blur-md px-6 py-2 rounded-full shadow-lg md:shadow-none md:bg-transparent md:border-olive/30">
                     <p class="font-sans text-xs tracking-[0.3em] text-olive font-bold">D&B • 01.03.26</p>
@@ -223,9 +231,10 @@
                      onerror="this.src='https://images.unsplash.com/photo-1583939003579-73013917a611?q=80&w=2070&auto=format&fit=crop'"
                      alt="Denilson y Belen">
                 
-                <!-- Wave SVG Bottom (Transición a Crema) -->
-                <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10">
-                    <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full">
+                <!-- Wave SVG Bottom -->
+                <!-- margin-bottom: -1px para evitar línea blanca -->
+                <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10 -mb-[1px]">
+                    <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block">
                         <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                     </svg>
                 </div>
@@ -247,7 +256,6 @@
 
                         <div class="text-center md:flex-1">
                             <p class="font-sans text-xs tracking-[0.4em] text-terracotta uppercase mb-2">A LAS</p>
-                            <!-- Actualizado a 15:00 hrs para coincidir con el itinerario -->
                             <p class="font-serif text-3xl text-olive tracking-widest border-b border-olive/10 pb-1 inline-block md:block md:border-none md:pb-0">15:00 hrs</p>
                         </div>
                     </div>
@@ -255,8 +263,16 @@
             </div>
         </header>
 
-        <!-- 2. CONTADOR -->
-        <section class="py-12 text-center px-4 fade-in-section bg-[#5E604B]/5 -mt-1">
+        <!-- WAVE SEPARATOR 1: Cream -> Olive Light (Countdown) -->
+        <!-- mt-[-2px] para solapamiento -->
+        <div class="wave-separator text-[#5E604B] text-opacity-5 -mt-[2px]">
+            <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+
+        <!-- 2. CONTADOR (Fondo Olive Light) -->
+        <section class="py-12 text-center px-4 fade-in-section bg-[#5E604B]/5 -mt-[1px]">
             <p class="font-sans text-xs tracking-[0.2em] text-terracotta uppercase mb-4">Save the Date</p>
             <h3 class="font-serif text-3xl text-olive mb-10 italic">Queremos que nos acompañes</h3>
             
@@ -265,15 +281,15 @@
             </div>
         </section>
 
-        <!-- WAVE SEPARATOR 2 -->
-        <div class="wave-separator text-[#5E604B] text-opacity-5 rotate-180 -mt-1">
+        <!-- WAVE SEPARATOR 2: Olive Light -> Cream (Celebration) -->
+        <div class="wave-separator text-[#5E604B] text-opacity-5 rotate-180 -mt-[2px]">
             <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
 
         <!-- 3. CELEBRACIÓN -->
-        <section class="py-20 px-6 fade-in-section">
+        <section class="py-20 px-6 fade-in-section -mt-[1px]">
             <h2 class="font-script text-6xl text-olive text-center mb-16">Celebración</h2>
             
             <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
@@ -316,12 +332,11 @@
             </div>
         </section>
 
-        <!-- FOTO DIVISORIA 2: FULL WIDTH CON WAVE SUPERIOR E INFERIOR -->
+        <!-- FOTO DIVISORIA 2 -->
         <div class="fade-in-section mt-12 mb-0 photo-wave-container h-[400px] relative">
-            <!-- Wave SVG Top (Blanco a Foto) -->
-            <div class="absolute top-0 left-0 w-full leading-[0] text-cream z-10 rotate-180">
-                <!-- CORREGIDO: viewBox 320 y h-24 -->
-                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full">
+            <!-- Wave SVG Top -->
+            <div class="absolute top-0 left-0 w-full leading-[0] text-cream z-10 rotate-180 -mt-[1px]">
+                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block">
                     <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                 </svg>
             </div>
@@ -330,31 +345,28 @@
                  onerror="this.src='https://images.unsplash.com/photo-1519225463359-2a682da67f1d?q=80&w=2070&auto=format&fit=crop'"
                  class="w-full h-full object-cover">
 
-            <!-- Wave SVG Bottom (Foto a Blanco) -->
-            <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10">
-                <!-- CORREGIDO: viewBox 320 y h-24 -->
-                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full">
+            <!-- Wave SVG Bottom -->
+            <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10 -mb-[1px]">
+                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block">
                     <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                 </svg>
             </div>
         </div>
 
         <!-- 4. ITINERARIO -->
-        <section class="py-20 px-6 fade-in-section">
+        <section class="py-20 px-6 fade-in-section -mt-[1px]">
             <h2 class="font-script text-6xl text-olive text-center mb-16">Itinerario</h2>
             
             <div class="max-w-2xl mx-auto space-y-12 pl-8 md:pl-0 border-l border-olive/10 md:border-none">
                 
                 <!-- 1. Ceremonia Civil (DERECHA) -->
-                <!-- Desktop: Time Left | Icon Center | Title Right -->
                 <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
                     <div class="md:w-[45%] md:text-right md:pr-10 md:order-1 order-2">
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">15:00 HRS</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
-                        <!-- Icono: Anillos/Firma -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> <!-- Escudo/Legal -->
+                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                              <path d="M9 12l2 2 4-4"/>
                         </svg>
                     </div>
@@ -365,14 +377,12 @@
                 </div>
 
                 <!-- 2. Entre Copas y Recuerdos (IZQUIERDA) -->
-                <!-- Desktop: Title Left | Icon Center | Time Right -->
                 <div class="flex flex-col md:flex-row items-start md:items-center justify-between group pl-6 md:pl-0 relative">
                     <div class="md:w-[45%] md:text-right md:pr-10">
                         <h4 class="font-serif text-xl text-olive font-bold">Copas y Recuerdos</h4>
                         <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Cóctel de Bienvenida</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10">
-                        <!-- Icono: Cámara/Copa -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E604B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
                             <circle cx="12" cy="13" r="4"/>
@@ -389,7 +399,6 @@
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">17:30 HRS</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
-                        <!-- Icono: Puerta/Entrada -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                              <circle cx="12" cy="7" r="4"/>
@@ -408,7 +417,6 @@
                         <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Salud por los novios</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10">
-                        <!-- Icono: Copas -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E604B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M8 22h8"/>
                             <path d="M12 15v7"/>
@@ -428,7 +436,6 @@
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">18:30 HRS</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
-                        <!-- Icono: Música -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                              <path d="M9 18V5l12-2v13"/>
                              <circle cx="6" cy="18" r="3"/>
@@ -448,7 +455,6 @@
                         <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Banquete</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10">
-                        <!-- Icono: Cubiertos -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E604B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
                             <path d="M7 2v20"/>
@@ -466,7 +472,6 @@
                          <p class="font-sans text-xs text-terracotta font-bold tracking-widest">19:40 HRS</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-olive rounded-full flex items-center justify-center z-10 md:order-2 order-1">
-                        <!-- Icono: Fiesta/Disco -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                              <circle cx="12" cy="12" r="10"/>
                              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
@@ -487,7 +492,6 @@
                         <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Hora Loca</p>
                     </div>
                     <div class="absolute -left-[19px] top-0 md:static md:w-10 md:h-10 bg-white border border-olive rounded-full flex items-center justify-center z-10">
-                        <!-- Icono: Corazón/Estrella -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E604B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                         </svg>
@@ -500,15 +504,15 @@
             </div>
         </section>
 
-        <!-- WAVE SEPARATOR 3 -->
-        <div class="wave-separator text-[#FFE8CF] text-opacity-30">
+        <!-- WAVE SEPARATOR 3: Cream -> Peach Light (Puntualidad) -->
+        <div class="wave-separator text-[#FFE8CF] text-opacity-30 -mt-[2px]">
             <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
 
         <!-- 5. PUNTUALIDAD -->
-        <section class="py-16 px-6 fade-in-section bg-[#FFE8CF]/30 -mt-1">
+        <section class="py-16 px-6 fade-in-section bg-[#FFE8CF]/30 -mt-[1px]">
             <div class="max-w-4xl mx-auto flex flex-col items-center gap-6 text-center">
                 
                 <svg class="icon-modern w-16 h-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -526,8 +530,8 @@
             </div>
         </section>
         
-        <!-- WAVE SEPARATOR 4 -->
-        <div class="wave-separator text-[#FFE8CF] text-opacity-30 rotate-180 -mt-1">
+        <!-- WAVE SEPARATOR 4: Peach Light -> Cream -->
+        <div class="wave-separator text-[#FFE8CF] text-opacity-30 rotate-180 -mt-[2px]">
             <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
@@ -535,9 +539,8 @@
 
         <!-- FOTO DIVISORIA 3: FULL WIDTH CON WAVES -->
         <div class="fade-in-section mt-12 mb-0 photo-wave-container h-[400px] relative">
-            <div class="absolute top-0 left-0 w-full leading-[0] text-cream z-10 rotate-180">
-                <!-- CORREGIDO: viewBox 320 y h-24 -->
-                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full">
+            <div class="absolute top-0 left-0 w-full leading-[0] text-cream z-10 rotate-180 -mt-[1px]">
+                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block">
                     <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                 </svg>
             </div>
@@ -546,16 +549,15 @@
                  onerror="this.src='https://images.unsplash.com/photo-1595168866166-f40b08da22c0?q=80&w=1000&auto=format&fit=crop'"
                  class="w-full h-full object-cover">
 
-            <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10">
-                <!-- CORREGIDO: viewBox 320 y h-24 -->
-                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full">
+            <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10 -mb-[1px]">
+                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block">
                     <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                 </svg>
             </div>
         </div>
 
         <!-- 6. CÓDIGO DE VESTIMENTA -->
-        <section class="py-20 px-6 fade-in-section">
+        <section class="py-20 px-6 fade-in-section -mt-[1px]">
             <h2 class="font-script text-6xl text-olive mb-2 text-center">Código de Vestimenta</h2>
             <p class="font-serif text-xl text-terracotta uppercase tracking-widest font-semibold mt-4 mb-16 text-center">Formal de Gala</p>
             
@@ -650,14 +652,15 @@
         </section>
 
         <!-- WAVE SEPARATOR FOOTER -->
-        <div class="wave-separator text-[#5E604B]">
+        <!-- mt-[-2px] para solapamiento -->
+        <div class="wave-separator text-[#5E604B] -mt-[2px] relative z-10">
             <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
 
         <!-- 10. CONFIRMACIÓN Y FOOTER -->
-        <footer class="relative pb-16 px-6 bg-olive text-cream overflow-hidden fade-in-section">
+        <footer class="relative pb-16 px-6 bg-olive text-cream overflow-hidden fade-in-section -mt-[1px]">
              <div class="relative z-10 text-center">
                  <!-- Icono: Check/Confirmación -->
                  <div class="mb-6 text-terracotta/80 flex justify-center">
