@@ -29,6 +29,7 @@
                         cream: '#FAF9F5',
                         white: '#FFFFFF',
                         graydetail: '#A0A09C',
+                        olivelight: '#F2F1EC', 
                     },
                     fontFamily: {
                         script: ['"Great Vibes"', 'cursive'],
@@ -46,7 +47,6 @@
             overflow-x: hidden;
         }
 
-        /* Corrección Global para SVGs */
         svg {
             display: block;
             shape-rendering: geometricPrecision;
@@ -66,7 +66,6 @@
             align-items: center;
         }
 
-        /* Estilo Papel Blanco */
         .paper-bg {
             background-color: #FDFBF7;
             background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
@@ -151,21 +150,41 @@
         }
         
         .masonry-item {
-            margin-bottom: 8px;
+            margin-bottom: 16px;
             overflow: hidden;
-            border-radius: 12px;
-            transition: transform 0.3s ease;
+            border-radius: 16px;
+            position: relative;
+            opacity: 0; 
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .masonry-item.in-view {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .masonry-item img {
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 12px;
+            border-radius: 16px;
+            transition: transform 0.7s ease, filter 0.7s ease;
+            filter: grayscale(80%); 
         }
 
-        .masonry-item:hover {
-            transform: scale(1.02);
+        .masonry-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .masonry-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(94, 96, 75, 0.2), transparent);
+            pointer-events: none;
+            border-radius: 12px;
         }
 
         .wave-separator {
@@ -208,9 +227,7 @@
         <!-- 1. HEADER -->
         <header id="cabecera" class="relative pt-0 md:pt-16 text-center fade-in-section bg-cream pb-0 flex flex-col">
             
-            <!-- (Eliminado: Logo Iniciales D&B) -->
-
-            <!-- Versículo (Orden 3 en móvil, 2 en desktop) -->
+            <!-- Versículo -->
             <div class="max-w-md mx-auto px-6 mb-12 order-3 md:order-2 md:mt-0 mt-12">
                 <p class="font-serif text-xl text-gray-600 leading-relaxed italic">
                     "Por esa razón, el hombre dejará a su padre y a su madre, se unirá a su esposa y ellos serán una sola carne."
@@ -218,19 +235,22 @@
                 <p class="font-sans text-[10px] font-bold mt-4 text-terracotta tracking-widest uppercase">— Génesis 2:24</p>
             </div>
 
-            <!-- Nombres (Orden 4 en móvil, 3 en desktop) -->
+            <!-- Nombres -->
             <h1 class="font-script text-7xl md:text-9xl text-olive mb-6 leading-none px-4 order-4 md:order-3">Denilson <span class="text-terracotta text-5xl md:text-7xl">&</span> Belen</h1>
             
             <p class="font-serif text-xl text-olive/80 my-10 max-w-lg mx-auto leading-relaxed px-6 order-5 md:order-4">
                 Tenemos el inmenso placer de invitarte a celebrar el inicio de nuestra vida juntos
             </p>
             
-            <!-- Foto Principal: (Orden 1 en móvil, sin margen top) -->
-            <div class="mt-0 md:mt-12 mb-0 photo-wave-container h-[60vh] md:h-[550px] relative order-1 md:order-5 w-full">
+            <!-- Foto Principal -->
+            <div class="mt-0 md:mt-12 mb-0 photo-wave-container h-[75vh] md:h-[550px] relative order-1 md:order-5 w-full">
                 <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/portada.png" 
                      onerror="this.src='https://images.unsplash.com/photo-1583939003579-73013917a611?q=80&w=2070&auto=format&fit=crop'"
                      alt="Denilson y Belen">
                 
+                <!-- Degradado inferior -->
+                <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black/20 to-transparent md:hidden z-20"></div>
+
                 <!-- Wave SVG Bottom -->
                 <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10 -mb-[1px]">
                     <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block">
@@ -239,7 +259,7 @@
                 </div>
             </div>
 
-            <!-- Fecha Estilizada (Orden 6) -->
+            <!-- Fecha Estilizada -->
             <div class="py-16 px-4 bg-cream order-6">
                 <div class="max-w-xl mx-auto border-y-2 border-double border-olive/20 py-8 px-4 bg-olive/5 shadow-sm">
                     <div class="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0">
@@ -263,14 +283,14 @@
         </header>
 
         <!-- WAVE SEPARATOR 1 -->
-        <div class="wave-separator text-[#5E604B] text-opacity-5 -mt-[2px]">
+        <div class="wave-separator text-olivelight -mt-[2px]">
             <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
 
         <!-- 2. CONTADOR -->
-        <section class="py-12 text-center px-4 fade-in-section bg-[#5E604B]/5 -mt-[1px]">
+        <section class="py-12 text-center px-4 fade-in-section bg-olivelight -mt-[1px]">
             <p class="font-sans text-xs tracking-[0.2em] text-terracotta uppercase mb-4">Cada día falta menos</p>
             <h3 class="font-serif text-3xl text-olive mb-10 italic">Queremos que nos acompañes</h3>
             
@@ -280,13 +300,13 @@
         </section>
 
         <!-- WAVE SEPARATOR 2 -->
-        <div class="wave-separator text-[#5E604B] text-opacity-5 rotate-180 -mt-[2px]">
+        <div class="wave-separator text-olivelight rotate-180 -mt-[2px]">
             <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
 
-        <!-- 3. CELEBRACIÓN (Unificado) -->
+        <!-- 3. CELEBRACIÓN -->
         <section class="py-20 px-6 fade-in-section -mt-[1px]">
             <div class="max-w-3xl mx-auto text-center">
                 <div class="inline-block p-10 border-2 border-olive/10 rounded-tl-[80px] rounded-br-[80px] bg-white shadow-lg relative">
@@ -315,135 +335,128 @@
             </div>
         </section>
 
-        <!-- FOTO DIVISORIA 2 (Cambiada a img5) -->
-        <!-- 4. ITINERARIO (Diseño Zig-Zag Real en Desktop) -->
-        <section class="py-20 px-6 fade-in-section -mt-[1px]">
+        <!-- FOTO DIVISORIA 2 -->
+        <div class="fade-in-section mt-12 mb-0 photo-wave-container h-[400px] relative">
+            <div class="absolute top-0 left-0 w-full leading-[0] text-cream z-10 rotate-180 -mt-[1px]">
+                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block">
+                    <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
+
+            <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/img5.png" 
+                 onerror="this.src='https://images.unsplash.com/photo-1519225463359-2a682da67f1d?q=80&w=2070&auto=format&fit=crop'"
+                 class="w-full h-full object-cover">
+
+            <div class="absolute bottom-0 left-0 w-full leading-[0] text-cream z-10 -mb-[1px]">
+                <svg viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block">
+                    <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- 4. ITINERARIO (Alineado Top y Limpio) -->
+        <section class="py-20 px-4 md:px-6 fade-in-section -mt-[1px]">
             <h2 class="font-script text-6xl text-olive text-center mb-16">Itinerario</h2>
             
             <div class="max-w-4xl mx-auto space-y-12 relative">
-                <!-- Línea central (Solo Desktop) -->
-                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-olive/20 -translate-x-1/2"></div>
-                <!-- Línea lateral (Solo Móvil) -->
-                <div class="md:hidden absolute left-[29px] top-0 bottom-0 w-px bg-olive/20"></div>
+                <!-- Línea central -->
+                <div class="absolute left-1/2 top-0 bottom-0 w-px bg-olive/20 -translate-x-1/2"></div>
 
                 <!-- 1. Ceremonia Civil (DERECHA) -->
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between w-full relative pl-16 md:pl-0">
-                    <div class="hidden md:block md:w-1/2 md:pr-12"></div>
-                    
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-0 w-14 h-14 bg-olive text-cream rounded-full flex items-center justify-center z-10 border-4 border-cream shadow-sm p-3">
+                <!-- Usamos items-start para que el texto y el icono se alineen arriba -->
+                <div class="flex flex-row items-start justify-between w-full relative">
+                    <div class="w-1/2 pr-3 md:pr-12"></div>
+                    <div class="absolute left-1/2 top-0 -translate-x-1/2 w-12 h-12 md:w-14 md:h-14 bg-olive text-cream rounded-full flex items-center justify-center z-10 border-2 md:border-4 border-cream shadow-sm p-3">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Ceremonia%20Civil.svg" class="w-full h-full object-contain filter invert brightness-0" alt="Civil">
                     </div>
-
-                    <div class="w-full md:w-1/2 md:pl-12 text-left">
-                        <span class="inline-block px-4 py-2 border border-terracotta/30 rounded-full text-lg md:text-xl font-bold text-terracotta tracking-widest mb-3 bg-white shadow-sm">15:00 HRS</span>
-                        <h4 class="font-serif text-2xl text-olive font-bold">Ceremonia Civil</h4>
-                        <p class="text-sm text-gray-500 mt-1 italic">Unión Legal</p>
+                    <div class="w-1/2 pl-8 md:pl-12 text-left">
+                        <span class="inline-block px-3 py-1 md:px-4 md:py-2 border border-terracotta/30 rounded-full text-base md:text-xl font-bold text-terracotta tracking-widest mb-1 md:mb-3 bg-white shadow-sm">15:00</span>
+                        <h4 class="font-serif text-lg md:text-2xl text-olive font-bold">Ceremonia Civil</h4>
                     </div>
                 </div>
 
                 <!-- 2. Entre Copas y Recuerdos (IZQUIERDA) -->
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between w-full relative pl-16 md:pl-0">
-                    <div class="w-full md:w-1/2 md:pr-12 text-left md:text-right order-2 md:order-1">
-                        <span class="inline-block px-4 py-2 border border-terracotta/30 rounded-full text-lg md:text-xl font-bold text-terracotta tracking-widest mb-3 bg-white shadow-sm">16:00 HRS</span>
-                        <h4 class="font-serif text-2xl text-olive font-bold">Copas y Recuerdos</h4>
-                        <p class="text-sm text-gray-500 mt-1 italic">Cóctel de Bienvenida</p>
+                <div class="flex flex-row items-start justify-between w-full relative">
+                    <div class="w-1/2 pr-8 md:pr-12 text-right">
+                        <span class="inline-block px-3 py-1 md:px-4 md:py-2 border border-terracotta/30 rounded-full text-base md:text-xl font-bold text-terracotta tracking-widest mb-1 md:mb-3 bg-white shadow-sm">16:00</span>
+                        <h4 class="font-serif text-lg md:text-2xl text-olive font-bold">Copas y Recuerdos</h4>
                     </div>
-
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-0 w-14 h-14 bg-white border-2 border-olive rounded-full flex items-center justify-center z-10 shadow-sm p-3 md:order-2">
+                    <div class="absolute left-1/2 top-0 -translate-x-1/2 w-12 h-12 md:w-14 md:h-14 bg-white border-2 border-olive rounded-full flex items-center justify-center z-10 shadow-sm p-3">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Recuerdos.svg" class="w-full h-full object-contain" alt="Recuerdos">
                     </div>
-
-                    <div class="hidden md:block md:w-1/2 md:pl-12 order-3"></div>
+                    <div class="w-1/2 pl-3 md:pl-12"></div>
                 </div>
 
                 <!-- 3. Entrada Sr y Sra ARTEAGA (DERECHA) -->
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between w-full relative pl-16 md:pl-0">
-                    <div class="hidden md:block md:w-1/2 md:pr-12"></div>
-                    
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-0 w-14 h-14 bg-olive text-cream rounded-full flex items-center justify-center z-10 border-4 border-cream shadow-sm p-3">
+                <div class="flex flex-row items-start justify-between w-full relative">
+                    <div class="w-1/2 pr-3 md:pr-12"></div>
+                    <div class="absolute left-1/2 top-0 -translate-x-1/2 w-12 h-12 md:w-14 md:h-14 bg-olive text-cream rounded-full flex items-center justify-center z-10 border-2 md:border-4 border-cream shadow-sm p-3">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Desfile%20novios.svg" class="w-full h-full object-contain filter invert brightness-0" alt="Entrada">
                     </div>
-
-                    <div class="w-full md:w-1/2 md:pl-12 text-left">
-                        <span class="inline-block px-4 py-2 border border-terracotta/30 rounded-full text-lg md:text-xl font-bold text-terracotta tracking-widest mb-3 bg-white shadow-sm">17:30 HRS</span>
-                        <h4 class="font-serif text-2xl text-olive font-bold">Entrada Sr y Sra Arteaga</h4>
-                        <p class="text-sm text-gray-500 mt-1 italic">Gran Entrada</p>
+                    <div class="w-1/2 pl-8 md:pl-12 text-left">
+                        <span class="inline-block px-3 py-1 md:px-4 md:py-2 border border-terracotta/30 rounded-full text-base md:text-xl font-bold text-terracotta tracking-widest mb-1 md:mb-3 bg-white shadow-sm">17:30</span>
+                        <h4 class="font-serif text-lg md:text-2xl text-olive font-bold">Entrada Sr y Sra Arteaga</h4>
                     </div>
                 </div>
 
                 <!-- 4. Brindis Social (IZQUIERDA) -->
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between w-full relative pl-16 md:pl-0">
-                    <div class="w-full md:w-1/2 md:pr-12 text-left md:text-right order-2 md:order-1">
-                        <span class="inline-block px-4 py-2 border border-terracotta/30 rounded-full text-lg md:text-xl font-bold text-terracotta tracking-widest mb-3 bg-white shadow-sm">18:00 HRS</span>
-                        <h4 class="font-serif text-2xl text-olive font-bold">Brindis Social</h4>
-                        <p class="text-sm text-gray-500 mt-1 italic">Salud por los novios</p>
+                <div class="flex flex-row items-start justify-between w-full relative">
+                    <div class="w-1/2 pr-8 md:pr-12 text-right">
+                        <span class="inline-block px-3 py-1 md:px-4 md:py-2 border border-terracotta/30 rounded-full text-base md:text-xl font-bold text-terracotta tracking-widest mb-1 md:mb-3 bg-white shadow-sm">18:00</span>
+                        <h4 class="font-serif text-lg md:text-2xl text-olive font-bold">Brindis Social</h4>
                     </div>
-
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-0 w-14 h-14 bg-white border-2 border-olive rounded-full flex items-center justify-center z-10 shadow-sm p-3 md:order-2">
+                    <div class="absolute left-1/2 top-0 -translate-x-1/2 w-12 h-12 md:w-14 md:h-14 bg-white border-2 border-olive rounded-full flex items-center justify-center z-10 shadow-sm p-3">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Brindis%20Social.svg" class="w-full h-full object-contain" alt="Brindis">
                     </div>
-
-                    <div class="hidden md:block md:w-1/2 md:pl-12 order-3"></div>
+                    <div class="w-1/2 pl-3 md:pl-12"></div>
                 </div>
 
                 <!-- 5. Baile de los Novios (DERECHA) -->
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between w-full relative pl-16 md:pl-0">
-                    <div class="hidden md:block md:w-1/2 md:pr-12"></div>
-                    
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-0 w-14 h-14 bg-olive text-cream rounded-full flex items-center justify-center z-10 border-4 border-cream shadow-sm p-3">
+                <div class="flex flex-row items-start justify-between w-full relative">
+                    <div class="w-1/2 pr-3 md:pr-12"></div>
+                    <div class="absolute left-1/2 top-0 -translate-x-1/2 w-12 h-12 md:w-14 md:h-14 bg-olive text-cream rounded-full flex items-center justify-center z-10 border-2 md:border-4 border-cream shadow-sm p-3">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Baile%20novios.svg" class="w-full h-full object-contain filter invert brightness-0" alt="Baile">
                     </div>
-
-                    <div class="w-full md:w-1/2 md:pl-12 text-left">
-                        <span class="inline-block px-4 py-2 border border-terracotta/30 rounded-full text-lg md:text-xl font-bold text-terracotta tracking-widest mb-3 bg-white shadow-sm">18:30 HRS</span>
-                        <h4 class="font-serif text-2xl text-olive font-bold">Baile de los Novios</h4>
-                        <p class="text-sm text-gray-500 mt-1 italic">Primer Baile</p>
+                    <div class="w-1/2 pl-8 md:pl-12 text-left">
+                        <span class="inline-block px-3 py-1 md:px-4 md:py-2 border border-terracotta/30 rounded-full text-base md:text-xl font-bold text-terracotta tracking-widest mb-1 md:mb-3 bg-white shadow-sm">18:30</span>
+                        <h4 class="font-serif text-lg md:text-2xl text-olive font-bold">Baile de los Novios</h4>
                     </div>
                 </div>
 
                 <!-- 6. Cena (IZQUIERDA) -->
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between w-full relative pl-16 md:pl-0">
-                    <div class="w-full md:w-1/2 md:pr-12 text-left md:text-right order-2 md:order-1">
-                        <span class="inline-block px-4 py-2 border border-terracotta/30 rounded-full text-lg md:text-xl font-bold text-terracotta tracking-widest mb-3 bg-white shadow-sm">19:00 HRS</span>
-                        <h4 class="font-serif text-2xl text-olive font-bold">Cena</h4>
-                        <p class="text-sm text-gray-500 mt-1 italic">Banquete</p>
+                <div class="flex flex-row items-start justify-between w-full relative">
+                    <div class="w-1/2 pr-8 md:pr-12 text-right">
+                        <span class="inline-block px-3 py-1 md:px-4 md:py-2 border border-terracotta/30 rounded-full text-base md:text-xl font-bold text-terracotta tracking-widest mb-1 md:mb-3 bg-white shadow-sm">19:00</span>
+                        <h4 class="font-serif text-lg md:text-2xl text-olive font-bold">Cena</h4>
                     </div>
-
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-0 w-14 h-14 bg-white border-2 border-olive rounded-full flex items-center justify-center z-10 shadow-sm p-3 md:order-2">
+                    <div class="absolute left-1/2 top-0 -translate-x-1/2 w-12 h-12 md:w-14 md:h-14 bg-white border-2 border-olive rounded-full flex items-center justify-center z-10 shadow-sm p-3">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Cena.svg" class="w-full h-full object-contain" alt="Cena">
                     </div>
-
-                    <div class="hidden md:block md:w-1/2 md:pl-12 order-3"></div>
+                    <div class="w-1/2 pl-3 md:pl-12"></div>
                 </div>
 
                 <!-- 7. ¡HEY! FIESTA (DERECHA) -->
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between w-full relative pl-16 md:pl-0">
-                    <div class="hidden md:block md:w-1/2 md:pr-12"></div>
-                    
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-0 w-14 h-14 bg-olive text-cream rounded-full flex items-center justify-center z-10 border-4 border-cream shadow-sm p-3">
+                <div class="flex flex-row items-start justify-between w-full relative">
+                    <div class="w-1/2 pr-3 md:pr-12"></div>
+                    <div class="absolute left-1/2 top-0 -translate-x-1/2 w-12 h-12 md:w-14 md:h-14 bg-olive text-cream rounded-full flex items-center justify-center z-10 border-2 md:border-4 border-cream shadow-sm p-3">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Fiesta.svg" class="w-full h-full object-contain filter invert brightness-0" alt="Fiesta">
                     </div>
-
-                    <div class="w-full md:w-1/2 md:pl-12 text-left">
-                        <span class="inline-block px-4 py-2 border border-terracotta/30 rounded-full text-lg md:text-xl font-bold text-terracotta tracking-widest mb-3 bg-white shadow-sm">19:40 HRS</span>
-                        <h4 class="font-serif text-xl text-olive font-bold uppercase leading-tight">¡Hey! ¿No se suponía que esto era una fiesta?</h4>
-                        <p class="text-sm text-gray-500 mt-1 italic">¡A bailar!</p>
+                    <div class="w-1/2 pl-8 md:pl-12 text-left">
+                        <span class="inline-block px-3 py-1 md:px-4 md:py-2 border border-terracotta/30 rounded-full text-base md:text-xl font-bold text-terracotta tracking-widest mb-1 md:mb-3 bg-white shadow-sm">19:40</span>
+                        <h4 class="font-serif text-lg md:text-xl text-olive font-bold uppercase leading-tight">¡Hey! ¿No se suponía que esto era una fiesta?</h4>
                     </div>
                 </div>
 
                 <!-- 8. ALGO ME GUSTA DE TI (IZQUIERDA) -->
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between w-full relative pl-16 md:pl-0">
-                    <div class="w-full md:w-1/2 md:pr-12 text-left md:text-right order-2 md:order-1">
-                        <span class="inline-block px-4 py-2 border border-terracotta/30 rounded-full text-lg md:text-xl font-bold text-terracotta tracking-widest mb-3 bg-white shadow-sm">00:30 HRS</span>
-                        <h4 class="font-serif text-2xl text-olive font-bold uppercase">Algo me gusta de ti</h4>
-                        <p class="text-sm text-gray-500 mt-1 italic">Hora Loca</p>
+                <div class="flex flex-row items-start justify-between w-full relative">
+                    <div class="w-1/2 pr-8 md:pr-12 text-right">
+                        <span class="inline-block px-3 py-1 md:px-4 md:py-2 border border-terracotta/30 rounded-full text-base md:text-xl font-bold text-terracotta tracking-widest mb-1 md:mb-3 bg-white shadow-sm">00:30</span>
+                        <h4 class="font-serif text-lg md:text-2xl text-olive font-bold uppercase">Algo me gusta de ti</h4>
                     </div>
-
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-0 w-14 h-14 bg-white border-2 border-olive rounded-full flex items-center justify-center z-10 shadow-sm p-3 md:order-2">
+                    <div class="absolute left-1/2 top-0 -translate-x-1/2 w-12 h-12 md:w-14 md:h-14 bg-white border-2 border-olive rounded-full flex items-center justify-center z-10 shadow-sm p-3">
                         <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/%C3%ADconos_IT%20Final-.svg" class="w-full h-full object-contain" alt="Hora Loca">
                     </div>
-
-                    <div class="hidden md:block md:w-1/2 md:pl-12 order-3"></div>
+                    <div class="w-1/2 pl-3 md:pl-12"></div>
                 </div>
 
             </div>
@@ -530,6 +543,9 @@
                 <p class="font-sans text-xs text-gray-600 mb-2 uppercase tracking-wider">
                     <span class="text-terracotta mr-2">•</span> Reservar el color blanco para la novia
                 </p>
+                <p class="font-sans text-xs text-gray-600 uppercase tracking-wider">
+                    <span class="text-terracotta mr-2">•</span> Recomendamos zapatos cómodos para jardín
+                </p>
             </div>
         </section>
 
@@ -543,16 +559,18 @@
             
             <div class="inline-block relative">
                  <div class="absolute -top-6 -right-6 bg-white p-3 rounded-full shadow-md border border-olive/20">
+                     <!-- Nuevo Icono Regalos -->
                      <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/regalos.svg" class="w-8 h-8 object-contain" alt="Regalo">
                  </div>
                 <div class="bg-white p-8 rounded-2xl shadow-xl border border-sand/30">
+                    <!-- QR Más Grande -->
                     <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/qr.jpeg" alt="QR Pago" class="mx-auto mix-blend-multiply opacity-90 mb-4 rounded-lg w-72">
                     <p class="font-sans text-[10px] font-bold text-olive tracking-[0.3em] uppercase">Escanear Aquí</p>
                 </div>
             </div>
         </section>
 
-        <!-- 8. GALERÍA (Masonry Style con imágenes intercambiadas) -->
+        <!-- 8. GALERÍA (Masonry Style con columnas CSS) -->
         <section class="py-20 px-4 fade-in-section">
             <h2 class="font-script text-5xl text-olive text-center mb-10">Nuestros Momentos</h2>
             
@@ -661,7 +679,7 @@
              <!-- Créditos -->
              <div class="relative z-10 text-center border-t border-white/10 pt-12 mt-16">
                  <h2 class="font-script text-5xl opacity-80 mb-2">Denilson & Belen</h2>
-                 <p class="text-[10px] opacity-60 font-sans tracking-[0.3em]">EST. 2026</p>
+                 <p class="text-[10px] opacity-60 font-sans tracking-[0.3em]">2026</p>
              </div>
         </footer>
 
@@ -697,8 +715,17 @@
                     contenedor.style.display = 'none';
                     // Re-iniciar observer para animaciones
                     observer.disconnect();
-                    document.querySelectorAll('.fade-in-section').forEach(section => {
+                    
+                    // Seleccionar elementos normales y elementos de galería
+                    const fadeElements = document.querySelectorAll('.fade-in-section');
+                    const masonryElements = document.querySelectorAll('.masonry-item');
+                    
+                    fadeElements.forEach(section => {
                         observer.observe(section);
+                    });
+                    
+                    masonryElements.forEach(item => {
+                        observer.observe(item);
                     });
                 }, 1500); 
             });
@@ -739,7 +766,7 @@
 
             }, 1000);
 
-            // --- 3. Intersection Observer ---
+            // --- 3. Intersection Observer (Modificado para galería) ---
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
@@ -747,9 +774,17 @@
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
+                entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
+                        // Si es un ítem de galería, añadir delay basado en índice para efecto escalonado
+                        if (entry.target.classList.contains('masonry-item')) {
+                            // Pequeño hack para staggered effect simple
+                            setTimeout(() => {
+                                entry.target.classList.add('in-view');
+                            }, index * 100); 
+                        } else {
+                            entry.target.classList.add('is-visible');
+                        }
                     }
                 });
             }, observerOptions);
