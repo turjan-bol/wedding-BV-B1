@@ -146,7 +146,7 @@
             display: block;
         }
 
-        /* --- Estilos Galería Masonry (Ajustado) --- */
+        /* --- Estilos Galería Masonry --- */
         .masonry-column {
             padding: 0 4px;
         }
@@ -171,20 +171,19 @@
             height: auto;
             display: block;
             border-radius: 16px;
-            /* Zoom elegante y suave sin cambio de color */
-            transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: transform 0.7s ease, filter 0.7s ease;
+            filter: grayscale(0%); 
         }
 
         .masonry-item:hover img {
-            transform: scale(1.1); /* Zoom in elegante */
+            transform: scale(1.05);
         }
 
         .masonry-item::after {
             content: '';
             position: absolute;
             inset: 0;
-            /* Sombra sutil interna para dar volumen, sin oscurecer demasiado */
-            background: linear-gradient(to top, rgba(0,0,0, 0.1), transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
             pointer-events: none;
             border-radius: 12px;
         }
@@ -395,17 +394,31 @@
         <!-- 1. HEADER -->
         <header id="cabecera" class="relative pt-0 md:pt-16 text-center fade-in-section bg-cream pb-0 flex flex-col">
             
-            <!-- Logo Iniciales (POSICIÓN INFERIOR EN MÓVIL) -->
-            <div class="absolute bottom-28 w-full z-30 flex justify-center pointer-events-none md:pointer-events-auto md:static md:w-auto md:block md:mb-12 md:order-1">
-                <div class="inline-block relative">
-                    <div class="absolute -inset-1 border border-white/30 rounded-full blur-[1px] md:hidden"></div>
-                    <div class="inline-block border border-white/50 bg-white/20 backdrop-blur-md px-8 py-3 rounded-full shadow-2xl md:shadow-none md:bg-transparent md:border-olive/30 md:px-6 md:py-2 relative z-10">
-                        <p class="font-sans text-xs tracking-[0.3em] text-white md:text-olive font-bold drop-shadow-md md:drop-shadow-none">D&B • 01.03.26</p>
-                    </div>
+            <!-- Logo Iniciales (AL INICIO DE TODO - Order-1 en móvil, estático) -->
+            <div class="w-full flex justify-center py-6 md:py-0 md:mb-12 order-1 relative z-30">
+                <div class="inline-block border border-olive/30 bg-cream/80 backdrop-blur-sm md:bg-transparent px-8 py-2 rounded-full shadow-sm md:shadow-none">
+                    <p class="font-sans text-xs tracking-[0.3em] text-olive font-bold">D&B • 01.03.26</p>
                 </div>
             </div>
 
-            <!-- CONTENEDOR DE TEXTOS -->
+            <!-- Foto Principal (Order-2 en móvil) -->
+            <div class="mt-0 md:mt-12 mb-0 photo-wave-container h-[75vh] md:h-[550px] relative order-2 md:order-5 w-full">
+                <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/portada.png" 
+                     onerror="this.src='https://images.unsplash.com/photo-1583939003579-73013917a611?q=80&w=2070&auto=format&fit=crop'"
+                     alt="Denilson y Belen">
+                
+                <!-- Degradado inferior -->
+                <div class="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-black/50 via-black/20 to-transparent md:hidden z-20 pointer-events-none"></div>
+
+                <!-- Wave SVG Bottom (CORREGIDO: Z-30 para tapar degradado y color sólido) -->
+                <div class="absolute bottom-0 left-0 w-full leading-[0] z-30 -mb-[1px]">
+                    <svg viewBox="0 0 1440 320" fill="#FAF9F5" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block text-[#FAF9F5]">
+                        <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- CONTENEDOR DE TEXTOS (Order-3) -->
             <div class="order-3 md:order-2 md:mt-0 mt-8 px-4 w-full relative z-20">
                 <div class="max-w-xl mx-auto bg-white border border-olive/10 shadow-sm p-8 md:p-12 rounded-[20px] relative overflow-hidden">
                     
@@ -443,24 +456,9 @@
                     </p>
                 </div>
             </div>
-            
-            <!-- Foto Principal -->
-            <div class="mt-0 md:mt-12 mb-0 photo-wave-container h-[75vh] md:h-[550px] relative order-1 md:order-5 w-full">
-                <img src="https://raw.githubusercontent.com/turjan-bol/wedding-BV-B1/main/portada.png" 
-                     onerror="this.src='https://images.unsplash.com/photo-1583939003579-73013917a611?q=80&w=2070&auto=format&fit=crop'"
-                     alt="Denilson y Belen">
-                
-                <div class="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-black/50 via-black/20 to-transparent md:hidden z-20 pointer-events-none"></div>
 
-                <div class="absolute bottom-0 left-0 w-full leading-[0] z-10 -mb-[1px]">
-                    <svg viewBox="0 0 1440 320" fill="#FAF9F5" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="h-24 w-full block text-[#FAF9F5]">
-                        <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,128C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- Fecha Estilizada -->
-            <div class="py-16 px-4 bg-cream order-6">
+            <!-- Fecha Estilizada (Order-4) -->
+            <div class="py-16 px-4 bg-cream order-4">
                 <div class="max-w-xl mx-auto border-y-2 border-double border-olive/20 py-8 px-4 bg-olive/5 shadow-sm">
                     <div class="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0">
                         <div class="text-center md:flex-1">
@@ -554,13 +552,13 @@
             </div>
         </div>
 
-        <!-- 4. ITINERARIO -->
+        <!-- 4. ITINERARIO (Línea central ajustada) -->
         <section class="py-20 px-4 md:px-6 fade-in-section -mt-[1px]">
             <h2 class="font-script text-6xl text-olive text-center mb-16">Itinerario</h2>
             
             <div class="max-w-4xl mx-auto space-y-12 relative">
-                <!-- Línea central -->
-                <div class="absolute left-1/2 top-0 bottom-0 w-px bg-olive/20 -translate-x-1/2"></div>
+                <!-- Línea central (CORREGIDO: bottom-8 para que termine tras el último ícono) -->
+                <div class="absolute left-1/2 top-0 bottom-12 w-px bg-olive/20 -translate-x-1/2"></div>
 
                 <!-- 1. Ceremonia Civil (DERECHA) -->
                 <div class="flex flex-row items-start justify-between w-full relative">
@@ -741,9 +739,6 @@
             <div class="mt-12 text-center">
                 <p class="font-sans text-xs text-gray-600 mb-2 uppercase tracking-wider">
                     <span class="text-terracotta mr-2">•</span> Reservar el color blanco para la novia
-                </p>
-                <p class="font-sans text-xs text-gray-600 uppercase tracking-wider">
-                    <span class="text-terracotta mr-2">•</span> Recomendamos zapatos cómodos para jardín
                 </p>
             </div>
         </section>
