@@ -207,28 +207,6 @@
 </head>
 <body class="text-olive antialiased selection:bg-terracotta selection:text-white font-serif">
 
-    <!-- CHATBOT WIDGET -->
-    <div id="chat-widget">
-        <div id="chat-window">
-            <div class="chat-header">
-                <span class="flex items-center gap-2"><i class="fa-solid fa-sparkles text-yellow-300"></i> Asistente de Boda</span>
-                <button id="close-chat" class="hover:text-gray-300"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="chat-messages" id="chat-messages">
-                <div class="message ai">
-                    ¡Hola! Soy el asistente virtual de la boda de Denilson y Belen. ✨ <br>¿Tienes alguna duda sobre el horario, vestimenta o lugar?
-                </div>
-            </div>
-            <div class="typing-indicator" id="typing-indicator">Escribiendo...</div>
-            <div class="chat-input-area">
-                <input type="text" id="user-input" placeholder="Escribe tu pregunta..." onkeypress="handleKeyPress(event)">
-                <button class="send-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
-            </div>
-        </div>
-        <div id="chat-trigger" onclick="toggleChat()">
-            <i class="fa-solid fa-robot"></i>
-        </div>
-    </div>
 
     <!-- PANTALLA DE APERTURA -->
     <div id="contenedor-a-ocultar">
